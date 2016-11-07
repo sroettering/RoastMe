@@ -13,14 +13,13 @@ body {
   max-width: 1200px;
   padding: 0 20px;
   position: relative; }
-
-.wrapper::after {
-  clear: both;
-  content: "";
-  display: block; }
+  .wrapper::after {
+    clear: both;
+    content: "";
+    display: block; }
 
 .button {
-  background: #446cb3;
+  background: #3498db;
   border-radius: 5px;
   color: #ffffff;
   display: inline-block;
@@ -30,10 +29,13 @@ body {
   height: 44px;
   line-height: 44px;
   padding: 0 20px;
-  text-decoration: none; }
+  text-decoration: none;
+  -webkit-transition: all 0.4s ease 0s;
+  transition: all 0.4s ease 0s; }
+  .button:hover {
+    background: #2980b9; }
 
 .badge {
-  animation: pop 0.3s 2s cubic-bezier(0.78, -0.35, 0.31, 1.36) 1 forwards;
   background: #f22613;
   border-radius: 50%;
   color: #ffffff;
@@ -46,24 +48,29 @@ body {
   right: 0;
   text-align: center;
   top: 0;
-  transform: scale(0);
   width: 20px; }
 
-@keyframes pop {
-  0% {
-    transform: scale(0); }
-  100% {
-    transform: scale(1); } }
+.vertical-align {
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+.horizontal-align {
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%); }
+
 .header {
+  border-bottom: 1px solid #ffffff;
   height: 100px;
   left: 0;
   position: fixed;
   top: 0;
-  -webkit-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
+  transition: all 0.4s ease 0s;
   width: 100%; }
-  .header.fixed {
-    background: rgba(31, 31, 31, 0.8); }
+
+.header.fixed {
+  background: rgba(31, 31, 31, 0.8); }
 
 .logo {
   background: transparent url("../images/logo.png") no-repeat scroll center/cover;
@@ -71,68 +78,64 @@ body {
   height: 37px;
   left: 20px;
   position: absolute;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
   width: 77px; }
 
 .navigation {
   left: 140px;
-  position: absolute;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%); }
+  position: absolute; }
   .navigation ul {
     list-style: none; }
   .navigation li {
     display: inline-block;
-    margin: 0 20px 0 0;
     position: relative; }
-    .navigation li:last-child {
-      margin: 0; }
   .navigation a {
-    color: #ffffff;
+    color: rgba(255, 255, 255, 0.5);
     display: block;
     font-family: "Montserrat", sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 44px;
+    padding: 0 20px;
     position: relative;
     text-decoration: none;
-    -webkit-transition: all 0.3s ease 0s;
-    transition: all 0.3s ease 0s; }
-    .navigation a:hover, .navigation a.current {
+    -webkit-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s; }
+    .navigation a:hover {
+      color: #ffffff; }
+    .navigation a.current {
       color: #f22613; }
 
 .account-navigation {
   position: absolute;
-  right: 20px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%); }
-
-.account-navigation ul {
-  list-style: none; }
-.account-navigation li {
-  display: inline-block;
-  position: relative; }
-  .account-navigation li:last-child {
-    margin: 0 0 0 20px; }
-.account-navigation a {
-  color: #ffffff;
-  display: block;
-  font-family: "Montserrat", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 44px;
-  position: relative;
-  text-align: center;
-  text-decoration: none; }
-  .account-navigation a.mdi {
-    width: 44px; }
-.account-navigation a.mdi::before {
-  font-size: 24px;
-  position: relative;
-  top: 3px; }
+  right: 20px; }
+  .account-navigation ul {
+    list-style: none; }
+  .account-navigation li {
+    display: inline-block;
+    position: relative; }
+  .account-navigation a {
+    color: rgba(255, 255, 255, 0.5);
+    display: block;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 44px;
+    padding: 0 20px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    -webkit-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s; }
+    .account-navigation a.mdi {
+      padding: 0;
+      width: 44px; }
+    .account-navigation a.button {
+      color: #ffffff; }
+    .account-navigation a:hover {
+      color: #ffffff; }
+  .account-navigation a.mdi::before {
+    font-size: 24px;
+    position: relative;
+    top: 3px; }
 
 /*# sourceMappingURL=main.css.map */
