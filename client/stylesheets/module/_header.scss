@@ -4,11 +4,20 @@
 	left: 0;
 	position: fixed;
 	top: 0;
+	-webkit-transition: -webkit-transform 0.3s ease 0s;
+	transition: -webkit-transform 0.3s ease 0s;
 	transition: transform 0.3s ease 0s;
+	transition: transform 0.3s ease 0s, -webkit-transform 0.3s ease 0s;
 	width: 100%;
 
 	&.fixed {
-		transform: translateY(-84px);
+		-webkit-transform: translateY(-84px);
+		        transform: translateY(-84px);
+
+		@media (min-width: $break-large) {
+			-webkit-transform: none;
+			        transform: none;
+		}
 	}
 }
 
@@ -62,6 +71,7 @@
 		position: relative;
 		text-align: center;
 		text-decoration: none;
+		-webkit-transition: color 0.3s ease 0s;
 		transition: color 0.3s ease 0s;
 
 		@media (min-width: $break-large) {
@@ -100,6 +110,7 @@
 		position: relative;
 		text-align: center;
 		text-decoration: none;
+		-webkit-transition: all 0.3s ease 0s;
 		transition: all 0.3s ease 0s;
 
 		&.button {
