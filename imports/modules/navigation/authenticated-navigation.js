@@ -12,7 +12,9 @@ const userName = () => {
 };
 
 export const AuthenticatedNavigation = () => (
-  <div>
-    
-  </div>
+  <nav className="navigation-right" role="navigation">
+    <ul>
+      <li><a href="#" className="button mdi mdi-logout"><span>Logout</span></a></li>
+    </ul>
+  </nav>
 );

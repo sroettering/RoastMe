@@ -14,8 +14,8 @@ export class Login extends React.Component {
   }
 
   render() {
-    return
-        <form ref="login" className="login">
-        </form>
+    return (
+        <div className="button">Test</div>
+    );
   }
 }

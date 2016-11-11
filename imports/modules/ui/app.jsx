@@ -1,20 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
-import AppNavigation from '/imports/modules/navigation/app-navigation';
+import { AppNavigation } from '/imports/modules/navigation/app-navigation';
 
-export const AppC = React.createClass({
-  propTypes: {
-    children: React.PropTypes.element.isRequired,
-    location: React.PropTypes.object,
-  },
+export class AppC extends Component {
+
   render() {
-    return <div>
-      { this.props.children }
-    </div>;
-  },
-});
+    return (
+      <div>
+        <AppNavigation />
+        { this.props.children }
+      </div>
+    );
+  }
+}
+
+AppC.propTypes = {
+  children: React.PropTypes.element.isRequired,
+  location: React.PropTypes.object,
+};
 
 export const App = createContainer(() => {
   Meteor.subscribe('loggedinUser');

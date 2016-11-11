@@ -26,7 +26,7 @@ Meteor.startup(() => {
       <Route path="/" component={ App }>
         <IndexRoute name="index" component={ Index } />
         <Route name="user" path="/user/:id" component={ UserProfile } onEnter={ requireAuth } />
-        <Route name="login" path="/login" component={ Login } />
+        <Route name="login" path="/login/" component={ Login } />
         <Route name="admin-page" path="/admin" component={ AdminPage } onEnter={ requireAuth }>
           <IndexRoute name="admin-dashboard" component={ Dashboard } />
         </Route>
