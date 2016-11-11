@@ -1,28 +1,28 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat");
-$backgroundColor: #1f1f1f;
-$black: #000000;
-$white: #ffffff;
-$lightBlue: #3498db;
-$darkBlue: #2980b9;
+$background-primary: #1f1f1f;
+$blue: #3498db;
 $red: #f22613;
-$montserrat: "Montserrat", sans-serif;
-$transition: all 0.4s ease 0s;
+$break-small: 600px;
+$break-large: 768px;
 
 * {
 	box-sizing: border-box;
+	font:  {
+		family: "Montserrat", sans-serif;
+		weight: 400;
+	}
 	margin: 0;
 	padding: 0;
 }
 
 body {
-	background: $backgroundColor;
+	background: $background-primary;
 }
 
 .wrapper {
 	height: 100%;
 	margin: 0 auto;
 	max-width: 1200px;
-	padding: 0 20px;
 	position: relative;
 
 	&::after {
@@ -33,24 +33,49 @@ body {
 }
 
 .button {
-	background: $lightBlue;
+	background: $blue;
 	border-radius: 5px;
-	color: $white;
-	display: inline-block;
-	font-family: $montserrat;
+	color: white;
+	display: block;
 	font-size: 16px;
-	font-weight: 400;
 	height: 44px;
 	line-height: 44px;
-	padding: 0 20px;
+	text-align: center;
 	text-decoration: none;
-	-webkit-transition: $transition;
-	        transition: $transition;
+	transition: opacity 0.3s ease 0s;
+	width: 44px;
 
 	&:hover {
-		background: $darkBlue;
+		opacity: 0.7;
+	}
+
+	@media (min-width: $break-small) {
+		padding: 0 15px 0 10px;
+		width: auto;
+	}
+
+	&::before {
+		font-size: 24px;
+		position: relative;
+		top: 3px;
+
+		@media (min-width: $break-small) {
+			margin: 0 10px 0 0;
+		}
+	}
+
+	span {
+		display: none;
+
+		@media (min-width: $break-small) {
+			display: inline-block;
+		}
 	}
 }
+
+
+
+/*
 
 .badge {
 	background: $red;
@@ -68,16 +93,7 @@ body {
 	width: 20px;
 }
 
-.vertical-align {
-	top: 50%;
-	-webkit-transform: translateY(-50%);
-	        transform: translateY(-50%);
-}
 
-.horizontal-align {
-	left: 50%;
-	-webkit-transform: translateX(-50%);
-	        transform: translateX(-50%);
-}
+*/
 
 @import "header";
