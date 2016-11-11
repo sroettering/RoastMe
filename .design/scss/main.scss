@@ -93,7 +93,15 @@ body {
 	width: 20px;
 }
 
+<<<<<<< HEAD:design/scss/main.scss
 
 */
+=======
+.horizontal-align {
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	        transform: translateX(-50%);
+}
+>>>>>>> 58ad496a0a1ef8fe2fe063fe47f839b87a1eeca8:.design/scss/main.scss
 
 @import "header";

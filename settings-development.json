@@ -1,0 +1,22 @@
+{
+  "public": {},
+  "private": {
+    "bandsintown": {
+      "app_id": "IQDevelopment13579"
+    },
+    "oAuth": {
+      "facebook": {
+        "appId": "1816893641891514",
+        "secret": "9ccd9b4f17361cfedc8a943cd6feb806"
+      },
+      "google": {
+        "clientId": "798063455359-f00nsc978i9e85s72eg275lj19pr30ie.apps.googleusercontent.com",
+        "secret": "FkYvSqyA3y0tbzyw6FyTwy68"
+      },
+      "twitter": {
+        "consumerKey": "iba5ybgJKERN3hXXub310xxWh",
+        "secret": "rLtF7khzSTL4VtSbLYVQxl88sHmLYCWvKecaZMPwgky11e3yqQ"
+      }
+    }
+  }
+}
