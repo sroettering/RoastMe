@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, IndexLink } from 'react-router';
 
 import { PublicNavigation } from './public-navigation';
 import { AuthenticatedNavigation } from './authenticated-navigation';
 
-import { ScrollHandler } from '/imports/modules/ui/scroll-handler';
+import { ScrollHandler } from '/imports/modules/utility/scroll-handler';
 
 export class AppNavigation extends React.Component {
   renderNavigation(hasUser) {
@@ -27,8 +27,8 @@ export class AppNavigation extends React.Component {
 
           <nav className="navigation-left" role="navigation">
             <ul>
-              <li><Link to="/hot/" activeClassName="current">Hot</Link></li>
-              <li><Link to="/login/" activeClassName="current">Trending</Link></li>
+              <li><IndexLink to="/" activeClassName="current">Hot</IndexLink></li>
+              <li><Link to="/trending/" activeClassName="current">Trending</Link></li>
               <li><Link to="/new/" activeClassName="current">New</Link></li>
             </ul>
           </nav>
