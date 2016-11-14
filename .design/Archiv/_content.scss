@@ -1,0 +1,82 @@
+.main {
+	display: block;
+	padding: 188px 0 0;
+	position: relative;
+
+	@media (min-width: $break-large) {
+		padding: 144px 0 0;
+	}
+
+	h1 {
+		color: white;
+		font-size: 28px;
+		line-height: 34px;
+		margin: 0 0 30px;
+	}
+
+	h2 {
+		color: white;
+		font-size: 24px;
+		line-height: 32px;
+		margin: 0 0 30px;
+	}
+
+	h3 {
+		color: white;
+		font-size: 20px;
+		line-height: 26px;
+		margin: 0 0 30px;
+	}
+
+	p {
+		color: white;
+		font-size: 16px;
+		line-height: 22px;
+		margin: 0 0 30px;
+
+		&.big {
+			font-size: 20px;
+			line-height: 26px;
+			margin: 0;
+		}
+
+		&:last-child {
+			margin: 0;
+		}
+
+		a {
+			color: $red;
+			text-decoration: none;
+		}
+	}
+
+	.content {
+		background: blue;
+		height: 200px;
+		left: -30px;
+		padding: 0 30px;
+		position: relative;
+		width: calc(100% + 60px);
+
+		@media (min-width: $break-large) {
+			float: left;
+			width: 70%;
+		}
+	}
+
+	.sidebar {
+		background: red;
+		height: 200px;
+		left: -30px;
+		padding: 0 30px;
+		position: relative;
+		width: calc(100% + 60px);
+
+		@media (min-width: $break-large) {
+			float: right;
+			left: auto;
+			right: -30px;
+			width: 30%;
+		}
+	}
+}

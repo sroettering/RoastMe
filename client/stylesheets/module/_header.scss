@@ -9,6 +9,7 @@
 	transition: transform 0.3s ease 0s;
 	transition: transform 0.3s ease 0s, -webkit-transform 0.3s ease 0s;
 	width: 100%;
+	z-index: 100;
 
 	&.fixed {
 		-webkit-transform: translateY(-84px);

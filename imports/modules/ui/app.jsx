@@ -10,7 +10,16 @@ export class AppC extends Component {
     return (
       <div>
         <AppNavigation />
-        { this.props.children }
+        <main className="main" role="main">
+          <div className="wrapper">
+            <div className="content">
+              { this.props.children }
+            </div>
+            <div className="sidebar">
+              SEITENSPALTE
+            </div>
+          </div>
+        </main>
       </div>
     );
   }

@@ -17,7 +17,6 @@ $break-large: 768px;
 
 body {
 	background: $background-primary;
-	height: 2000px;
 }
 
 .wrapper {
@@ -96,6 +95,7 @@ body {
 */
 
 @import "module/header";
+@import "module/content";
 @import "module/loading";
 @import "module/login";
 @import "module/admin";

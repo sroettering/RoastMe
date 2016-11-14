@@ -1,15 +1,25 @@
+@mixin social-btn ($bgColor, $fntColor) {
+  display: block;
+  border: none;
+  border-radius: 22px;
+  width: 75%;
+  height: 44px;
+  font-size: 20px;
+  margin: 20px auto;
+  cursor: pointer;
+  background-color: $bgColor;
+  color: $fntColor;
+}
+
 .btn-facebook,
 .btn-facebook:hover {
-  background-color: #3b5998;
-  color: #ffffff;
+  @include social-btn(#3b5998, #ffffff);
 }
 
 .btn-twitter {
-  background-color: #4099ff;
-  color: #ffffff;
+  @include social-btn(#4099ff, #ffffff);
 }
 
 .btn-google {
-  background-color: #ffffff;
-  border: 1px solid #000 !important;
+  @include social-btn(#ffffff, #000000);
 }
