@@ -9,7 +9,7 @@ export class AppC extends Component {
   render() {
     return (
       <div>
-        <AppNavigation />
+        <AppNavigation hasUser={ !!Meteor.userId() }/>
         <main className="main" role="main">
           <div className="wrapper">
             <div className="content">

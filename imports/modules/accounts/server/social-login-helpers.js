@@ -24,8 +24,8 @@ Meteor.methods({
       const url = `http://graph.facebook.com/v2.8/${userId}/picture`;
       const params = {
         redirect: false,
-        type: 'large',
-        height: 425,
+        type: 'small',
+        height: 100,
       };
       HTTP.get(url, { params }, (err, result) => {
         if (err) {

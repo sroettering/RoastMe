@@ -9,7 +9,7 @@ export const handleLogin = (service) => {
 
   if (service === 'loginWithFacebook') {
     options.requestPermissions.push('email');
-    options.requestPermissions.push('user_birthday');
+    //options.requestPermissions.push('user_birthday');
   }
 
   if (service === 'loginWithGoogle') {

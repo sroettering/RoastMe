@@ -41,5 +41,5 @@ export class AppNavigation extends React.Component {
 }
 
 AppNavigation.propTypes = {
-  hasUser: React.PropTypes.object,
+  hasUser: React.PropTypes.bool,
 };
