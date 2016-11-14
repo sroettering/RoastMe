@@ -30,6 +30,7 @@ Meteor.startup(() => {
         <IndexRoute name="hot" component={ Hot } />
         <Route name="trending" path="/trending" component={ Trending } />
         <Route name="new" path="/new" component={ New } />
+        <Route name="roast" path="/roast/:id/:title" component={ New } />
         <Route name="user" path="/user/:id" component={ UserProfile } onEnter={ requireAuth } />
         <Route name="admin-page" path="/admin" component={ AdminPage } onEnter={ requireAuth }>
           <IndexRoute name="admin-dashboard" component={ Dashboard } />
