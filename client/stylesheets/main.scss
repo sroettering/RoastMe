@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat");
 $background-primary: #1f1f1f;
+$background-secondary: #332c2c;
+$background-tertiary: #3a3232;
 $blue: #3498db;
 $red: #f22613;
 $break-small: 600px;
@@ -23,6 +25,7 @@ body {
 	height: 100%;
 	margin: 0 auto;
 	max-width: 1200px;
+	padding: 0 30px;
 	position: relative;
 
 	&::after {

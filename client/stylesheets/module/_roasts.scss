@@ -1,0 +1,198 @@
+.roast-list-view {
+	position: relative;
+}
+
+.roast {
+	border-bottom: 2px solid black;
+	padding: 60px 0 0;
+	position: relative;
+
+	&:last-child {
+		border-bottom: none;
+	}
+}
+
+.roast-section {
+	margin: 0 0 30px;
+	position: relative;
+
+	&:last-child {
+		margin: 0;
+	}
+}
+
+.roast-image {
+	height: auto;
+	left: -30px;
+	position: relative;
+	width: calc(100% + 60px);
+
+	@media (min-width: $break-large) {
+		left: 0;
+		width: 100%;
+	}
+}
+
+.roast-social-media {
+	ul {
+		list-style: none;
+	}
+
+	li {
+		display: inline-block;
+		margin: 0 15px 0 0;
+	}
+}
+
+.roast-score {
+	position: absolute;
+	right: 30px;
+	top: -5px;
+
+	p {
+		text-align: right;
+
+		span {
+			margin: 0 0 0 10px;
+		}
+	}
+}
+
+.roast-write-comment {
+	background: $background-tertiary;
+	border-radius: 5px;
+	height: 234px;
+	margin: 0 0 60px;
+	overflow: hidden;
+	position: relative;
+
+	textarea {
+		background: transparent;
+		border: none;
+		border-bottom: 2px solid $background-secondary;
+		color: white;
+		font-size: 16px;
+		font-weight: 400;
+		height: 150px;
+		line-height: 20px;
+		padding: 30px;
+		width: 100%;
+	}
+
+	.mdi-emoticon {
+		bottom: 20px;
+		color: rgba(white, 0.7);
+		display: block;
+		font-size: 24px;
+		left: 30px;
+		line-height: 44px;
+		position: absolute;
+		text-align: center;
+		text-decoration: none;
+		-webkit-transition: color 0.3s ease 0s;
+		        transition: color 0.3s ease 0s;
+		width: 44px;
+
+		&:hover {
+			color: white;
+		}
+	}
+
+	.roast-write-counter {
+		bottom: 20px;
+		line-height: 44px;
+		margin: 0;
+		position: absolute;
+		right: 89px;
+		text-align: center;
+		width: 44px;
+
+		@media (min-width: $break-small) {
+			right: 162px;
+		}
+	}
+
+	.button {
+		bottom: 20px;
+		position: absolute;
+		right: 30px;
+	}
+}
+
+.roast-comment {
+	margin: 0 0 60px;
+}
+
+.roast-comment-answers {
+	padding: 60px 0 0;
+
+	.roast-answer {
+		padding: 0 0 0 30px;
+		position: relative;
+
+		@media (min-width: $break-small) {
+			padding: 0 0 0 60px;
+		}
+
+		@media (min-width: $break-large) {
+			padding: 0 0 0 90px;
+		}
+	}
+}
+
+.roast-comment-profile {
+	margin: 0 0 30px;
+	position: relative;
+
+	img {
+		border-radius: 50%;
+		height: 60px;
+		width: 60px;
+	}
+
+	h3 {
+		left: 90px;
+		position: absolute;
+		top: 3px;
+	}
+
+	p {
+		left: 90px;
+		position: absolute;
+		top: 30px;
+
+		@media (min-width: $break-small) {
+			left: auto;
+			right: 0;
+			top: 3px;
+		}
+
+		span {
+			margin: 0 0 0 10px;
+		}
+	}
+}
+
+.roast-commtent-text {
+	margin: 0 0 30px;
+	position: relative;
+
+	@media (min-width: $break-small) {
+		margin: -60px 0 30px;
+		padding: 0 0 0 90px;
+	}
+}
+
+.roast-comment-reply {
+	height: 44px;
+	position: relative;
+
+	ul {
+		list-style: none;
+	}
+
+	li {
+		display: inline-block;
+		margin: 0 15px 0 0;
+	}
+}

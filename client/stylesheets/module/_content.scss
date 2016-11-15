@@ -8,6 +8,12 @@
 		padding: 144px 0 0;
 	}
 
+	&::after {
+		clear: both;
+		content: "";
+		display: block;
+	}
+
 	h1 {
 		color: white;
 		font-size: 28px;
