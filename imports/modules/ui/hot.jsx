@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { ScrollHandler } from '/imports/modules/utility/scroll-handler';
 
+import { Roast } from '/imports/modules/roasts/roast';
+
 export class Hot extends Component {
 
   componentDidMount() {
@@ -13,7 +15,9 @@ export class Hot extends Component {
       color: 'white',
     }
     return (
-      <h1 style={style}>Hot</h1>
+      <div className="roast-list-view">
+        <Roast />
+      </div>
     );
   }
 }
