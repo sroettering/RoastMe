@@ -3,5 +3,7 @@ import '/imports/modules/accounts/server/publications';
 import '/imports/modules/accounts/server/users-schema';
 import '/imports/modules/accounts/server/social-login-helpers';
 
+import '/imports/modules/roasts/server/roasts-collection';
+
 import '/imports/modules/admin/server/fixtures';
 import '/imports/modules/admin/server/publications';
