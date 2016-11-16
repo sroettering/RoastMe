@@ -32,5 +32,7 @@ AppC.propTypes = {
 
 export const App = createContainer(() => {
   Meteor.subscribe('loggedinUser');
+  Meteor.subscribe('all-roasts');
+  Meteor.subscribe('all-comments');
   return {};
 }, AppC);
