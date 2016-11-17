@@ -6,8 +6,9 @@ const CommentsSchema = new SimpleSchema({
   content: {
     type: String,
   },
-  isReply: {
-    type: Boolean,
+  replyTo: {
+    type: String,
+    optional: true,
   },
   votes: {
     type: [String], // Array of userIDs

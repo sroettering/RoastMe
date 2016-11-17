@@ -28,9 +28,6 @@ export class Login extends Component {
         <button className="btn btn-google" data-social-login="loginWithGoogle" onClick={this.login}>
           <i className="mdi mdi-google-plus-box"></i> Sign in with Google+
         </button>
-        <button className="btn btn-twitter" data-social-login="loginWithTwitter" onClick={this.login}>
-          <i className="mdi mdi-twitter-box"></i> Sign in with Twitter
-        </button>
       </div>
     );
   }

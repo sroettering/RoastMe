@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { _ } from 'meteor/underscore';
+import { createContainer } from 'meteor/react-meteor-data';
 
 import { Roasts } from './roasts-collection';
 import { Comments } from './comments-collection';
 
-export class Roast extends Component {
+class RoastC extends Component {
 
   constructor(props) {
     super(props);
@@ -13,6 +14,7 @@ export class Roast extends Component {
     this.renderSocials = this.renderSocials.bind(this);
     this.renderScore = this.renderScore.bind(this);
     this.renderCommentSection = this.renderCommentSection.bind(this);
+    this.renderComment = this.renderComment.bind(this);
   }
 
   renderHeadline() {
@@ -50,42 +52,46 @@ export class Roast extends Component {
   renderScore() {
     return (
       <div className="roast-score">
-          <p className="big">{this.props.comments.length}<span className="mdi mdi-fire"></span></p>
+          <p className="big">{this.props.totalComments}<span className="mdi mdi-fire"></span></p>
           <p className="big">{this.props.roast.totalUpvotes}<span className="mdi mdi-trophy-award"></span></p>
       </div>
     );
   }
 
-  renderCommentSection() {
+  renderCommentSection(comments) {
     return (
       <div className="roast-section">
-        { this.props.comments.map((comment) => {
-          return
-            <div>
-                <div className="roast-comment">
-                    <div className="roast-comment-profile">
-                        <img src="/Fred.jpg" alt="" />
-                        <h3>FreakyFreddy</h3>
-                        <p className="big">134<span className="mdi mdi-trophy-award"></span></p>
-                    </div>
+        { comments.map((comment, index) => {
+          return (
+            <div key={index}>
+              { this.renderComment(comment) }
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 
-                    <div className="roast-commtent-text">
-                        <p>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. At vero eos et accusam et justo duo dolores
-                            et ea rebum.
-                        </p>
-                    </div>
-
-                    <div className="roast-comment-reply">
-                        <ul>
-                            <li><a href="#" className="button mdi mdi-reply"><span>Reply</span></a></li>
-                            <li><a href="#" className="button mdi mdi-arrow-up-bold-circle"><span>Upvote</span></a></li>
-                            <li><a href="#" className="button mdi mdi-arrow-down-bold-circle"><span>Downvote</span></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>;
-          })}
+  renderComment(comment) {
+    return (
+      <div className="roast-comment">
+          <div className="roast-comment-profile">
+              <img src={comment.userImage} alt="" />
+              <h3>{comment.userName}</h3>
+              <p className="big">{comment.votes.length}<span className="mdi mdi-trophy-award"></span></p>
+          </div>
+          <div className="roast-commtent-text">
+              <p>
+                  {comment.content}
+              </p>
+          </div>
+          <div className="roast-comment-reply">
+              <ul>
+                  <li><a href="#" className="button mdi mdi-reply"><span>Reply</span></a></li>
+                  <li><a href="#" className="button mdi mdi-arrow-up-bold-circle"><span>Upvote</span></a></li>
+                  <li><a href="#" className="button mdi mdi-arrow-down-bold-circle"><span>Downvote</span></a></li>
+              </ul>
+          </div>
       </div>
     );
   }
@@ -102,7 +108,7 @@ export class Roast extends Component {
                   { this.renderScore() }
                 </div>
             </div>
-            { this.renderCommentSection() }
+            { this.renderCommentSection(this.props.comments) }
         </div>
       );
     } else {
@@ -113,7 +119,23 @@ export class Roast extends Component {
   }
 }
 
-Roast.propTypes = {
+RoastC.propTypes = {
   roast: React.PropTypes.object,
-  comments: React.PropTypes.array,
+  comments: React.PropTypes.array // these are not the raw db comments
 };
+
+// this component needs a roast and its respective comments as props
+export const Roast = createContainer((props) => {
+  const totalComments = props.comments.length;
+  let comments;
+  if(props.comments) {
+    comments = _.filter(props.comments, (c) => !c.replyTo);
+    _.each(comments, (comment) => {
+      comment.replies = _.filter(props.comments, (c) => !!c.replyTo && c.replyTo === comment._id);
+    });
+  }
+  return {
+    comments,
+    totalComments,
+  }
+}, RoastC);
