@@ -3,14 +3,6 @@ import { Random } from 'meteor/random';
 import { Roasts } from '../roasts-collection';
 import { Comments } from '../comments-collection';
 
-Meteor.publish('all-roasts', function() {
-  return Roasts.find();
-});
-
-Meteor.publish('all-comments', function() {
-  return Comments.find();
-});
-
 Meteor.startup(function(){
   if(Roasts.find().count() <= 0) {
     const Roast = {

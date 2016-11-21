@@ -10,8 +10,51 @@ const CommentsSchema = new SimpleSchema({
     type: String,
     optional: true,
   },
-  votes: {
-    type: [String], // Array of userIDs
+  upvotes: {
+    type: [Object],
+    autoValue() {
+      if(this.isInsert) {
+        return [];
+      }
+    },
+  },
+  "upvotes.$.userId": {
+    type: String,
+  },
+  "upvotes.$.createdAt": {
+    type: Date,
+    autoValue() {
+      if(this.isInsert) {
+        return new Date();
+      }
+    },
+  },
+  downvotes: {
+    type: [Object],
+    autoValue() {
+      if(this.isInsert) {
+        return [];
+      }
+    },
+  },
+  "downvotes.$.userId": {
+    type: String,
+  },
+  "downvotes.$.createdAt": {
+    type: Date,
+    autoValue() {
+      if(this.isInsert) {
+        return new Date();
+      }
+    },
+  },
+  points: {
+    type: Number,
+    autoValue() {
+      if(this.isInsert) {
+        return 0;
+      }
+    },
   },
   userId: {
     type: String,

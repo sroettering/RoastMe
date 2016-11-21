@@ -28,14 +28,13 @@ class HotC extends Component {
 
 HotC.propTypes = {
   roast: React.PropTypes.object,
+  comments: React.PropTypes.array,
 }
 
 export const Hot = createContainer(() => {
   Meteor.subscribe('all-roasts');
   const roast = Roasts.findOne();
-  const comments = Comments.find().fetch();
   return {
     roast,
-    comments,
   }
 }, HotC);

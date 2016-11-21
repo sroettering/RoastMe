@@ -35,6 +35,33 @@ body {
 	}
 }
 
+.toggle-button {
+	background: transparent;
+	border: none;
+	outline: none;
+	color: white;
+	opacity: 1.0;
+	display: block;
+	font-size: 30px;
+	height: 44px;
+	line-height: 44px;
+	text-align: center;
+	width: 44px;
+
+	&:hover:enabled {
+		opacity: 0.8;
+	}
+
+	&:disabled {
+		color: grey;
+	}
+
+	&.toggled {
+		color: $blue;
+		opacity: 1.0;
+	}
+}
+
 .button {
 	background: $blue;
 	border-radius: 5px;

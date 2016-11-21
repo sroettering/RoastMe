@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import { Roasts } from './roasts-collection';
 import { Comments } from './comments-collection';
+import { upvote } from './voting';
+import { downvote } from './voting';
+import { ToggleButton } from '/imports/modules/ui/toggle-button';
 
 class RoastC extends Component {
 
@@ -56,7 +60,7 @@ class RoastC extends Component {
     return (
       <div className="roast-score">
         <p className="big">{ this.props.totalComments }<span className="mdi mdi-fire"></span></p>
-        <p className="big">{ this.props.roast.totalUpvotes }<span className="mdi mdi-trophy-award"></span></p>
+        <p className="big">{ this.props.totalPoints }<span className="mdi mdi-trophy-award"></span></p>
       </div>
     );
   }
@@ -74,31 +78,20 @@ class RoastC extends Component {
   renderComment(comment) {
     return (
       <div key={ comment._id }>
-        { this.renderContent({
-          userImage: comment.userImage,
-          userName: comment.userName,
-          votes: comment.votes.length,
-          content: comment.content,
-          commentId: comment._id,
-        }) }
-        { this.renderReplies(comment) };
+        { this.renderContent(comment) }
+        { this.renderReplies(comment) }
       </div>
     );
   }
 
   renderReplies(comment) {
+    const replies = comment.replies || [];
     return (
       <div className="roast-comment-answers">
-        { comment.replies.map((reply, index) => {
+        { replies.map((reply, index) => {
           return (
             <div className="roast-answer" key={ reply._id }>
-              { this.renderContent({
-                userImage: reply.userImage,
-                userName: reply.userName,
-                votes: reply.votes.length,
-                content: reply.content,
-                commentId: reply._id,
-              }) }
+              { this.renderContent(reply) }
             </div>
           );
         }) }
@@ -106,29 +99,35 @@ class RoastC extends Component {
     );
   }
 
-  renderContent({userImage, userName, votes, content, commentId}) {
+  renderContent(comment) {
     return (
       <div className="roast-comment">
         <div className="roast-comment-profile">
-          <img src={ userImage } alt="" />
-          <h3>{ userName }</h3>
-          <p className="big">{ votes } Points<span className="mdi mdi-trophy-award"></span></p>
+          <img src={ comment.userImage } alt="" />
+          <h3>{ comment.userName }</h3>
+          <p className="big">{ comment.points }<span className="mdi mdi-trophy-award"></span></p>
         </div>
         <div className="roast-comment-text">
-          <p>{ content }</p>
+          <p>{ comment.content }</p>
         </div>
-        { this.renderCommentControls(commentId) }
+        { this.renderCommentControls(comment) }
       </div>
     );
   }
 
-  renderCommentControls(commentId) {
+  renderCommentControls(comment) {
+    const upToggled = !!_.findWhere(comment.upvotes, { userId: Meteor.userId() });
+    const downToggled = !!_.findWhere(comment.downvotes, { userId: Meteor.userId() });
     return (
       <div className="roast-comment-reply">
         <ul>
-          <li><a href="#" className="button mdi mdi-reply"><span>Reply</span></a></li>
-          <li><a href="#" className="button mdi mdi-arrow-up-bold-circle"><span>Upvote</span></a></li>
-          <li><a href="#" className="button mdi mdi-arrow-down-bold-circle"><span>Downvote</span></a></li>
+          <li><a href="#!" className="button mdi mdi-reply"><span>Reply</span></a></li>
+          <li>
+            <ToggleButton callback={ upvote.bind(this, comment._id) } icon="mdi mdi-arrow-up-bold-circle" toggled={ upToggled } enabled={ true } />
+          </li>
+          <li>
+            <ToggleButton callback={ downvote.bind(this, comment._id) } icon="mdi mdi-arrow-down-bold-circle" toggled={ downToggled } enabled={ comment.points > 0 } />
+          </li>
         </ul>
       </div>
     );
@@ -159,21 +158,28 @@ class RoastC extends Component {
 
 RoastC.propTypes = {
   roast: React.PropTypes.object,
-  comments: React.PropTypes.array // these are not the raw db comments
+  comments: React.PropTypes.array, // these are not the raw db comments
+  totalComments: React.PropTypes.number,
+  totalPoints: React.PropTypes.number,
 };
 
 // this component needs a roast and its respective comments as props
 export const Roast = createContainer((props) => {
-  const totalComments = props.comments.length;
+  if(!props.roast) return {};
+  Meteor.subscribe('all-comments-for-roast', props.roast._id);
+  const allComments = Comments.find({roastId: props.roast._id}).fetch();
+  const totalComments = allComments.length || 0;
+  const totalPoints = _.reduce(props.comments, (mem, c) => {return mem + c.points;}, 0);
   let comments;
-  if(props.comments) {
-    comments = _.filter(props.comments, (c) => !c.replyTo);
+  if(allComments) {
+    comments = _.filter(allComments, (c) => !c.replyTo);
     _.each(comments, (comment) => {
-      comment.replies = _.filter(props.comments, (c) => !!c.replyTo && c.replyTo === comment._id);
+      comment.replies = _.filter(allComments, (c) => !!c.replyTo && c.replyTo === comment._id);
     });
   }
   return {
     comments,
     totalComments,
+    totalPoints,
   }
 }, RoastC);
