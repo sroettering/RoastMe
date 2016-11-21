@@ -126,7 +126,7 @@ class RoastC extends Component {
             <ToggleButton callback={ upvote.bind(this, comment._id) } icon="mdi mdi-arrow-up-bold-circle" toggled={ upToggled } enabled={ true } />
           </li>
           <li>
-            <ToggleButton callback={ downvote.bind(this, comment._id) } icon="mdi mdi-arrow-down-bold-circle" toggled={ downToggled } enabled={ comment.points > 0 } />
+            <ToggleButton callback={ downvote.bind(this, comment._id) } icon="mdi mdi-arrow-down-bold-circle" toggled={ downToggled } enabled={ comment.points > 0 || downToggled } />
           </li>
         </ul>
       </div>
