@@ -1,50 +1,72 @@
 import { Random } from 'meteor/random';
+import { faker } from 'meteor/digilord:faker';
 
+import Seed from '/imports/modules/utility/seeder';
 import { Roasts } from '../roasts-collection';
 import { Comments } from '../comments-collection';
 
+const createRoasts = () => {
+  Seed('roasts', {
+    num: 20,
+    ignoreExistingData: false,
+    environments: ['development'],
+    model(index) {
+      return {
+        title: faker.lorem.sentence(),
+        userId: faker.random.uuid(),
+        userName: faker.internet.userName(),
+        userImage: faker.internet.avatar(),
+        imageUrl: faker.image.imageUrl(),
+      }
+    },
+  });
+};
+
+const createComments = () => {
+  const roasts = Roasts.find().fetch();
+  _.each(roasts, (roast) => {
+    Seed('comments', {
+      num: 10,
+      ignoreExistingData: true,
+      environments: ['development'],
+      model(index) {
+        return {
+          content: faker.lorem.paragraph(),
+          userId: faker.random.uuid(),
+          userName: faker.internet.userName(),
+          userImage: faker.internet.avatar(),
+          roastId: roast._id,
+        }
+      },
+    });
+  });
+};
+
+const createReplies = () => {
+  const comments = Comments.find().fetch();
+  _.each(comments, (comment) => {
+    Seed('comments', {
+      num: Math.floor(Math.random() * 5),
+      ignoreExistingData: true,
+      environments: ['development'],
+      model(index) {
+        return {
+          content: faker.lorem.paragraph(),
+          userId: faker.random.uuid(),
+          userName: faker.internet.userName(),
+          userImage: faker.internet.avatar(),
+          roastId: comment.roastId,
+          replyTo: comment._id,
+        }
+      },
+    });
+  });
+}
+
 Meteor.startup(function(){
-  if(Roasts.find().count() <= 0) {
-    const Roast = {
-      userId: "JGckJnFogrBaG9tgv",
-      userName: "Fred",
-      userImage: "/Fred.jpg",
-      imageUrl: "/Fred.jpg",
-      totalUpvotes: 0,
-    };
-
-    Roasts.insert(Roast);
-  }
-  if(Comments.find().count() <= 0) {
-    let Comment = {
-      content: "Hässlicher Mongo...",
-      votes: [],
-      userId: "fakeUser",
-      userName: "fakeUser",
-      userImage: "/Fred.jpg",
-      roastId: Roasts.findOne()._id,
-    };
-    Comments.insert(Comment);
-
-    const Reply = {
-      content: "Da geb ich dir Recht",
-      votes: [],
-      replyTo: Comments.findOne()._id,
-      userId: "fakeUser2",
-      userName: "fakeUser2",
-      userImage: "/Fred.jpg",
-      roastId: Roasts.findOne()._id,
-    }
-    Comments.insert(Reply);
-
-    Comment = {
-      content: "Ich will kein Kind von dir!",
-      votes: [],
-      userId: "fakeUser3",
-      userName: "fakeUser3",
-      userImage: "/Fred.jpg",
-      roastId: Roasts.findOne()._id,
-    }
-    Comments.insert(Comment);
+  if(Roasts.find().count() < 1 && Comments.find().count() < 1) {
+    createRoasts();
+    createComments();
+    createReplies();
   }
 });

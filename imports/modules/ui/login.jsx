@@ -22,6 +22,12 @@ export class Login extends Component {
   render() {
     return (
       <div>
+        <p>
+          Welcome to Roast me Good!
+          
+          This site's purpose is to verbally roast uploaded images from you and other users.
+          By registering you have to be fully aware of this fact!
+        </p>
         <button className="btn btn-facebook" data-social-login="loginWithFacebook" onClick={this.login}>
           <i className="mdi mdi-facebook-box"></i> Sign in with Facebook
         </button>

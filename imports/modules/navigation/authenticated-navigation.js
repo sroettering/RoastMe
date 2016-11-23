@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
@@ -28,12 +29,13 @@ const profileImage = () => {
   return imgSrc;
 }
 
+// <li><a href="#">{ userName() }</a></li>
 const AuthenticatedNavigationC = () => (
   <nav className="navigation-right" role="navigation">
     <ul>
+      <li><Link to="/roast/" activeClassName="current" className="mdi mdi-fire"></Link></li>
       <li><img className="img-circle" src={ profileImage() } /></li>
-      <li><a href="#">{ userName() }</a></li>
-      <li><a href="#" className="button mdi mdi-logout" onClick={ handleLogout }><span>Logout</span></a></li>
+      <li><a href="#" className="button mdi mdi-logout" onClick={ handleLogout }></a></li>
     </ul>
   </nav>
 );

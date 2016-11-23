@@ -30,7 +30,6 @@ export class AppNavigation extends React.Component {
               <li><IndexLink to="/" activeClassName="current">Hot</IndexLink></li>
               <li><Link to="/trending/" activeClassName="current">Trending</Link></li>
               <li><Link to="/new/" activeClassName="current">New</Link></li>
-              <li><Link to="/roast/" activeClassName="current">Create Roast</Link></li>
             </ul>
           </nav>
 

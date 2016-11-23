@@ -3,6 +3,9 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { SchemaCommons } from '/imports/modules/utility/schema-commons.js';
 
 const RoastsSchema = new SimpleSchema({
+  title: {
+    type: String,
+  },
   userId: {
     type: String,
   },
@@ -17,6 +20,11 @@ const RoastsSchema = new SimpleSchema({
   },
   totalUpvotes: {
     type: Number,
+    autoValue() {
+      if(this.isInsert) {
+        return 0;
+      }
+    },
   },
   createdAt: SchemaCommons.createdAt,
   updatedAt: SchemaCommons.updatedAt,

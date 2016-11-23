@@ -10,7 +10,7 @@ import { Index } from '/imports/modules/ui/index.jsx';
 import { Hot } from '/imports/modules/ui/hot';
 import { Trending } from '/imports/modules/ui/trending';
 import { New } from '/imports/modules/ui/new';
-import { RoastPage } from '/imports/modules/roasts/roast-page';
+import { RoastPage } from '/imports/modules/ui/roast-page';
 import { Login } from '/imports/modules/ui/login';
 import { AdminPage } from '/imports/modules/admin/admin-page';
 import { Dashboard } from '/imports/modules/admin/admin-dashboard';
@@ -43,7 +43,7 @@ Meteor.startup(() => {
         <IndexRoute name="hot" component={ Hot } />
         <Route name="trending" path="/trending" component={ Trending } />
         <Route name="new" path="/new" component={ New } />
-        <Route name="roast" path="/roast/:id/" component={ RoastPage } />
+        <Route name="roast" path="/roast/:id" component={ RoastPage } />
         <Route name="login" path="/login" component={ Login } />
         <Route name="user" path="/user/:id" component={ UserProfile } onEnter={ requireAuth } />
         <Route name="admin-page" path="/admin" component={ AdminPage } onEnter={ requireAuth }>

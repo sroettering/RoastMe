@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 
-import { Roasts } from './roasts-collection';
-import { Comments } from './comments-collection';
-import { Roast } from './roast';
+import { Roasts } from '/imports/modules/roasts/roasts-collection';
+import { Comments } from '/imports/modules/roasts/comments-collection';
+import { Roast } from '/imports/modules/roasts/roast';
 
 export class RoastPageC extends Component {
   render() {
     if(this.props.roast) {
-      return <Roast roast={ this.props.roast } comments={ this.props.comments }/>;
+      return <Roast roast={ this.props.roast } single={ true }/>;
     } else {
       return (
         <div>Loading...</div>

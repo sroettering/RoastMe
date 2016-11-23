@@ -15,14 +15,19 @@ class HotC extends Component {
   }
 
   render() {
-    const style = {
-      color: 'white',
+    if(this.props.roasts) {
+      return (
+        <div className="roast-list-view">
+          { this.props.roasts.map((roast) => {
+            return <Roast key={roast._id} roast={roast} single={false}/>
+          })}
+        </div>
+      );
+    } else {
+      return (
+        <h3>Loading...</h3>
+      );
     }
-    return (
-      <div className="roast-list-view">
-        <Roast roast={this.props.roast} comments={this.props.comments}/>
-      </div>
-    );
   }
 }
 
@@ -33,8 +38,8 @@ HotC.propTypes = {
 
 export const Hot = createContainer(() => {
   Meteor.subscribe('all-roasts');
-  const roast = Roasts.findOne();
+  const roasts = Roasts.find().fetch();
   return {
-    roast,
+    roasts,
   }
 }, HotC);

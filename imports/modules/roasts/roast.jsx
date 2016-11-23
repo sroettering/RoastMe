@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
 import { createContainer } from 'meteor/react-meteor-data';
+import { browserHistory } from 'react-router';
 
 import { Roasts } from './roasts-collection';
 import { Comments } from './comments-collection';
@@ -28,7 +29,7 @@ class RoastC extends Component {
     return (
       <div className="roast-section">
         <div>
-          <h2>Hi, I'm { this.props.roast.userName }, #roastme!</h2>
+          <h2>{ this.props.roast.title }</h2>
         </div>
       </div>
     );
@@ -36,7 +37,7 @@ class RoastC extends Component {
 
   renderRoastImage() {
     return (
-      <div className="roast-section">
+      <div className="roast-section" onClick={ this.handleClick.bind(this) }>
         <div>
           <img className="roast-image" src={ this.props.roast.imageUrl } alt="" />
         </div>
@@ -154,6 +155,10 @@ class RoastC extends Component {
       );
     }
   }
+
+  handleClick(event) {
+    browserHistory.push(`/roast/${this.props.roast._id}`);
+  }
 }
 
 RoastC.propTypes = {
@@ -164,12 +169,17 @@ RoastC.propTypes = {
 };
 
 // this component needs a roast and its respective comments as props
-export const Roast = createContainer((props) => {
-  if(!props.roast) return {};
-  Meteor.subscribe('all-comments-for-roast', props.roast._id);
-  const allComments = Comments.find({roastId: props.roast._id}).fetch();
+export const Roast = createContainer(({roast, single}) => {
+  if(!roast) return {};
+  if(single) {
+    //Meteor.subscribe('all-comments-for-roast', roast._id);
+  } else {
+    Meteor.subscribe('top-comments-for-roast', roast._id);
+  }
+
+  const allComments = Comments.find({roastId: roast._id}).fetch();
   const totalComments = allComments.length || 0;
-  const totalPoints = _.reduce(props.comments, (mem, c) => {return mem + c.points;}, 0);
+  const totalPoints = _.reduce(totalComments, (mem, c) => {return mem + c.points;}, 0);
   let comments;
   if(allComments) {
     comments = _.filter(allComments, (c) => !c.replyTo);
