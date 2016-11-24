@@ -9,6 +9,7 @@ import { Comments } from './comments-collection';
 import { upvote } from './voting';
 import { downvote } from './voting';
 import { ToggleButton } from '/imports/modules/ui/toggle-button';
+import { TextArea } from '/imports/modules/ui/textarea';
 
 class RoastC extends Component {
 
@@ -134,12 +135,24 @@ class RoastC extends Component {
     );
   }
 
+  renderTextArea() {
+    return (
+      <div class="roast-write-comment">
+        <textarea name="name" placeholder="Write comment ..."></textarea>
+        <a href="#" class="mdi mdi-emoticon"></a>
+        <p class="roast-write-counter">64</p>
+        <a href="#" class="button mdi mdi-send"><span>Submit</span></a>
+      </div>
+    );
+  }
+
   render() {
     if(this.props.roast && this.props.comments) {
       return (
         <div className="roast">
           { this.renderHeadline() }
           { this.renderRoastImage() }
+          { this.props.single ? <TextArea roast={ this.props.roast } /> : '' }
           <div className="roast-section">
             <div>
               { this.renderSocials() }
@@ -157,7 +170,7 @@ class RoastC extends Component {
   }
 
   handleClick(event) {
-    browserHistory.push(`/roast/${this.props.roast._id}`);
+    if(!this.props.single) browserHistory.push(`/roast/${this.props.roast._id}`);
   }
 }
 
@@ -184,7 +197,8 @@ export const Roast = createContainer(({roast, single}) => {
   if(allComments) {
     comments = _.filter(allComments, (c) => !c.replyTo);
     _.each(comments, (comment) => {
-      comment.replies = _.filter(allComments, (c) => !!c.replyTo && c.replyTo === comment._id);
+      replies = _.filter(allComments, (c) => !!c.replyTo && c.replyTo === comment._id);
+      comment.replies = _.sortBy(replies, 'createdAt');
     });
   }
   return {

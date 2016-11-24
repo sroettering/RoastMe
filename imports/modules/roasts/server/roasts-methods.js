@@ -10,6 +10,43 @@ Meteor.methods({
     if(!this.userId) return;
 
   },
+  createComment(roastId, commentId, text) {
+    check(roastId, String);
+    check(commentId, Match.OneOf(String, null));
+    check(text, String);
+
+    //TODO: clean text!
+
+    if(!this.userId) return;
+    const user = Meteor.users.findOne(this.userId);
+
+    const roast = Roasts.findOne(roastId);
+    if(!roast) return;
+
+    let comment;
+    if(commentId) {
+      comment = Comments.findOne(commentId);
+      if(!comment) return;
+    }
+
+    let userImage;
+    if(user.services.facebook) {
+      userImage = user.services.facebook.picture;
+    } else if(user.services.google) {
+      userImage = user.services.google.picture;
+    }
+
+    const newComment = {
+      content: text,
+      userId: user._id,
+      userName: user.profile.username || user.profile.name,
+      userImage,
+      roastId: roastId,
+      replyTo: commentId || undefined,
+    }
+
+    Comments.insert(newComment);
+  },
   upvoteComment(commentId) {
     check(commentId, String);
 
