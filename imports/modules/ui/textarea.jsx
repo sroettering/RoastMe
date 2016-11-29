@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Bert } from 'meteor/themeteorchef:bert';
 
 export class TextArea extends Component {
 
@@ -7,7 +8,14 @@ export class TextArea extends Component {
     const text = this.textarea.value; // TODO: clean text and resolve mentions
     const roastId = this.props.roast ? this.props.roast._id : undefined;
     const commentId = this.props.comment ? this.props.comment._id : undefined;
-    Meteor.call('createComment', roastId, commentId, text);
+    Meteor.call('createComment', roastId, commentId, text, (error, result) => {
+      if(!error) {
+        this.textarea.value = '';
+        Bert.alert('Commented', 'success');
+      } else {
+        Bert.alert('Something went wrong!', 'warning');
+      }
+    });
   }
 
   render() {

@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import { AppNavigation } from '/imports/modules/navigation/app-navigation';
+import { Footer } from './footer';
 
 export class AppC extends Component {
 
@@ -20,6 +21,7 @@ export class AppC extends Component {
             </div>
           </div>
         </main>
+        <Footer />
       </div>
     );
   }

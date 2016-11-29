@@ -26,6 +26,14 @@ const RoastsSchema = new SimpleSchema({
       }
     },
   },
+  totalComments: {
+    type: Number,
+    autoValue() {
+      if(this.isInsert) {
+        return 0;
+      }
+    },
+  },
   createdAt: SchemaCommons.createdAt,
   updatedAt: SchemaCommons.updatedAt,
 });

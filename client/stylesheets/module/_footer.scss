@@ -1,0 +1,44 @@
+.footer {
+    background: black;
+    padding: 60px 0;
+    position: relative;
+}
+.footer-navigation {
+    margin: 0 0 30px;
+    position: relative;
+    @media (min-width: $break-large) {
+        margin: 0;
+        position: absolute;
+        right: 30px;
+        text-align: right;
+        top: 0;
+    }
+    ul {
+        list-style: none;
+    }
+    li {
+        display: block;
+        position: relative;
+        @media (min-width: $break-large) {
+            display: inline-block;
+            margin: 0 0 0 15px;
+        }
+    }
+    a {
+        color: rgba(white, 0.7);
+        display: inline-block;
+        font-size: 16px;
+        line-height: 44px;
+        text-decoration: none;
+        -webkit-transition: color 0.3s ease 0s;
+                transition: color 0.3s ease 0s;
+        &:hover {
+            color: white;
+        }
+    }
+}
+.copyright {
+    color: white;
+    font-size: 16px;
+    line-height: 44px;
+}

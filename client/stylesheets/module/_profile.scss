@@ -1,0 +1,58 @@
+.profile {
+    padding: 60px 0 0;
+    position: relative;
+}
+.profile-section {
+    margin: 0 0 30px;
+    position: relative;
+    &:last-child {
+        margin: 0;
+    }
+}
+.profile-picture {
+    margin: 0 0 30px;
+    position: relative;
+    img {
+        border-radius: 50%;
+        display: block;
+        height: auto;
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+        width: 200px;
+        @media (min-width: $break-small) {
+            margin: 0;
+        }
+    }
+}
+.profile-information {
+    position: relative;
+    @media (min-width: $break-small) {
+        left: 300px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    @media (min-width: $break-large) {
+        width: 300px;
+    }
+    .button {
+        margin: 0 0 30px;
+        padding: 0 15px 0 10px;
+        width: auto;
+        &::before {
+            margin: 0 10px 0 0;
+        }
+    }
+    .profile-score {
+        position: absolute;
+        right: 0;
+        top: 60px;
+        p {
+            text-align: right;
+            span {
+                margin: 0 0 0 10px;
+            }
+        }
+    }
+}

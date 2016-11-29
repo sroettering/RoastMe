@@ -30,11 +30,15 @@ const profileImage = () => {
 }
 
 // <li><a href="#">{ userName() }</a></li>
-const AuthenticatedNavigationC = () => (
+const AuthenticatedNavigationC = ({user}) => (
   <nav className="navigation-right" role="navigation">
     <ul>
       <li><Link to="/roast/" activeClassName="current" className="mdi mdi-fire"></Link></li>
-      <li><img className="img-circle" src={ profileImage() } /></li>
+      <li>
+        <Link to={ "/user/" + (user ? user._id : "") }>
+          <img className="img-circle" src={ profileImage() } />
+        </Link>
+      </li>
       <li><a href="#" className="button mdi mdi-logout" onClick={ handleLogout }></a></li>
     </ul>
   </nav>

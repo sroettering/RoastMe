@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
+import { Meteor } from 'meteor/meteor';
+import { createContainer } from 'meteor/react-meteor-data';
 
-import { ScrollHandler } from '/imports/modules/utility/scroll-handler';
+import { RoastsListView, roastLimit } from './roasts-list-view';
+import { Roasts } from '/imports/modules/roasts/roasts-collection';
 
-export class New extends Component {
-
-  componentDidMount() {
-    ScrollHandler.resetScrollPosition();
+export const New = createContainer(() => {
+  Meteor.subscribe('new-roasts', roastLimit.get());
+  const roasts = Roasts.find().fetch();
+  return {
+    roasts,
   }
-
-  render() {
-    const style = {
-      color: 'white',
-    }
-    return (
-      <h1 style={style}>New</h1>
-    );
-  }
-}
+}, RoastsListView);

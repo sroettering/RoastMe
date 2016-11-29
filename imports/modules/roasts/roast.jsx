@@ -24,6 +24,9 @@ class RoastC extends Component {
     this.renderCommentControls = this.renderCommentControls.bind(this);
     this.renderContent = this.renderContent.bind(this);
     this.renderReplies = this.renderReplies.bind(this);
+    this.state = {
+      replyingTo: null,
+    }
   }
 
   renderHeadline() {
@@ -113,6 +116,7 @@ class RoastC extends Component {
           <p>{ comment.content }</p>
         </div>
         { this.renderCommentControls(comment) }
+        { this.state.replyingTo === comment._id ? <TextArea roast={this.props.roast} comment={comment} /> : '' }
       </div>
     );
   }
@@ -123,7 +127,9 @@ class RoastC extends Component {
     return (
       <div className="roast-comment-reply">
         <ul>
-          <li><a href="#!" className="button mdi mdi-reply"><span>Reply</span></a></li>
+          { this.props.single ?
+            (<li><a href="#!" className="button mdi mdi-reply" onClick={ this.handleReply.bind(this, comment) }><span>Reply</span></a></li>)
+            : ''}
           <li>
             <ToggleButton callback={ upvote.bind(this, comment._id) } icon="mdi mdi-arrow-up-bold-circle" toggled={ upToggled } enabled={ true } />
           </li>
@@ -135,15 +141,9 @@ class RoastC extends Component {
     );
   }
 
-  renderTextArea() {
-    return (
-      <div class="roast-write-comment">
-        <textarea name="name" placeholder="Write comment ..."></textarea>
-        <a href="#" class="mdi mdi-emoticon"></a>
-        <p class="roast-write-counter">64</p>
-        <a href="#" class="button mdi mdi-send"><span>Submit</span></a>
-      </div>
-    );
+  handleReply(comment, event) {
+    event.preventDefault();
+    this.setState({ replyingTo: comment._id });
   }
 
   render() {
@@ -181,24 +181,23 @@ RoastC.propTypes = {
   totalPoints: React.PropTypes.number,
 };
 
-// this component needs a roast and its respective comments as props
 export const Roast = createContainer(({roast, single}) => {
   if(!roast) return {};
   if(single) {
-    //Meteor.subscribe('all-comments-for-roast', roast._id);
+    Meteor.subscribe('all-comments-for-roast', roast._id);
   } else {
     Meteor.subscribe('top-comments-for-roast', roast._id);
   }
 
   const allComments = Comments.find({roastId: roast._id}).fetch();
-  const totalComments = allComments.length || 0;
+  const totalComments = roast.totalComments;
   const totalPoints = _.reduce(totalComments, (mem, c) => {return mem + c.points;}, 0);
   let comments;
   if(allComments) {
     comments = _.filter(allComments, (c) => !c.replyTo);
     _.each(comments, (comment) => {
       replies = _.filter(allComments, (c) => !!c.replyTo && c.replyTo === comment._id);
-      comment.replies = _.sortBy(replies, 'createdAt');
+      comment.replies = _.sortBy(replies, 'createdAt').reverse();
     });
   }
   return {

@@ -64,6 +64,8 @@ const createReplies = () => {
 }
 
 Meteor.startup(function(){
+  /*Roasts.remove({});
+  Comments.remove({});*/
   if(Roasts.find().count() < 1 && Comments.find().count() < 1) {
     createRoasts();
     createComments();

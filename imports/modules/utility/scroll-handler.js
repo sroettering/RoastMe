@@ -9,6 +9,14 @@ export const ScrollHandler = {
     this.scrollPosition = 0;
     document.body.scrollTop = 0;
   },
+  infScrollHandler: null,
+  infiniteScroll(handler) {
+    this.infScrollHandler = handler;
+    $(window).scroll(this.infScrollHandler);
+  },
+  disableInfiniteScroll() {
+    $(window).unbind("scroll", this.infScrollHandler);
+  }
 };
 
 /*

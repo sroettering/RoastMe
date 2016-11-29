@@ -1,6 +1,7 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 import { SchemaCommons } from '/imports/modules/utility/schema-commons.js';
+import { Roasts } from './roasts-collection';
 
 const CommentsSchema = new SimpleSchema({
   content: {
@@ -75,3 +76,11 @@ const CommentsSchema = new SimpleSchema({
 export const Comments = new Mongo.Collection('comments');
 
 Comments.attachSchema(CommentsSchema);
+
+Comments.after.insert(function(userId, doc) {
+  Roasts.update({ _id: doc.roastId }, { $inc: { totalComments: 1 } });
+});
+
+Comments.after.remove(function(userId, doc) {
+  Roasts.update({ _id: doc.roastId }, { $inc: { totalComments: -1 } });
+});
