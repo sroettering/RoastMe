@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ReactiveVar } from 'meteor/reactive-var';
+import Spinner from 'react-spinkit';
 
 import { ScrollHandler } from '/imports/modules/utility/scroll-handler';
 import { Roast } from '/imports/modules/roasts/roast';
@@ -14,7 +15,7 @@ export class RoastsListView extends Component {
     ScrollHandler.infiniteScroll(
       _.throttle(function() {
         if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-          roastLimit.set(roastLimit.get() + 2);
+          roastLimit.set(roastLimit.get() + 10);
         }
       }, 500)
     );
@@ -31,16 +32,18 @@ export class RoastsListView extends Component {
           { this.props.roasts.map((roast) => {
             return <Roast key={roast._id} roast={roast} single={false}/>
           })}
+          { this.props.hasMore ? <Spinner spinnerName="circle"/> : '' }
         </div>
       );
     } else {
       return (
-        <h3>Loading...</h3>
+        <Spinner spinnerName="circle"/>
       );
     }
   }
 }
 
 RoastsListView.propTypes = {
-  roast: React.PropTypes.object,
+  roasts: React.PropTypes.array,
+  hasMore: React.PropTypes.bool,
 }

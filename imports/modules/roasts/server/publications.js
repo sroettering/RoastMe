@@ -7,20 +7,24 @@ import { Comments } from '../comments-collection';
 // ----------------- Roasts -----------------
 
 Meteor.publish('hot-roasts', function(limit) {
-  return Roasts.find({}, { sort: { totalUpvotes: 1 }, limit: limit });
+  return Roasts.find({ status: 'accepted' }, { sort: { totalUpvotes: 1 }, limit: limit });
 });
 
 Meteor.publish('trending-roasts', function(limit) {
-  return Roasts.find({}, { sort: { totalComments: 1 }, limit: limit });
+  return Roasts.find({ status: 'accepted' }, { sort: { totalComments: 1 }, limit: limit });
 });
 
 Meteor.publish('new-roasts', function(limit) {
-  return Roasts.find({}, { sort: { createdAt: -1 }, limit: limit });
+  return Roasts.find({ status: 'accepted' }, { sort: { createdAt: -1 }, limit: limit });
 });
 
 Meteor.publish('single-roast', function(roastId) {
   check(roastId, String);
-  return Roasts.find(roastId);
+  return Roasts.find({ _id: roastId, status: 'accepted' });
+});
+
+Meteor.publish('queued-roasts', function() {
+  return Roasts.find({ status: 'queued' }, { sort: { createdAt: 1 } });
 });
 
 

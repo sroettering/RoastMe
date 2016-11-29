@@ -1,35 +1,11 @@
-div .admin-content {
-  background: #E9F0F5;
-  min-height: 100vh;
-  min-width: 100vw;
-}
+div .admin-main {
 
-div .admin-sidenav {
-  background-color: #273135;
-  padding: 0;
-  min-height: 100vh;
-}
+  h2 {
+    text-align: center;
+  }
 
-.admin-nav-item > a > i {
-  margin-left: 10px;
-  margin-right: 20px;
-}
-
-.admin-nav-item > a {
-  color: #89949B;
-  font-size: 18px;
-}
-
-.admin-nav-item.active {
-  box-shadow: 5px 0px 0px #E76049 inset;
-  background-color: rgba(0,0,0,0.2) !important;
-}
-
-.admin-nav-item > a:hover {
-  background-color: rgba(0,0,0,0.2) !important;
-  color: #fff;
-}
-
-.chart-panel {
-  max-height: 200px;
+  .button {
+    display: inline-block;
+    margin: 10px 40px 0 0;
+  }
 }

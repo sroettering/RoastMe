@@ -1,86 +1,47 @@
 import React, { Component } from 'react';
-
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
-import { UserStats } from '/imports/modules/admin/admin-collections.js';
-
-const formatUserData = (doc) => {
-  const data = {
-    labels: doc.labels,
-    datasets: [
-      {
-        label: 'Neue Nutzer',
-        fill: true,
-        pointRadius: 2,
-        data: doc.userDeltas,
-      },
-    ],
-  };
-  return data;
-};
-
-const getChartOptions = () => {
-  return {
-    maintainAspectRatio: false,
-    title: {
-      display: true,
-      text: 'Nutzerzuwachs',
-      fontSize: 16,
-    },
-    legend: {
-      display: false,
-    },
-    scales: {
-      xAxes: [{
-        scaleLabel: {
-          display: true,
-          labelString: 'Datum',
-        },
-        gridLines: {
-          display: false,
-        },
-        ticks: {
-          maxRotation: 0,
-        },
-      }],
-      yAxes: [{
-        scaleLabel: {
-          display: true,
-          labelString: 'Anzahl registrierte Nutzer',
-        },
-        ticks: {
-          beginAtZero: true,
-          suggestedMax: 10,
-          maxTicksLimit: 10,
-        },
-      }],
-    },
-  };
-};
+import { Roasts } from '/imports/modules/roasts/roasts-collection';
 
 export class DashboardC extends Component {
-  render() {
 
+  handleRoast(accept) {
+    const { roast } = this.props;
+    if(!roast) return;
+    if(accept) {
+      Meteor.call('acceptRoast', roast._id);
+    } else {
+      Meteor.call('declineRoast', roast._id);
+    }
+  }
+
+  render() {
+    const { roast } = this.props;
+    return (
+      <main className="main admin-main">
+        <div className="wrapper">
+          <h2>Dashboard</h2>
+          <img className="roast-image" src={ roast ? roast.imageUrl : '' } alt=""/>
+          <button className="button mdi mdi-thumb-up" onClick={ this.handleRoast.bind(this, true) }>Accept</button>
+          <button className="button mdi mdi-thumb-down" onClick={ this.handleRoast.bind(this, false) }>Decline</button>
+        </div>
+      </main>
+    );
   }
 }
 
 DashboardC.propTypes = {
-  userData: React.PropTypes.object,
-  chartOptions: React.PropTypes.object,
-  userLoading: React.PropTypes.bool,
+  user: React.PropTypes.object,
+  roast: React.PropTypes.object,
 };
 
 export const Dashboard = createContainer(() => {
-  const historyLength = 10;
-  const userStatsHandle = Meteor.subscribe('usersPerDay', historyLength);
-  const userStats = UserStats.findOne();
-  const userData = userStats ? formatUserData(UserStats.findOne()) : {};
-  const chartOptions = getChartOptions();
-
+  const user = Meteor.user();
+  const roastHandle = Meteor.subscribe('queued-roasts');
+  const roast = Roasts.findOne();
   return {
-    userLoading: !userStatsHandle.ready(),
-    userData,
-    chartOptions,
+    user,
+    roast,
   };
 }, DashboardC);

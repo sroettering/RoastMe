@@ -8,7 +8,9 @@ import { Roasts } from '/imports/modules/roasts/roasts-collection';
 export const Hot = createContainer(() => {
   Meteor.subscribe('hot-roasts', roastLimit.get());
   const roasts = Roasts.find().fetch();
+  const hasMore = roasts.length >= roastLimit.get();
   return {
     roasts,
+    hasMore,
   }
 }, RoastsListView);

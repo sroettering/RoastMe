@@ -18,6 +18,15 @@ const RoastsSchema = new SimpleSchema({
   imageUrl: {
     type: String,
   },
+  status: {
+    type: String,
+    allowedValues: ['queued', 'accepted', 'declined'],
+    autoValue() {
+      if(this.isInsert) {
+        return 'queued';
+      }
+    },
+  },
   totalUpvotes: {
     type: Number,
     autoValue() {

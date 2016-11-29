@@ -5,6 +5,8 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { AppNavigation } from '/imports/modules/navigation/app-navigation';
 import { Footer } from './footer';
 
+// TODO: Add footer beneath main tag
+
 export class AppC extends Component {
 
   render() {
@@ -21,7 +23,7 @@ export class AppC extends Component {
             </div>
           </div>
         </main>
-        <Footer />
+
       </div>
     );
   }

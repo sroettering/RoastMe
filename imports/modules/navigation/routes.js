@@ -25,17 +25,6 @@ const requireAuth = (nextState, replace) => {
   }
 };
 
-const requireAdmin = (nextState, replace) => {
-  if (!Meteor.loggingIn() && !Meteor.userId()) {
-    if(!Roles.userIsInRole(Meteor.userId())) {
-      replace({
-        pathname: '/',
-        state: { nextPathname: '/' },
-      });
-    }
-  }
-};
-
 Meteor.startup(() => {
   render(
     <Router history={ browserHistory }>
@@ -46,11 +35,11 @@ Meteor.startup(() => {
         <Route name="roast" path="/roast/:id" component={ RoastPage } />
         <Route name="login" path="/login" component={ Login } />
         <Route name="user" path="/user/:id" component={ UserProfile } onEnter={ requireAuth } />
-        <Route name="admin-page" path="/admin" component={ AdminPage } onEnter={ requireAuth }>
-          <IndexRoute name="admin-dashboard" component={ Dashboard } />
-        </Route>
-        <Route path="*" component={ NotFound } />
       </Route>
+      <Route name="admin-page" path="/admin" component={ AdminPage } onEnter={ requireAuth }>
+        <IndexRoute name="admin-dashboard" component={ Dashboard } />
+      </Route>
+      <Route path="*" component={ NotFound } />
     </Router>,
     document.getElementById('react-root')
   );

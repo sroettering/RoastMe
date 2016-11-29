@@ -23,6 +23,8 @@ Meteor.methods({
     const roast = Roasts.findOne(roastId);
     if(!roast) return;
 
+    if(roast.status !== 'accepted') return;
+
     let comment;
     if(commentId) {
       comment = Comments.findOne(commentId);
@@ -127,5 +129,27 @@ Meteor.methods({
         $set: { points: Math.max(0, points - 1) },
       });
     }
+  },
+  acceptRoast(roastId) {
+    check(roastId, String);
+
+    if(!this.userId) return;
+    if(!Roles.userIsInRole(this.userId, 'admin')) return;
+
+    const roast = Roasts.findOne({ _id: roastId, status: { $ne: 'accepted' } });
+    if(!roast) return;
+
+    Roasts.update({ _id: roastId }, { $set: { status: 'accepted' } });
+  },
+  declineRoast(roastId) {
+    check(roastId, String);
+
+    if(!this.userId) return;
+    if(!Roles.userIsInRole(this.userId, 'admin')) return;
+
+    const roast = Roasts.findOne({ _id: roastId, status: { $ne: 'declined' } });
+    if(!roast) return;
+
+    Roasts.update({ _id: roastId }, { $set: { status: 'declined' } });
   },
 });
