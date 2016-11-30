@@ -75,24 +75,4 @@ body {
 }
 
 
-
-/*
-
-.badge {
-	background: $red;
-	border-radius: 50%;
-	color: $white;
-	font-family: $montserrat;
-	font-size: 12px;
-	font-weight: 400;
-	height: 20px;
-	line-height: 20px;
-	position: absolute;
-	right: 0;
-	text-align: center;
-	top: 0;
-	width: 20px;
-}
-*/
-
-@import "header";
+@import "modal";

@@ -1,0 +1,95 @@
+.modal-overlay {
+	background: rgba(#000000, 0.8);
+	height: 100%;
+	left: 0;
+	opacity: 0;
+	position: fixed;
+	top: 0;
+	-webkit-transition: all 0.3s ease 0s;
+	        transition: all 0.3s ease 0s;
+	visibility: hidden;
+	width: 100%;
+
+	&.active {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.modal {
+		background: #f9f7cb;
+		margin: 0 auto;
+		max-width: 400px;
+		padding: 30px;
+		position: relative;
+		top: 50%;
+		-webkit-transform: translateY(-50%);
+		        transform: translateY(-50%);
+
+		&::after {
+			clear: both;
+			content: "";
+			display: block;
+		}
+
+		hr {
+			background: #d9d7bd;
+			border: none;
+			color: #d9d7bd;
+			height: 1px;
+			left: -30px;
+			margin: 0 0 30px;
+			position: relative;
+			width: calc(100% + 60px);
+		}
+
+		.modal-title {
+			color: black;
+			display: block;
+			font-size: 24px;
+			line-height: 32px;
+			margin: 0 0 30px;
+		}
+
+		label {
+			display: block;
+			margin: 0 0 5px;
+		}
+
+		.modal-upload {
+			background: #d9d7bd;
+			cursor: pointer;
+			cursor: pointer;
+			height: 150px;
+			margin: 0 0 15px;
+			position: relative;
+			width: 100%;
+		}
+
+		.mdi {
+			color: #898477;
+			cursor: pointer;
+			font-size: 48px;
+			height: 100%;
+			left: 0;
+			line-height: 150px;
+			position: absolute;
+			text-align: center;
+			top: 0;
+			width: 100%;
+		}
+
+		input {
+			cursor: pointer;
+			height: 100%;
+			left: 0;
+			opacity: 0;
+			position: absolute;
+			top: 0;
+			width: 100%;
+		}
+
+		.button {
+			float: right;
+		}
+	}
+}

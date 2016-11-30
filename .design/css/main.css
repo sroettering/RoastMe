@@ -13,6 +13,7 @@ body {
   height: 100%;
   margin: 0 auto;
   max-width: 1200px;
+  padding: 0 30px;
   position: relative; }
   .wrapper::after {
     clear: both;
@@ -50,108 +51,79 @@ body {
       .button span {
         display: inline-block; } }
 
-/*
-
-.badge {
-	background: $red;
-	border-radius: 50%;
-	color: $white;
-	font-family: $montserrat;
-	font-size: 12px;
-	font-weight: 400;
-	height: 20px;
-	line-height: 20px;
-	position: absolute;
-	right: 0;
-	text-align: center;
-	top: 0;
-	width: 20px;
-}
-
-
-*/
-.header {
-  background: rgba(31, 31, 31, 0.8);
-  height: 128px;
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.8);
+  height: 100%;
   left: 0;
+  opacity: 0;
   position: fixed;
   top: 0;
-  transition: transform 0.3s ease 0s;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  visibility: hidden;
   width: 100%; }
-  .header.fixed {
-    transform: translateY(-84px); }
-
-.logo {
-  background: transparent url("../images/logo.png") no-repeat scroll center/cover;
-  display: block;
-  height: 37px;
-  left: 30px;
-  position: absolute;
-  top: 20px;
-  width: 77px; }
-
-.navigation-left {
-  left: 0;
-  position: absolute;
-  top: 84px;
-  width: 100%; }
-  @media (min-width: 768px) {
-    .navigation-left {
-      left: 140px;
-      top: 20px;
-      width: auto; } }
-  .navigation-left ul {
-    list-style: none; }
-  .navigation-left li {
-    display: block;
-    float: left;
+  .modal-overlay.active {
+    opacity: 1;
+    visibility: visible; }
+  .modal-overlay .modal {
+    background: #f9f7cb;
+    margin: 0 auto;
+    max-width: 400px;
+    padding: 30px;
     position: relative;
-    width: 33%; }
-    @media (min-width: 768px) {
-      .navigation-left li {
-        margin: 0 15px 0 0;
-        width: auto; }
-        .navigation-left li:last-child {
-          margin: 0; } }
-  .navigation-left a {
-    color: rgba(255, 255, 255, 0.7);
-    display: block;
-    font-size: 20px;
-    line-height: 44px;
-    position: relative;
-    text-align: center;
-    text-decoration: none;
-    transition: color 0.3s ease 0s; }
-    @media (min-width: 768px) {
-      .navigation-left a {
-        padding: 0 15px; } }
-    .navigation-left a:hover {
-      color: white; }
-    .navigation-left a.current {
-      color: #f22613; }
-
-.navigation-right {
-  position: absolute;
-  right: 30px;
-  top: 20px; }
-  .navigation-right ul {
-    list-style: none; }
-  .navigation-right li {
-    display: inline-block;
-    position: relative; }
-  .navigation-right a {
-    color: rgba(255, 255, 255, 0.7);
-    display: block;
-    font-size: 20px;
-    line-height: 44px;
-    position: relative;
-    text-align: center;
-    text-decoration: none;
-    transition: all 0.3s ease 0s; }
-    .navigation-right a.button {
-      color: white;
-      font-size: 16px; }
-    .navigation-right a:hover {
-      color: white; }
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%); }
+    .modal-overlay .modal::after {
+      clear: both;
+      content: "";
+      display: block; }
+    .modal-overlay .modal hr {
+      background: #d9d7bd;
+      border: none;
+      color: #d9d7bd;
+      height: 1px;
+      left: -30px;
+      margin: 0 0 30px;
+      position: relative;
+      width: calc(100% + 60px); }
+    .modal-overlay .modal .modal-title {
+      color: black;
+      display: block;
+      font-size: 24px;
+      line-height: 32px;
+      margin: 0 0 30px; }
+    .modal-overlay .modal label {
+      display: block;
+      margin: 0 0 5px; }
+    .modal-overlay .modal .modal-upload {
+      background: #d9d7bd;
+      cursor: pointer;
+      cursor: pointer;
+      height: 150px;
+      margin: 0 0 15px;
+      position: relative;
+      width: 100%; }
+    .modal-overlay .modal .mdi {
+      color: #898477;
+      cursor: pointer;
+      font-size: 48px;
+      height: 100%;
+      left: 0;
+      line-height: 150px;
+      position: absolute;
+      text-align: center;
+      top: 0;
+      width: 100%; }
+    .modal-overlay .modal input {
+      cursor: pointer;
+      height: 100%;
+      left: 0;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      width: 100%; }
+    .modal-overlay .modal .button {
+      float: right; }
 
 /*# sourceMappingURL=main.css.map */

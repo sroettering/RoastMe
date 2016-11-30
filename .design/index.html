@@ -8,24 +8,17 @@
     <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
-    <header class="header" role="banner">
-      <div class="wrapper">
-        <a href="#" class="logo"></a>
-
-        <nav class="navigation-left" role="navigation">
-          <ul>
-            <li><a href="#">Hot</a></li>
-            <li><a href="#" class="current">Trending</a></li>
-            <li><a href="#">New</a></li>
-          </ul>
-        </nav>
-
-        <nav class="navigation-right" role="navigation">
-          <ul>
-            <li><a href="#" class="button mdi mdi-login"><span>Login</span></a></li>
-          </ul>
-        </nav>
+    <div class="modal-overlay active">
+      <div class="modal">
+        <span class="modal-title">Upload an image</span>
+        <hr>
+        <label for="modal-input">Choose or drag image here</label>
+        <div class="modal-upload">
+          <span class="mdi mdi-upload"></span>
+          <input id="modal-input" type="file" name="name" value="">
+        </div>
+        <a href="#" class="button">Upload?!</a>
       </div>
-    </header>
+    </div>
   </body>
 </html>
