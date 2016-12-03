@@ -23,7 +23,7 @@ export class AppC extends Component {
             </div>
           </div>
         </main>
-
+        <Footer />
       </div>
     );
   }
