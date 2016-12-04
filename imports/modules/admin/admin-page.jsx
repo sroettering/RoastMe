@@ -7,14 +7,6 @@ import { NotFound } from '/imports/modules/ui/not-found';
 
 class AdminPageC extends Component {
 
-  componentWillReceiveProps(nextProps) {
-    const { isAdmin } = nextProps;
-    const { user } = nextProps;
-    if(!isAdmin && user) {
-      browserHistory.push('/');
-    }
-  }
-
   render() {
     if(this.props.isAdmin) {
       return this.props.children;

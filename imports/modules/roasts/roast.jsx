@@ -55,7 +55,6 @@ class RoastC extends Component {
         <ul>
           <li><a href="#" className="button mdi mdi-facebook"><span>Facebook</span></a></li>
           <li><a href="#" className="button mdi mdi-twitter"><span>Twitter</span></a></li>
-          <li><a href="#" className="button mdi mdi-google-plus"><span>Google +</span></a></li>
         </ul>
       </div>
     );
@@ -191,7 +190,7 @@ export const Roast = createContainer(({roast, single}) => {
 
   const allComments = Comments.find({roastId: roast._id}).fetch();
   const totalComments = roast.totalComments;
-  const totalPoints = _.reduce(totalComments, (mem, c) => {return mem + c.points;}, 0);
+  const totalPoints = _.reduce(allComments, (mem, c) => mem + c.points, 0);
   let comments;
   if(allComments) {
     comments = _.filter(allComments, (c) => !c.replyTo);

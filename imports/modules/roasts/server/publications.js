@@ -41,5 +41,5 @@ Meteor.publish('all-comments-for-roast', function(roastId) {
 
 Meteor.publish('top-comments-for-roast', function(roastId) {
   check(roastId, String);
-  return Comments.find({roastId: roastId, replyTo: null}, { sort: { points: 1 }, limit: 5 });
+  return Comments.find({roastId: roastId, replyTo: null}, { sort: { points: -1 }, limit: 5 });
 });
