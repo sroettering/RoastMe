@@ -1,7 +1,7 @@
 export const ScrollHandler = {
   scrollPosition: 0,
   handleScrollEvent(event) {
-    const curScrollPos = event.srcElement.body.scrollTop;
+    const curScrollPos = Math.max(event.srcElement.body.scrollTop, 0);
     document.getElementsByClassName('header')[0].classList.toggle('fixed', curScrollPos > this.scrollPosition);
     this.scrollPosition = curScrollPos;
   },
