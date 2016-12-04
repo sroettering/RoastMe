@@ -22,7 +22,6 @@ export class TextArea extends Component {
     return (
       <div className="roast-write-comment">
         <textarea name="name" placeholder="Write comment ..." ref={(element) => {this.textarea = element;}}></textarea>
-        <a href="#" className="mdi mdi-emoticon"></a>
         <p className="roast-write-counter">64</p>
         <a href="#" className="button mdi mdi-send" onClick={ this.submit.bind(this) }><span>Submit</span></a>
       </div>
