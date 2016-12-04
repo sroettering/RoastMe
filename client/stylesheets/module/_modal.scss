@@ -59,7 +59,7 @@
 			background: #d9d7bd;
 			cursor: pointer;
 			cursor: pointer;
-			height: 150px;
+			min-height: 150px;
 			margin: 0 0 15px;
 			position: relative;
 			width: 100%;
@@ -85,6 +85,10 @@
 			opacity: 0;
 			position: absolute;
 			top: 0;
+			width: 100%;
+		}
+
+		img {
 			width: 100%;
 		}
 
