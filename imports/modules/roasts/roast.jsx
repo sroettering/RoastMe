@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
 import { createContainer } from 'meteor/react-meteor-data';
-import { browserHistory } from 'react-router';
+import { browserHistory, Link } from 'react-router';
 
 import { Roasts } from './roasts-collection';
 import { Comments } from './comments-collection';
@@ -107,8 +107,8 @@ class RoastC extends Component {
     return (
       <div className="roast-comment">
         <div className="roast-comment-profile">
-          <img src={ comment.userImage } alt="" />
-          <h3>{ comment.userName }</h3>
+          <Link to={ `/user/${comment.userId}` }><img src={ comment.userImage } alt="" /></Link>
+          <h3><Link to={ `/user/${comment.userId}` }>{ comment.userName }</Link></h3>
           <p className="big">{ comment.points }<span className="mdi mdi-trophy-award"></span></p>
         </div>
         <div className="roast-comment-text">
