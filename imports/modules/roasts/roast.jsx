@@ -115,7 +115,12 @@ class RoastC extends Component {
           <p>{ comment.content }</p>
         </div>
         { this.renderCommentControls(comment) }
-        { this.state.replyingTo === comment._id ? <TextArea roast={this.props.roast} comment={comment} /> : '' }
+        { this.state.replyingTo === comment._id ?
+          <TextArea
+            roast={ this.props.roast }
+            comment={ comment }
+            onCommented={ this.closeTextArea.bind(this) } />
+          : '' }
       </div>
     );
   }
@@ -143,6 +148,10 @@ class RoastC extends Component {
   handleReply(comment, event) {
     event.preventDefault();
     this.setState({ replyingTo: comment._id });
+  }
+
+  closeTextArea() {
+    this.setState({ replyingTo: null });
   }
 
   render() {

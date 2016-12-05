@@ -7,10 +7,13 @@ export class TextArea extends Component {
     event.preventDefault();
     const text = this.textarea.value; // TODO: clean text and resolve mentions
     const roastId = this.props.roast ? this.props.roast._id : undefined;
-    const commentId = this.props.comment ? this.props.comment._id : undefined;
+    const commentId = this.props.comment ? this.props.comment.replyTo || this.props.comment._id : undefined;
     Meteor.call('createComment', roastId, commentId, text, (error, result) => {
       if(!error) {
         this.textarea.value = '';
+        if(this.props.onCommented) {
+          this.props.onCommented();
+        }
         Bert.alert('Commented', 'success');
       } else {
         Bert.alert('Something went wrong!', 'warning');
@@ -32,4 +35,5 @@ export class TextArea extends Component {
 TextArea.propTypes = {
   roast: React.PropTypes.object,
   comment: React.PropTypes.object,
+  onCommented: React.PropTypes.func,
 }
