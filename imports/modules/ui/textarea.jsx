@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import { Bert } from 'meteor/themeteorchef:bert';
 
 export class TextArea extends Component {
@@ -22,13 +23,21 @@ export class TextArea extends Component {
   }
 
   render() {
-    return (
-      <div className="roast-write-comment">
-        <textarea name="name" placeholder="Write comment ..." ref={(element) => {this.textarea = element;}}></textarea>
-        <p className="roast-write-counter">64</p>
-        <a href="#" className="button mdi mdi-send" onClick={ this.submit.bind(this) }><span>Submit</span></a>
-      </div>
-    );
+    if(Meteor.userId()) {
+      return (
+        <div className="roast-write-comment">
+          <textarea name="name" placeholder="Write comment ..." ref={(element) => {this.textarea = element;}}></textarea>
+          <p className="roast-write-counter">64</p>
+          <a href="#" className="button mdi mdi-send" onClick={ this.submit.bind(this) }><span>Submit</span></a>
+        </div>
+      );
+    } else {
+      return (
+        <div className="roast-write-comment">
+          <p className="login-hint"><Link to={ "/login" }>Login</Link> to write a roast!</p>
+        </div>
+      );
+    }
   }
 }
 
