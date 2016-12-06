@@ -16,7 +16,7 @@
 	}
 
 	.modal {
-		background: #f9f7cb;
+		background: $background-modal;
 		margin: 0 auto;
 		max-width: 400px;
 		padding: 30px;
@@ -32,7 +32,7 @@
 		}
 
 		hr {
-			background: #d9d7bd;
+			background: $background-secondary;
 			border: none;
 			color: #d9d7bd;
 			height: 1px;
@@ -56,13 +56,13 @@
 		}
 
 		.modal-upload {
-			background: #d9d7bd;
-			cursor: pointer;
+			background: $background-modal;
 			cursor: pointer;
 			min-height: 150px;
 			margin: 0 0 15px;
 			position: relative;
 			width: 100%;
+			border: 1px solid $background-secondary;
 		}
 
 		.mdi {
@@ -89,11 +89,31 @@
 		}
 
 		img {
-			width: 100%;
+			display: block;
+			width: auto;
+			max-width: 100%;
 		}
 
 		.button {
 			float: right;
+		}
+
+		.spinner {
+			margin: 55px auto;
+			width: 30px;
+			height: 30px;
+
+			&.dark {
+				.circle:before {
+					background: $background-secondary;
+				}
+			}
+
+			&.light {
+				.circle:before {
+					background: $background-modal;
+				}
+			}
 		}
 	}
 }

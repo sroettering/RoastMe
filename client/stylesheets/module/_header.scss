@@ -1,5 +1,5 @@
 .header {
-	background: rgba($background-primary, 0.8);
+	background: rgba($background-header, 0.8);
 	height: 128px;
 	left: 0;
 	position: fixed;
@@ -27,7 +27,7 @@
 }
 
 .logo {
-	background: transparent url("logo.png") no-repeat scroll center / cover;
+	background: transparent url("RoastMe_Logo_Original.svg") no-repeat scroll center / cover;
 	display: block;
 	height: 37px;
 	left: 30px;

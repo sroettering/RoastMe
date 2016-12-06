@@ -32,7 +32,7 @@ export class RoastsListView extends Component {
           { this.props.roasts.map((roast) => {
             return <Roast key={roast._id} roast={roast} single={false}/>
           })}
-          { this.props.hasMore ? <Spinner spinnerName="circle"/> : '' }
+          { this.props.hasMore ? <Spinner spinnerName="circle" className="light" noFadeIn/> : '' }
         </div>
       );
     } else {

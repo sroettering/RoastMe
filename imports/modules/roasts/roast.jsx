@@ -43,7 +43,7 @@ class RoastC extends Component {
     return (
       <div className="roast-section" onClick={ this.handleClick.bind(this) }>
         <div>
-          <img className="roast-image" src={ this.props.roast.imageUrl } alt="" />
+          <img className="roast-image" src={ this.props.roast.imageUrl } alt={ this.props.roast.title } />
         </div>
       </div>
     );
@@ -107,7 +107,7 @@ class RoastC extends Component {
     return (
       <div className="roast-comment">
         <div className="roast-comment-profile">
-          <Link to={ `/user/${comment.userId}` }><img src={ comment.userImage } alt="" /></Link>
+          <Link to={ `/user/${comment.userId}` }><img src={ comment.userImage } alt={ comment.userName } /></Link>
           <h3><Link to={ `/user/${comment.userId}` }>{ comment.userName }</Link></h3>
           <p className="big">{ comment.points }<span className="mdi mdi-trophy-award"></span></p>
         </div>

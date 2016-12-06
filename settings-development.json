@@ -9,10 +9,6 @@
       "google": {
         "clientId": "476899950105-v1420qjpvhk417o9r7g608maops0e6n7.apps.googleusercontent.com",
         "secret": "_1UPh1HR1sNSryrHDUehOWuY"
-      },
-      "twitter": {
-        "consumerKey": "tpXehxYCe4AAXdDrP0Lmb24Fz",
-        "secret": "sDzkJFrIezL3b1ZfbcdfNX0I5IadOKBfurs9pxLnUH0n3f81w9"
       }
     }
   }
