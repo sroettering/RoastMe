@@ -65,7 +65,7 @@
 			border: 1px solid $background-secondary;
 		}
 
-		.mdi {
+		.drop-area {
 			color: #898477;
 			cursor: pointer;
 			font-size: 48px;
@@ -78,7 +78,7 @@
 			width: 100%;
 		}
 
-		input {
+		input#modal-input {
 			cursor: pointer;
 			height: 100%;
 			left: 0;
@@ -88,7 +88,18 @@
 			width: 100%;
 		}
 
+		input.roast-title {
+			outline: none;
+			width: 100%;
+			line-height: 32px;
+			font-size: 16px;
+			margin-bottom: 20px;
+			padding-left: 5px;
+			border: 1px solid $background-secondary;
+		}
+
 		img {
+			position: relative;
 			display: block;
 			width: auto;
 			max-width: 100%;

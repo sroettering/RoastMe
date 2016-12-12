@@ -4,11 +4,39 @@ import { _ } from 'meteor/underscore';
 
 import { Roasts } from '/imports/modules/roasts/roasts-collection';
 import { Comments } from '/imports/modules/roasts/comments-collection';
+import { checkAmazonUrlValidity } from '/imports/modules/utility/amazon-url-validity';
+
+const getUserImage = (user) => {
+  if(user.services.facebook) {
+    return user.services.facebook.picture;
+  } else if(user.services.google) {
+    return user.services.google.picture;
+  }
+}
 
 Meteor.methods({
-  createRoast() {
-    if(!this.userId) return;
+  createRoast(imageUrl, title) {
+    check(imageUrl, String);
+    check(title, String);
+    checkAmazonUrlValidity(imageUrl);
 
+    if(!this.userId) return;
+    const user = Meteor.users.findOne(this.userId);
+    const userName = user.profile.username || user.profile.name;
+    const userImage = getUserImage(user);
+
+    let roast = Roasts.findOne({ userId: this.userId, imageUrl: imageUrl });
+    if(roast) throw new Meteor.Error("You already uploaded this file!");
+
+    roast = {
+      title,
+      userId: this.userId,
+      userName,
+      userImage,
+      imageUrl,
+    };
+
+    return Roasts.insert(roast);
   },
   createComment(roastId, commentId, text) {
     check(roastId, String);
@@ -31,12 +59,7 @@ Meteor.methods({
       if(!comment) return;
     }
 
-    let userImage;
-    if(user.services.facebook) {
-      userImage = user.services.facebook.picture;
-    } else if(user.services.google) {
-      userImage = user.services.google.picture;
-    }
+    const userImage = getUserImage(user);
 
     const newComment = {
       content: text,

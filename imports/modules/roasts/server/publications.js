@@ -7,14 +7,17 @@ import { Comments } from '../comments-collection';
 // ----------------- Roasts -----------------
 
 Meteor.publish('hot-roasts', function(limit) {
+  check(limit, Number);
   return Roasts.find({ status: 'accepted' }, { sort: { totalUpvotes: 1 }, limit: limit });
 });
 
 Meteor.publish('trending-roasts', function(limit) {
+  check(limit, Number);
   return Roasts.find({ status: 'accepted' }, { sort: { totalComments: 1 }, limit: limit });
 });
 
 Meteor.publish('new-roasts', function(limit) {
+  check(limit, Number);
   return Roasts.find({ status: 'accepted' }, { sort: { createdAt: -1 }, limit: limit });
 });
 

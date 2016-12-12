@@ -5,12 +5,11 @@ import Spinner from 'react-spinkit';
 import { ScrollHandler } from '/imports/modules/utility/scroll-handler';
 import { Roast } from '/imports/modules/roasts/roast';
 
-export const roastLimit = new ReactiveVar(2);
+export const roastLimit = new ReactiveVar(30);
 
 export class RoastsListView extends Component {
 
   componentDidMount() {
-    roastLimit.set(2);
     ScrollHandler.resetScrollPosition();
     ScrollHandler.infiniteScroll(
       _.throttle(function() {

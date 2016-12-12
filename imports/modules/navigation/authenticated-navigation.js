@@ -3,9 +3,10 @@ import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
+import { ReactiveVar } from 'meteor/reactive-var';
 
 import { ModalDialog } from '/imports/modules/ui/modal-dialog';
-import { ModalUpload } from '/imports/modules/roasts/upload';
+import { ModalUpload } from '/imports/modules/ui/modal-upload';
 
 const handleLogout = () => {
   Meteor.logout(() => browserHistory.push('/login'));
@@ -63,7 +64,7 @@ class AuthenticatedNavigationC extends Component {
           <li><a href="#" className="button mdi mdi-logout" onClick={ handleLogout }></a></li>
         </ul>
         <ModalDialog isOpen={ this.state.isModalOpen } closeHandler={ this.modalCloseHandler.bind(this) }>
-          <ModalUpload />
+          <ModalUpload closeModal={ this.closeModal.bind(this) }/>
         </ModalDialog>
       </nav>
     );
