@@ -3,29 +3,15 @@ import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import { Roasts } from '/imports/modules/roasts/roasts-collection';
+import { RoastVerificationPanel } from '/imports/modules/admin/roast-verification-panel';
 
 export class DashboardC extends Component {
-
-  handleRoast(accept) {
-    const { roast } = this.props;
-    if(!roast) return;
-    if(accept) {
-      Meteor.call('acceptRoast', roast._id);
-    } else {
-      Meteor.call('declineRoast', roast._id);
-    }
-  }
-
   render() {
-    const { roast } = this.props;
+    const { roast, numQueued } = this.props;
     return (
       <main className="main admin-main">
-        <div className="wrapper">
-          <h2>Dashboard</h2>
-          <img className="roast-image" src={ roast ? roast.imageUrl : '' } alt=""/>
-          <button className="button mdi mdi-thumb-up" onClick={ this.handleRoast.bind(this, true) }>Accept</button>
-          <button className="button mdi mdi-thumb-down" onClick={ this.handleRoast.bind(this, false) }>Decline</button>
-        </div>
+        <h2>Dashboard</h2>
+        <RoastVerificationPanel roast={ roast } numQueued={ numQueued } />
       </main>
     );
   }
@@ -34,14 +20,17 @@ export class DashboardC extends Component {
 DashboardC.propTypes = {
   user: React.PropTypes.object,
   roast: React.PropTypes.object,
+  numQueued: React.PropTypes.number,
 };
 
 export const Dashboard = createContainer(() => {
   const user = Meteor.user();
   const roastHandle = Meteor.subscribe('queued-roasts');
   const roast = Roasts.findOne();
+  const numQueued = Roasts.find().count();
   return {
     user,
     roast,
+    numQueued,
   };
 }, DashboardC);
