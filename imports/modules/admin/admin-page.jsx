@@ -26,7 +26,7 @@ export const AdminPage = createContainer(() => {
   Meteor.subscribe('loggedinUser');
   const user = Meteor.user();
   return {
-    user: Meteor.user(),
+    user,
     isAdmin: user && Roles.userIsInRole(user, 'admin'),
   };
 }, AdminPageC);

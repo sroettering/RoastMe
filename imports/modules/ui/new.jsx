@@ -7,7 +7,7 @@ import { Roasts } from '/imports/modules/roasts/roasts-collection';
 
 export const New = createContainer(() => {
   Meteor.subscribe('new-roasts', roastLimit.get());
-  const roasts = Roasts.find({}).fetch();
+  const roasts = Roasts.find({}, { sort: { createdAt: -1 } }).fetch();
   const hasMore = roasts.length >= roastLimit.get();
   return {
     roasts,

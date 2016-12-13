@@ -7,7 +7,7 @@ import { Roasts } from '/imports/modules/roasts/roasts-collection';
 
 export const Trending = createContainer(() => {
   Meteor.subscribe('trending-roasts', roastLimit.get());
-  const roasts = Roasts.find().fetch();
+  const roasts = Roasts.find({}, { sort: { totalComments: 1 } }).fetch();
   const hasMore = roasts.length >= roastLimit.get();
   return {
     roasts,
