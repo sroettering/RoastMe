@@ -1,0 +1,39 @@
+i {
+  width: 24px;
+  height: 24px;
+  color: white;
+  display: inline-block;
+  margin-left: 5px;
+
+	&.icon-comment {
+    background: url("./icons/comment.svg") no-repeat center;
+	}
+
+	&.icon-downvote {
+    background: url("./icons/downvote.svg") no-repeat center;
+	}
+
+	&.icon-news {
+    background: url("./icons/news.svg") no-repeat center;
+	}
+
+	&.icon-point {
+    background: url("./icons/point.svg") no-repeat center;
+	}
+
+	&.icon-profile {
+    background: url("./icons/profile.svg") no-repeat center;
+	}
+
+	&.icon-topofbox {
+    background: url("./icons/topofbox.svg") no-repeat center;
+	}
+
+	&.icon-upload {
+    background: url("./icons/upload.svg") no-repeat center;
+	}
+
+	&.icon-upvote {
+    background: url("./icons/upvote.svg") no-repeat center;
+	}
+}

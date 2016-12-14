@@ -33,7 +33,7 @@ class RoastC extends Component {
     return (
       <div className="roast-section">
         <div>
-          <h2>{ this.props.roast.title }</h2>
+          <h2><Link to={`/roast/${this.props.roast._id}`}>{ this.props.roast.title }</Link></h2>
         </div>
       </div>
     );
@@ -63,8 +63,14 @@ class RoastC extends Component {
   renderScore() {
     return (
       <div className="roast-score">
-        <p className="big">{ this.props.totalComments }<span className="mdi mdi-fire"></span></p>
-        <p className="big">{ this.props.totalPoints }<span className="mdi mdi-trophy-award"></span></p>
+        <p className="big">
+          Roasts:
+          <span>{ this.props.totalComments }<i className="icon-comment"></i></span>
+        </p>
+        <p className="big">
+          Points:
+          <span>{ this.props.totalPoints }<i className="icon-point"></i></span>
+        </p>
       </div>
     );
   }
@@ -163,8 +169,8 @@ class RoastC extends Component {
           { this.props.single ? <TextArea roast={ this.props.roast } /> : '' }
           <div className="roast-section">
             <div>
-              { this.renderSocials() }
               { this.renderScore() }
+              { this.renderSocials() }
             </div>
           </div>
           { this.renderCommentSection(this.props.comments) }

@@ -6,8 +6,8 @@ export default ImageUpload = (file, imgElement, title, onFinished) => {
   const height = imgElement.naturalHeight;
   const aspectRatio = width / height;
   const resizeOptions = {
-    width: 1200,
-    height: 1200 / aspectRatio,
+    width: Math.min(1200, 1200 * aspectRatio),
+    height: Math.min(1200, 1200 / aspectRatio),
     cropSquare: false,
   };
 
