@@ -49,4 +49,16 @@ const RoastsSchema = new SimpleSchema({
 
 export const Roasts = new Mongo.Collection('roasts');
 
+Roasts.allow({
+  insert: () => false,
+  update: () => false,
+  remove: () => false,
+});
+
+Roasts.deny({
+  insert: () => true,
+  update: () => true,
+  remove: () => true,
+});
+
 Roasts.attachSchema(RoastsSchema);

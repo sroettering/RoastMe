@@ -75,6 +75,18 @@ const CommentsSchema = new SimpleSchema({
 
 export const Comments = new Mongo.Collection('comments');
 
+Comments.allow({
+  insert: () => false,
+  update: () => false,
+  remove: () => false,
+});
+
+Comments.deny({
+  insert: () => true,
+  update: () => true,
+  remove: () => true,
+});
+
 Comments.attachSchema(CommentsSchema);
 
 Comments.after.insert(function(userId, doc) {
