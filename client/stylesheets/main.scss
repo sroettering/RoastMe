@@ -66,10 +66,13 @@ body {
 
 .button {
 	background: $blue;
+	border: none;
+	outline: none;
 	border-radius: 5px;
 	color: white;
 	display: block;
 	font-size: 16px;
+	font-weight: bold;
 	height: 44px;
 	line-height: 44px;
 	text-align: center;
@@ -103,6 +106,12 @@ body {
 			display: inline-block;
 		}
 	}
+}
+
+.flat-button {
+	@extend .button;
+	background: transparent;
+	color: #D83118;
 }
 
 /*

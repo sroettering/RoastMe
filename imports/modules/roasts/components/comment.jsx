@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 
 import { TextArea } from '/imports/modules/ui/textarea';
+import { CommentProfile } from './comment-profile';
+import { CommentText } from './comment-text';
 import { CommentControls } from './comment-controls';
 import { Replies } from './replies';
 
@@ -26,14 +28,8 @@ export class Comment extends Component {
     return (
       <div className="comment-wrapper">
         <div className="roast-comment">
-          <div className="roast-comment-profile">
-            <Link to={ `/user/${comment.userId}` }><img src={ comment.userImage } alt={ comment.userName } /></Link>
-            <h3><Link to={ `/user/${comment.userId}` }>{ comment.userName }</Link></h3>
-            <p className="big">{ comment.points }<span className="mdi mdi-trophy-award"></span></p>
-          </div>
-          <div className="roast-comment-text">
-            <p>{ comment.content }</p>
-          </div>
+          <CommentProfile comment={ comment } />
+          <CommentText comment={ comment } />
           <CommentControls comment={ comment } replyTo={ this.openTextArea.bind(this) }/>
           { this.state.replyingTo === comment._id ?
             <TextArea

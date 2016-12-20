@@ -14,20 +14,16 @@
 
 	a {
 		text-decoration: none;
-		color: rgba(white, 0.7);
+		color: white;
 
 		&:hover {
-			color: white;
+			color: rgba(white, 0.7);
 		}
 	}
 
 	h2 {
 		font-weight: bold;
 		margin-bottom: 20px;
-
-		a {
-			color: white;
-		}
 	}
 }
 
@@ -202,6 +198,7 @@
 	}
 
 	p {
+		color: rgba(white, 0.4);
 		left: 90px;
 		position: absolute;
 		top: 30px;
@@ -231,6 +228,7 @@
 .roast-comment-reply {
 	height: 44px;
 	position: relative;
+	margin-left: 90px;
 
 	ul {
 		list-style: none;
@@ -239,5 +237,15 @@
 	li {
 		display: inline-block;
 		margin: 0 15px 0 0;
+	}
+
+	button.flat-button {
+		margin-left: -10px;
+		font-size: 20px;
+	}
+
+	i {
+		width: 24px;
+		height: 24px;
 	}
 }

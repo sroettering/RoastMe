@@ -5,7 +5,6 @@ import { upvote } from '../voting';
 import { downvote } from '../voting';
 import { ToggleButton } from '/imports/modules/ui/toggle-button';
 
-// TODO: make reply button a flat button
 export const CommentControls = ({ comment, replyTo }) => {
   const upToggled = !!_.findWhere(comment.upvotes, { userId: Meteor.userId() });
   const downToggled = !!_.findWhere(comment.downvotes, { userId: Meteor.userId() });
@@ -13,15 +12,23 @@ export const CommentControls = ({ comment, replyTo }) => {
     <div className="roast-comment-reply">
       <ul>
         <li>
-          <a href="#!" className="button mdi mdi-reply" onClick={ replyTo }>
-            <span>Reply</span>
-          </a>
+          <button className="flat-button" onClick={ replyTo }>Reply</button>
         </li>
         <li>
-          <ToggleButton callback={ upvote.bind(null, comment._id) } icon="mdi mdi-arrow-up-bold-circle" toggled={ upToggled } enabled={ true } />
+          <ToggleButton
+            callback={ upvote.bind(null, comment._id) }
+            toggled={ upToggled }
+            enabled={ true }>
+            <i className="icon-upvote"></i>
+          </ToggleButton>
         </li>
         <li>
-          <ToggleButton callback={ downvote.bind(null, comment._id) } icon="mdi mdi-arrow-down-bold-circle" toggled={ downToggled } enabled={ comment.points > 0 || downToggled } />
+          <ToggleButton
+            callback={ downvote.bind(null, comment._id) }
+            toggled={ downToggled }
+            enabled={ comment.points > 0 || downToggled }>
+            <i className="icon-downvote"></i>
+          </ToggleButton>
         </li>
       </ul>
     </div>
