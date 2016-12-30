@@ -65,13 +65,18 @@
 
       .roast-image {
         max-height: 250px;
+        margin: 0;
+      }
+
+      .image {
+        border-right: 1px solid $background-tertiary;
+        background: transparent;
       }
 
       .roast-comment-text {
         color: white;
         padding: 10px;
         margin: 0;
-        background-color: $background-tertiary;
         overflow: scroll;
 
         @media (min-width: $break-small) {
@@ -80,7 +85,6 @@
 
         span {
           display: block;
-          margin: 5px 0;
         }
 
         p {
