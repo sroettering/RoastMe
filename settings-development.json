@@ -13,9 +13,5 @@
     }
   },
   "AWSAccessKeyId": "AKIAI6YJJZWMQ7WUIQZQ",
-  "AWSSecretAccessKey": "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",
-  "kadira": {
-    "appId": "uDWnSsYmcpm4i78yE",
-    "appSecret": "6402632d-cbf5-43c8-b0be-fbd826b8c90e" 
-  }
+  "AWSSecretAccessKey": "2QDXSaobv1G/e5uJqSkji6bIrkohmjLyJZApLzBk"
 }

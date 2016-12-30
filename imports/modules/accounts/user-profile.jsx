@@ -6,6 +6,8 @@ import { moment } from 'meteor/momentjs:moment';
 
 import { Roasts } from '/imports/modules/roasts/roasts-collection';
 import { Comments } from '/imports/modules/roasts/comments-collection';
+import { Score } from '/imports/modules/roasts/components/score';
+import { ProfileRoast } from './profile-roast';
 
 class UserProfileC extends Component {
 
@@ -22,7 +24,7 @@ class UserProfileC extends Component {
 
   render() {
     if(this.props.user && this.props.user.services) {
-      const user = this.props.user;
+      const { user, comments } = this.props;
       const name = user.profile.username || user.profile.name;
       const since = moment(user.createdAt).format('DD.MM.YYYY');
 
@@ -37,15 +39,22 @@ class UserProfileC extends Component {
           <div className="profile-section">
             <div className="wrapper">
               <div className="profile-picture">
-                <img src={ avatar } alt="" />
+                <img src={ avatar } alt={ name } />
               </div>
               <div className="profile-information">
                 <h1>{ name }</h1>
                 <div className="profile-score">
-                  <p className="big">Roasts: { this.props.comments.length || 0 }<span className="mdi mdi-fire"></span></p>
-                  <p className="big">Points: { this.getTotalPoints() }<span className="mdi mdi-trophy-award"></span></p>
+                  <Score comments={ comments.length } points={ this.getTotalPoints() } />
                 </div>
                 <p className="membership">Member since { since }</p>
+              </div>
+            </div>
+          </div>
+          <div className="profile-section">
+            <div className="wrapper">
+              <div className="profile-roasts">
+                <h1>Best Roasts</h1>
+                { comments.map((comment, index) => <ProfileRoast key={ index } comment={ comment } />) }
               </div>
             </div>
           </div>
@@ -62,19 +71,17 @@ class UserProfileC extends Component {
 
 UserProfileC.propTypes = {
   user: React.PropTypes.object,
-  roasts: React.PropTypes.array,
   comments: React.PropTypes.array,
 }
 
-export const UserProfile = createContainer((props) => {
-  const user = Meteor.user();
-  const roastsHandle = Meteor.subscribe('all-roasts-for-user');
-  const commentsHandle = Meteor.subscribe('all-comments-for-user');
-  const roasts = Roasts.find({ userId: Meteor.userId() }).fetch();
-  const comments = Comments.find({ userId: Meteor.userId() }).fetch();
+export const UserProfile = createContainer(({ params }) => {
+  const userId = params.id;
+  const user = Meteor.users.findOne(userId);
+  const commentsHandle = Meteor.subscribe('all-comments-for-user', userId);
+  let comments = Comments.find({ userId }, { sort: { points: -1 } }).fetch();
+  comments = _.uniq(comments, (item) => item.roastId );
   return {
     user,
-    roasts,
     comments,
   }
 }, UserProfileC);

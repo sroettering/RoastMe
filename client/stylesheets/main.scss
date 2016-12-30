@@ -4,6 +4,8 @@ $background-secondary: #332c2c;
 $background-tertiary: #3a3232;
 $background-header: #141414;
 $background-modal: #ffffff;
+$facebook-color: #3b5998;
+$twitter-color: #1da1f2;
 $blue: #3498db;
 $red: #f22613;
 $break-small: 600px;
@@ -42,7 +44,7 @@ body {
 	border: none;
 	outline: none;
 	color: white;
-	opacity: 1.0;
+	opacity: 0.75;
 	display: block;
 	font-size: 30px;
 	height: 44px;
@@ -51,21 +53,20 @@ body {
 	width: 44px;
 
 	&:hover:enabled {
-		opacity: 0.8;
+		opacity: 1.0;
 	}
 
 	&:disabled {
-		color: grey;
+		opacity: 0.3;
 	}
 
 	&.toggled {
-		color: $blue;
 		opacity: 1.0;
 	}
 }
 
 .button {
-	background: $blue;
+	background: $red;
 	border: none;
 	outline: none;
 	border-radius: 5px;
@@ -105,6 +106,10 @@ body {
 		@media (min-width: $break-small) {
 			display: inline-block;
 		}
+	}
+
+	&:disabled {
+		opacity: 0.5;
 	}
 }
 

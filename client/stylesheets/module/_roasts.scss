@@ -59,6 +59,14 @@
 
 	li {
 		display: inline-block;
+
+		.mdi-facebook {
+			background-color: $facebook-color;
+		}
+
+		.mdi-twitter {
+			background-color: $twitter-color;
+		}
 	}
 
 	li:last-child {

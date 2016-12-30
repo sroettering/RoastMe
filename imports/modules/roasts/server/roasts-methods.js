@@ -87,28 +87,35 @@ Meteor.methods({
     const roast = Roasts.findOne({ _id: comment.roastId });
     if(!roast) return;
 
-    const points = comment.points;
+    let points = comment.points;
+    let roastPoints = roast.totalUpvotes - points;
 
     // revert upvote if clicked twice
     const upvote = _.findWhere(comment.upvotes, { userId });
     const downvote = _.findWhere(comment.downvotes, { userId });
     if(upvote) {
+      points = Math.max(0, points - 1);
       Comments.update({ _id: commentId }, {
         $pull: { upvotes: upvote },
-        $set: { points: Math.max(0, points - 1) },
+        $set: { points: points },
       });
     } else if(downvote) {
+      points += 2;
       Comments.update({ _id: commentId }, {
         $push: { upvotes: { userId, createdAt: new Date() } },
         $pull: { downvotes: downvote },
-        $set: { points: points + 2 },
+        $set: { points: points },
       });
     } else {
+      points++;
       Comments.update({ _id: commentId }, {
         $push: { upvotes: { userId, createdAt: new Date() } },
-        $set: { points: points + 1 },
+        $set: { points: points },
       });
     }
+
+    roastPoints += points;
+    Roasts.update({ _id: roast._id }, { $set: { totalUpvotes: roastPoints } });
   },
   downvoteComment(commentId) {
     check(commentId, String);
@@ -125,33 +132,41 @@ Meteor.methods({
     const roast = Roasts.findOne({ _id: comment.roastId });
     if(!roast) return;
 
-    const points = comment.points;
+    let points = comment.points;
+    let roastPoints = roast.totalUpvotes - points;
 
     // revert downvote if clicked twice
     const upvote = _.findWhere(comment.upvotes, { userId });
     const downvote = _.findWhere(comment.downvotes, { userId });
     if(downvote) {
+      points++;
       Comments.update({ _id: commentId }, {
         $pull: { downvotes: downvote },
-        $set: { points: points + 1 },
+        $set: { points: points },
       });
     } else if(upvote && points > 1) {
+      points = Math.max(0, points - 2);
       Comments.update({ _id: commentId }, {
         $pull: { upvotes: upvote },
         $push: { downvotes: { userId, createdAt: new Date() } },
-        $set: { points: Math.max(0, points - 2) },
+        $set: { points: points },
       });
     } else if(upvote && points <= 1) {
+      points = Math.max(0, points - 1);
       Comments.update({ _id: commentId }, {
         $pull: { upvotes: upvote },
-        $set: { points: Math.max(0, points - 1) },
+        $set: { points: points },
       });
     } else {
+      points = Math.max(0, points - 1);
       Comments.update({ _id: commentId }, {
         $push: { downvotes: { userId, createdAt: new Date() } },
-        $set: { points: Math.max(0, points - 1) },
+        $set: { points: points },
       });
     }
+
+    roastPoints += points;
+    Roasts.update({ _id: roast._id }, { $set: { totalUpvotes: roastPoints } });
   },
   acceptRoast(roastId) {
     check(roastId, String);

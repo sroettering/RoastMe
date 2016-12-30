@@ -31,7 +31,7 @@ export class ModalUpload extends Component {
   }
 
   uploadImg(event) {
-    if(this.image && this.title) {
+    if(this.image && this.title.value) {
       ImageUpload(this.image, this.imgElement, this.title.value, (roastId) => {
         if(roastId) {
           const notification = () => Bert.alert({
@@ -81,7 +81,7 @@ export class ModalUpload extends Component {
         <button
           className="button mdi mdi-check"
           onClick={ this.uploadImg.bind(this) }
-          disabled={ !this.state.uploadEnabled }>Create Roast</button>
+          disabled={ !this.state.uploadEnabled }>Roast me!</button>
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
+import EventListener from 'react-event-listener';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import { ReactiveVar } from 'meteor/reactive-var';
@@ -43,6 +44,13 @@ class AuthenticatedNavigationC extends Component {
     this.setState({ isModalOpen: false });
   }
 
+  handleKeyUp(event) {
+    console.log(event.keyCode);
+    if(event.keyCode === 27) {
+      this.closeModal();
+    }
+  }
+
   modalCloseHandler(event) {
     const target = event.target;
     if(target.className === 'modal-overlay active') {
@@ -55,17 +63,19 @@ class AuthenticatedNavigationC extends Component {
     return (
       <nav className="navigation-right" role="navigation">
         <ul>
-          <li><i className="mdi mdi-fire" onClick={ this.openModal.bind(this) }></i></li>
+          <li><i className="icon-upload big" onClick={ this.openModal.bind(this) }></i></li>
           <li>
             <Link to={ "/user/" + (user ? user._id : "") }>
               <img className="img-circle" src={ profileImage() } />
             </Link>
           </li>
-          <li><a href="#" className="button mdi mdi-logout" onClick={ handleLogout }></a></li>
         </ul>
+        { this.state.isModalOpen ?
         <ModalDialog isOpen={ this.state.isModalOpen } closeHandler={ this.modalCloseHandler.bind(this) }>
+          <EventListener target="window" onKeyUp={ this.handleKeyUp.bind(this) } />
           <ModalUpload closeModal={ this.closeModal.bind(this) }/>
         </ModalDialog>
+        : '' }
       </nav>
     );
   }

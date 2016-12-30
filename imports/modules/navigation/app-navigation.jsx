@@ -24,6 +24,7 @@ export class AppNavigation extends React.Component {
       <header className="header" role="banner">
         <div className="wrapper">
           <a href="#" className="logo"></a>
+          <IndexLink to="/" className="logo" />
 
           <nav className="navigation-left" role="navigation">
             <ul>

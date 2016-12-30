@@ -1,5 +1,5 @@
 .profile {
-    padding: 60px 0 0;
+    padding: 0;
     position: relative;
 }
 .profile-section {
@@ -27,32 +27,67 @@
 }
 .profile-information {
     position: relative;
+
     @media (min-width: $break-small) {
         left: 300px;
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
     }
+
     @media (min-width: $break-large) {
         width: 300px;
     }
-    .button {
-        margin: 0 0 30px;
-        padding: 0 15px 0 10px;
-        width: auto;
-        &::before {
-            margin: 0 10px 0 0;
-        }
+
+    .roast-score {
+        position: relative;
     }
-    .profile-score {
-        position: absolute;
-        right: 0;
-        top: 60px;
+
+    p.membership {
+      margin-top: 30px;
+    }
+}
+.profile-roasts {
+
+  .roast {
+    border: none;
+    clear: left;
+
+    .profile-roast-section {
+      width: 100%;
+      float: none;
+
+      @media (min-width: $break-small) {
+        width: 50%;
+        float: left;
+        margin-bottom: 20px;
+      }
+
+      .roast-image {
+        max-height: 250px;
+      }
+
+      .roast-comment-text {
+        color: white;
+        padding: 10px;
+        margin: 0;
+        background-color: $background-tertiary;
+        overflow: scroll;
+
+        @media (min-width: $break-small) {
+          height: 250px;
+        }
+
+        span {
+          display: block;
+          margin: 5px 0;
+        }
+
         p {
-            text-align: right;
-            span {
-                margin: 0 0 0 10px;
-            }
+          border-top: 1px solid $background-primary;
+          padding-top: 5px;
         }
+      }
     }
+  }
 }
