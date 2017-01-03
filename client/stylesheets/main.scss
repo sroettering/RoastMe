@@ -43,14 +43,14 @@ body {
 	background: transparent;
 	border: none;
 	outline: none;
-	color: white;
 	opacity: 0.75;
-	display: block;
-	font-size: 30px;
-	height: 44px;
-	line-height: 44px;
-	text-align: center;
-	width: 44px;
+	width: 24px;
+	height: 24px;
+	line-height: 24px;
+
+	i {
+		vertical-align: text-bottom;
+	}
 
 	&:hover:enabled {
 		opacity: 1.0;
