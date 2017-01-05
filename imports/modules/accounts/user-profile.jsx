@@ -24,7 +24,7 @@ class UserProfileC extends Component {
 
   render() {
     if(this.props.user && this.props.user.services) {
-      const { user, comments } = this.props;
+      const { user, comments, ownProfile } = this.props;
       const name = user.profile.username || user.profile.name;
       const since = moment(user.createdAt).format('DD.MM.YYYY');
 
@@ -46,7 +46,8 @@ class UserProfileC extends Component {
                 <div className="profile-score">
                   <Score comments={ comments.length } points={ this.getTotalPoints() } />
                 </div>
-                <p className="membership">Member since { since }</p>
+                <span className="membership">Member since { since }</span>
+                { ownProfile ? <button className="flat-button">Logout</button> : '' }
               </div>
             </div>
           </div>
@@ -72,16 +73,19 @@ class UserProfileC extends Component {
 UserProfileC.propTypes = {
   user: React.PropTypes.object,
   comments: React.PropTypes.array,
+  ownProfile: React.PropTypes.bool,
 }
 
 export const UserProfile = createContainer(({ params }) => {
   const userId = params.id;
   const user = Meteor.users.findOne(userId);
+  const ownProfile = Meteor.userId() === userId;
   const commentsHandle = Meteor.subscribe('all-comments-for-user', userId);
   let comments = Comments.find({ userId }, { sort: { points: -1 } }).fetch();
   comments = _.uniq(comments, (item) => item.roastId );
   return {
     user,
     comments,
+    ownProfile,
   }
 }, UserProfileC);
