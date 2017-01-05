@@ -8,7 +8,6 @@ import { Rules } from './rules';
 export class IntroPage extends Component {
 
   componentWillUpdate() {
-    console.log('lifecycle');
     if(Meteor.user() && Meteor.user().rulesAccepted && Meteor.user().tosAccepted) {
       browserHistory.push('/');
     }
@@ -28,7 +27,7 @@ export class IntroPage extends Component {
     return (
       <div className="wrapper rules">
         <Rules />
-        <p>By continuing you accept our rules and the <Link to="/tos">Terms of Service</Link></p>
+        <p>By continuing you accept our rules and the <Link to="/tos" target="_blank">Terms of Service</Link></p>
         <button className="button" onClick={ this.acceptRulesAndTos.bind(this) }>Accept and Continue</button>
       </div>
     );
