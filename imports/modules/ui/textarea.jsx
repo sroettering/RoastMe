@@ -15,7 +15,7 @@ export class TextArea extends Component {
         if(this.props.onCommented) {
           this.props.onCommented();
         }
-        Bert.alert('Commented', 'success');
+        Bert.alert('Roasted!', 'success');
       } else {
         Bert.alert('Something went wrong!', 'warning');
       }

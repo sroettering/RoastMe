@@ -8,10 +8,12 @@ import { Footer } from './footer';
 export class AppC extends Component {
 
   render() {
-    const { children, currentUser } = this.props;
+    const { children, currentUser, location } = this.props;
     const clonedChildren = React.Children.map(children, (child) => {
       return React.cloneElement(child, { currentUser });
     });
+    const path = location.pathname;
+    const sidebarVisible = path !== '/postSignup';
     return (
       <div>
         <AppNavigation hasUser={ !!Meteor.userId() }/>
@@ -20,8 +22,7 @@ export class AppC extends Component {
             <div className="content">
               { clonedChildren }
             </div>
-            <div className="sidebar">
-            </div>
+            { sidebarVisible ? <div className="sidebar"></div> : '' }
           </div>
         </main>
         <Footer />
