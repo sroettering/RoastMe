@@ -16,6 +16,7 @@ import { IntroPage } from '/imports/modules/accounts/intro-page';
 import { Rules } from '/imports/modules/accounts/rules';
 import { TermsOfService } from '/imports/modules/ui/terms-of-service';
 import { Imprint } from '/imports/modules/ui/imprint';
+import { PrivacyStatement } from '/imports/modules/ui/privacy-statement';
 import { AdminPage } from '/imports/modules/admin/admin-page';
 import { Dashboard } from '/imports/modules/admin/admin-dashboard';
 import { NotFound } from '/imports/modules/ui/not-found.jsx';
@@ -41,6 +42,7 @@ Meteor.startup(() => {
         <Route name="postSignup" path="/postSignup" component={ IntroPage } onEnter={requireAuth} />
         <Route name="rules" path="/rules" component={ Rules } onEnter={requireAuth} />
         <Route name="termsOfService" path="/tos" component={ TermsOfService } />
+        <Route name="privacy" path="/privacy" component={ PrivacyStatement } />
         <Route name="imprint" path="/imprint" component={ Imprint } />
         <Route name="user" path="/user/:id" component={ UserProfile } onEnter={ requireAuth } />
       </Route>

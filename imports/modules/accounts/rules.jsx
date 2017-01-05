@@ -29,7 +29,7 @@ export const Rules = () => <div className="rules">
       <p>This is a comedy website, so try to make the internet laugh about your roast. Blunt insults will result in a permanent ban.</p>
     </li>
     <li className="rule">
-      <p>Try to keep your roast short. No one likes to read walls of text.</p>
+      <p>Write your roast in english and try to keep it short. No one likes to read walls of text.</p>
     </li>
     <li className="rule">
       <p>Do not roast anyone in the picture who is not aware of the picture being taken.</p>

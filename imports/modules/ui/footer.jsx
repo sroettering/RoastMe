@@ -8,7 +8,7 @@ export const Footer = (props) => {
         <nav className="footer-navigation" role="navigation">
           <ul>
             <li><Link to="/rules">Rules</Link></li>
-            <li><a href="#">Privacy</a></li>
+            <li><Link to ="/privacy">Privacy</Link></li>
             <li><Link to="/tos">Terms</Link></li>
             <li><Link to="/imprint">Imprint</Link></li>
           </ul>
