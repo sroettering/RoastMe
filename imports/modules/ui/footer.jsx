@@ -10,7 +10,7 @@ export const Footer = (props) => {
             <li><Link to="/rules">Rules</Link></li>
             <li><a href="#">Privacy</a></li>
             <li><Link to="/tos">Terms</Link></li>
-            <li><a href="#">Imprint</a></li>
+            <li><Link to="/imprint">Imprint</Link></li>
           </ul>
         </nav>
         <div className="copyright">

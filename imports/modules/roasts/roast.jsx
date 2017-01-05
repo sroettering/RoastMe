@@ -59,7 +59,7 @@ export const Roast = createContainer(({roast, single}) => {
     Meteor.subscribe('top-comments-for-roast', roast._id);
   }
 
-  const allComments = Comments.find({roastId: roast._id}).fetch();
+  const allComments = Comments.find({ roastId: roast._id }, { sort: { points: -1 } }).fetch();
   const totalComments = roast.totalComments;
   const totalPoints = _.reduce(allComments, (mem, c) => mem + c.points, 0);
   let comments;

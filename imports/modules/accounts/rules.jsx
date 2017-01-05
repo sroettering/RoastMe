@@ -17,7 +17,7 @@ export const Rules = () => <div className="rules">
       <p>Your picture will be checked by a moderator before it is published. This may take an hour or two.</p>
     </li>
     <li className="rule">
-      <p>The minimum age is 16. Your picture will not be accepted if you look younger!</p>
+      <p>The minimum age is 18. Your picture will not be accepted if you look younger!</p>
     </li>
     <li className="rule">
       <p>By uploading a picture you agree to your picture being saved and hosted on this website and to others offending your picture in a comedic way.</p>
