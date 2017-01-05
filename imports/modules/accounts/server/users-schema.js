@@ -27,6 +27,22 @@ export const UsersSchema = new SimpleSchema({
   },
   createdAt: SchemaCommons.createdAt,
   updatedAt: SchemaCommons.updatedAt,
+  rulesAccepted: {
+    type: Boolean,
+    autoValue() {
+      if(this.isInsert) {
+        return false;
+      }
+    },
+  },
+  tosAccepted: {
+    type: Boolean,
+    autoValue() {
+      if(this.isInsert) {
+        return false;
+      }
+    },
+  },
   heartbeat: {
     type: Date,
     optional: true,

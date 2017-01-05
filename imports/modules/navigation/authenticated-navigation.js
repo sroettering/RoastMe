@@ -37,7 +37,12 @@ class AuthenticatedNavigationC extends Component {
   }
 
   openModal() {
-    this.setState({ isModalOpen: true });
+    const { user } = this.props;
+    if(user && (!user.rulesAccepted || !user.tosAccepted)) {
+      browserHistory.push('/postSignup');
+    } else {
+      this.setState({ isModalOpen: true });
+    }
   }
 
   closeModal() {

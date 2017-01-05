@@ -14,6 +14,8 @@ Meteor.publish('loggedinUser', function() {
       roles: 1,
       createdAt: 1,
       updatedAt: 1,
+      rulesAccepted: 1,
+      tosAccepted: 1,
     },
   });
 });

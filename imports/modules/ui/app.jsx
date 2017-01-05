@@ -8,13 +8,17 @@ import { Footer } from './footer';
 export class AppC extends Component {
 
   render() {
+    const { children, currentUser } = this.props;
+    const clonedChildren = React.Children.map(children, (child) => {
+      return React.cloneElement(child, { currentUser });
+    });
     return (
       <div>
         <AppNavigation hasUser={ !!Meteor.userId() }/>
         <main className="main" role="main">
           <div className="wrapper">
             <div className="content">
-              { this.props.children }
+              { clonedChildren }
             </div>
             <div className="sidebar">
             </div>
@@ -29,9 +33,13 @@ export class AppC extends Component {
 AppC.propTypes = {
   children: React.PropTypes.element.isRequired,
   location: React.PropTypes.object,
+  currentUser: React.PropTypes.object,
 };
 
 export const App = createContainer(() => {
   Meteor.subscribe('loggedinUser');
-  return {};
+  const currentUser = Meteor.user();
+  return {
+    currentUser,
+  };
 }, AppC);

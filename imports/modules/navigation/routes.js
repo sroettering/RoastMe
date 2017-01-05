@@ -12,6 +12,8 @@ import { Trending } from '/imports/modules/ui/trending';
 import { New } from '/imports/modules/ui/new';
 import { RoastPage } from '/imports/modules/ui/roast-page';
 import { Login } from '/imports/modules/ui/login';
+import { IntroPage } from '/imports/modules/accounts/intro-page';
+import { TermsOfService } from '/imports/modules/ui/terms-of-service';
 import { AdminPage } from '/imports/modules/admin/admin-page';
 import { Dashboard } from '/imports/modules/admin/admin-dashboard';
 import { NotFound } from '/imports/modules/ui/not-found.jsx';
@@ -34,6 +36,8 @@ Meteor.startup(() => {
         <Route name="new" path="/new" component={ New } />
         <Route name="roast" path="/roast/:id" component={ RoastPage } />
         <Route name="login" path="/login" component={ Login } />
+        <Route name="postSignup" path="/postSignup" component={ IntroPage } onEnter={requireAuth} />
+        <Route name="termsOfService" path="/tos" component={ TermsOfService } />
         <Route name="user" path="/user/:id" component={ UserProfile } onEnter={ requireAuth } />
       </Route>
       <Route name="admin-page" path="/admin" component={ AdminPage } onEnter={ requireAuth }>

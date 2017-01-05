@@ -32,7 +32,11 @@ export const handleLogin = (service) => {
     }
 
     if (!error) {
-      browserHistory.push('/');
+      if (!Meteor.user().rulesAccepted || !Meteor.user().tosAccepted) {
+        browserHistory.push('/postSignup');
+      } else {
+        browserHistory.push('/');
+      }
     }
   });
 };
