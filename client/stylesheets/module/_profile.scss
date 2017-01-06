@@ -70,7 +70,7 @@
       }
 
       .roast-image {
-        max-height: 250px;
+        max-height: 300px;
         margin: 0;
       }
 
@@ -86,7 +86,7 @@
         overflow: scroll;
 
         @media (min-width: $break-small) {
-          height: 250px;
+          height: 300px;
         }
 
         span {
@@ -96,6 +96,7 @@
         p {
           border-top: 1px solid $background-primary;
           padding-top: 5px;
+          word-wrap: break-word;
         }
       }
     }

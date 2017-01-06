@@ -6,6 +6,7 @@ import { Roasts } from './roasts-collection';
 const CommentsSchema = new SimpleSchema({
   content: {
     type: String,
+    max: 500,
   },
   replyTo: {
     type: String,

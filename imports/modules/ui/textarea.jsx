@@ -4,6 +4,23 @@ import { Bert } from 'meteor/themeteorchef:bert';
 
 export class TextArea extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      charsLeft: 500,
+    };
+  }
+
+  textAreaChange(event) {
+    const text = this.textarea.value;
+    let charsLeft = 500 - text.length;
+    if(charsLeft < 0) {
+      charsLeft = 0;
+      this.textarea.value = text.substring(0, 500);
+    }
+    this.setState({ charsLeft });
+  }
+
   submit(event) {
     event.preventDefault();
     const text = this.textarea.value; // TODO: clean text and resolve mentions
@@ -26,8 +43,12 @@ export class TextArea extends Component {
     if(Meteor.userId()) {
       return (
         <div className="roast-write-comment">
-          <textarea name="name" placeholder="Write comment ..." ref={(element) => {this.textarea = element;}}></textarea>
-          <p className="roast-write-counter">64</p>
+          <textarea
+            name="name"
+            onChange={ this.textAreaChange.bind(this) }
+            ref={(element) => {this.textarea = element;}}>
+          </textarea>
+          <p className="roast-write-counter">{ this.state.charsLeft }</p>
           <a href="#" className="button mdi mdi-send" onClick={ this.submit.bind(this) }><span>Submit</span></a>
         </div>
       );
