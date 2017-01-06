@@ -6,6 +6,8 @@ const adminEmails = [
   'svenroettering@web.de',
   'king78176@yahoo.de',
   'Rosenboom.benjamin@aol.com',
+  'k-wiese@web.de',
+  'facebook@tim-tilch.de',
 ];
 
 const makeAdmins = () => {
