@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import { _ } from 'meteor/underscore';
@@ -20,6 +21,11 @@ class UserProfileC extends Component {
     let points = 0;
     _.each(this.props.comments, (comment) => {points += comment.points});
     return points;
+  }
+
+  logout() {
+    Meteor.logout();
+    browserHistory.push('/');
   }
 
   render() {
@@ -47,7 +53,7 @@ class UserProfileC extends Component {
                   <Score comments={ comments.length } points={ this.getTotalPoints() } />
                 </div>
                 <span className="membership">Member since { since }</span>
-                { ownProfile ? <button className="flat-button">Logout</button> : '' }
+                { ownProfile ? <button className="flat-button" onClick={ this.logout.bind(this) }>Logout</button> : '' }
               </div>
             </div>
           </div>
