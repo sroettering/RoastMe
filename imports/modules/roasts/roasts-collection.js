@@ -20,7 +20,7 @@ const RoastsSchema = new SimpleSchema({
   },
   status: {
     type: String,
-    allowedValues: ['queued', 'accepted', 'declined', 'banned'],
+    allowedValues: ['queued', 'accepted', 'declined', 'banned', 'deleted'],
     autoValue() {
       if(this.isInsert) {
         return 'queued';

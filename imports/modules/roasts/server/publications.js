@@ -34,6 +34,14 @@ Meteor.publish('queued-roasts', function() {
   return Roasts.find({ status: 'queued' }, { sort: { createdAt: 1 } });
 });
 
+if (Meteor.isServer) {
+  Roasts._ensureIndex({ status: 1, totalUpvotes: 1 });
+  Roasts._ensureIndex({ status: 1, totalComments: 1 });
+  Roasts._ensureIndex({ status: 1, createdAt: 1 });
+  Roasts._ensureIndex({ _id: 1, status: 1 });
+  Roasts._ensureIndex({ userId: 1, status: 1 });
+}
+
 
 // ----------------- Comments -----------------
 
@@ -53,5 +61,12 @@ Meteor.publish('top-comments-for-roast', function(roastId) {
 
 Meteor.publish('all-comments-for-user', function(userId){
   check(userId, String);
-  return Comments.find({ userId: userId, replyTo: null });
+  return Comments.find({ userId: userId, replyTo: null }, { sort: { points: -1 } });
 });
+
+if (Meteor.isServer) {
+  Comments._ensureIndex({ replyTo: 1, points: 1, userId: 1, roastId: 1 });
+  Comments._ensureIndex({ points: 1, userId: 1, roastId: 1, replyTo: 1 });
+  Comments._ensureIndex({ userId: 1, replyTo: 1, points: 1 });
+  Comments._ensureIndex({ roastId: 1, replyTo: 1, points: 1});
+}

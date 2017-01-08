@@ -84,6 +84,7 @@ UserProfileC.propTypes = {
 
 export const UserProfile = createContainer(({ params }) => {
   const userId = params.id;
+  const userHandle = Meteor.subscribe('user.profile', userId);
   const user = Meteor.users.findOne(userId);
   const ownProfile = Meteor.userId() === userId;
   const commentsHandle = Meteor.subscribe('all-comments-for-user', userId);

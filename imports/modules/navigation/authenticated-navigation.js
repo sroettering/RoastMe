@@ -9,10 +9,6 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { ModalDialog } from '/imports/modules/ui/modal-dialog';
 import { ModalUpload } from '/imports/modules/ui/modal-upload';
 
-const handleLogout = () => {
-  Meteor.logout(() => browserHistory.push('/login'));
-}
-
 const profileImage = () => {
   const user = Meteor.user();
   let imgSrc = '';
@@ -50,7 +46,6 @@ class AuthenticatedNavigationC extends Component {
   }
 
   handleKeyUp(event) {
-    console.log(event.keyCode);
     if(event.keyCode === 27) {
       this.closeModal();
     }
