@@ -45,6 +45,7 @@ export class TextArea extends Component {
         <div className="roast-write-comment">
           <textarea
             name="name"
+            placeholder="Looks like a placeholder..."
             onChange={ this.textAreaChange.bind(this) }
             ref={(element) => {this.textarea = element;}}>
           </textarea>
