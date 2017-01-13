@@ -67,7 +67,7 @@ export const Roast = createContainer(({roast, single}) => {
     comments = _.filter(allComments, (c) => !c.replyTo);
     _.each(comments, (comment) => {
       replies = _.filter(allComments, (c) => !!c.replyTo && c.replyTo === comment._id);
-      comment.replies = _.sortBy(replies, 'createdAt').reverse();
+      comment.replies = _.sortBy(replies, 'createdAt');
     });
   }
   return {
