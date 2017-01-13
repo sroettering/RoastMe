@@ -22,7 +22,7 @@ class RoastC extends Component {
       return (
         <div className="roast">
           <Headline roastUrl={ `/roast/${this.props.roast._id}` } roastTitle={ roast.title }/>
-          { single ? '' : <Caption totalComments={ totalComments } totalPoints={ totalPoints }/> }
+          { single ? '' : <Caption username={ roast.userName } totalComments={ totalComments } totalPoints={ totalPoints }/> }
           <Image
             imageUrl={ roast.imageUrl }
             roastTitle={ roast.title }

@@ -4,13 +4,15 @@ import { _ } from 'meteor/underscore';
 import { upvote } from '../voting';
 import { downvote } from '../voting';
 import { ToggleButton } from '/imports/modules/ui/toggle-button';
+import { SocialButtons } from './social-buttons';
 
 export const CommentControls = ({ comment, replyTo }) => {
   const upToggled = !!_.findWhere(comment.upvotes, { userId: Meteor.userId() });
   const downToggled = !!_.findWhere(comment.downvotes, { userId: Meteor.userId() });
   return (
     <div className="roast-comment-reply">
-      <ul>
+      <SocialButtons />
+      <ul className="comment-buttons">
         <li>
           <ToggleButton
             callback={ downvote.bind(null, comment._id) }
