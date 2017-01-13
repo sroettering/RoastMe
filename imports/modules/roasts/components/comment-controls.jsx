@@ -12,7 +12,12 @@ export const CommentControls = ({ comment, replyTo }) => {
     <div className="roast-comment-reply">
       <ul>
         <li>
-          <button className="flat-button" onClick={ replyTo }>Reply</button>
+          <ToggleButton
+            callback={ downvote.bind(null, comment._id) }
+            toggled={ downToggled }
+            enabled={ comment.points > 0 || downToggled }>
+            <i className="icon-downvote"></i>
+          </ToggleButton>
         </li>
         <li>
           <ToggleButton
@@ -23,12 +28,7 @@ export const CommentControls = ({ comment, replyTo }) => {
           </ToggleButton>
         </li>
         <li>
-          <ToggleButton
-            callback={ downvote.bind(null, comment._id) }
-            toggled={ downToggled }
-            enabled={ comment.points > 0 || downToggled }>
-            <i className="icon-downvote"></i>
-          </ToggleButton>
+          <button className="flat-button" onClick={ replyTo }>Reply</button>
         </li>
       </ul>
     </div>

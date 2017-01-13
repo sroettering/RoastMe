@@ -241,20 +241,22 @@
 .roast-comment-reply {
 	height: 44px;
 	position: relative;
-	margin-left: 90px;
 
 	ul {
 		list-style: none;
+		float: right;
 	}
 
 	li {
 		display: inline-block;
-		margin: 0 15px 0 0;
+		margin-left: 20px;
 	}
 
 	button.flat-button {
-		margin-left: -10px;
 		font-size: 20px;
+		width: auto;
+		padding-right: 5px;
+		padding-left: 5px;
 	}
 
 	i {
