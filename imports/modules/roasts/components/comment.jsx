@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { moment } from 'meteor/momentjs:moment';
+import { Session } from 'meteor/session';
+import { createContainer } from 'meteor/react-meteor-data';
 
 import { TextArea } from '/imports/modules/ui/textarea';
 import { CommentProfile } from './comment-profile';
@@ -7,7 +10,7 @@ import { CommentText } from './comment-text';
 import { CommentControls } from './comment-controls';
 import { Replies } from './replies';
 
-export class Comment extends Component {
+class CommentC extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,12 +27,12 @@ export class Comment extends Component {
   }
 
   render() {
-    const { comment, roast, single } = this.props;
+    const { comment, roast, single, time } = this.props;
     return (
       <div className="comment-wrapper">
         <div className="roast-comment">
           <CommentProfile comment={ comment } />
-          <CommentText comment={ comment } />
+          <CommentText comment={ comment } time={ time } />
           <CommentControls comment={ comment } replyTo={ this.openTextArea.bind(this) } single={ single } />
           { this.state.replyingTo === comment._id ?
             <TextArea
@@ -44,8 +47,20 @@ export class Comment extends Component {
   }
 }
 
-Comment.propTypes = {
+CommentC.propTypes = {
   comment: React.PropTypes.object,
   roast: React.PropTypes.object,
   single: React.PropTypes.bool,
+  time: React.PropTypes.string,
 };
+
+export const Comment = createContainer(({ comment }) => {
+  const hoursPassed = moment(Session.get('now')).diff(comment.createdAt, 'hours');
+  let timeString = moment(comment.createdAt).fromNow();
+  if(hoursPassed >= 24) {
+    timeString = moment(comment.createdAt).format('MM.DD.YY - HH:mm');
+  }
+  return {
+    time: timeString,
+  }
+}, CommentC);

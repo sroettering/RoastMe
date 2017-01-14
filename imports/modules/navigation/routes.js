@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
+import { moment } from 'meteor/momentjs:moment';
 
 import { App } from '/imports/modules/ui/app';
 import { UserProfile } from '/imports/modules/accounts/user-profile';
@@ -31,6 +32,10 @@ const requireAuth = (nextState, replace) => {
 };
 
 Meteor.startup(() => {
+  Session.set('now', moment().toObject());
+  Meteor.setInterval(() => {
+    Session.set('now', moment().toObject());
+  }, 20000);
   render(
     <Router history={ browserHistory }>
       <Route path="/" component={ App }>
