@@ -7,7 +7,7 @@ export const Replies = ({ replies, roast }) =>
     { replies.map((reply, index) => {
       return (
         <div className="roast-answer" key={ index }>
-          <Comment comment={ reply } roast={ roast }/>
+          <Comment comment={ reply } roast={ roast } single={ true } />
         </div>
       );
     }) }

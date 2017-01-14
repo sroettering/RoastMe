@@ -24,13 +24,13 @@ export class Comment extends Component {
   }
 
   render() {
-    const { comment, roast } = this.props;
+    const { comment, roast, single } = this.props;
     return (
       <div className="comment-wrapper">
         <div className="roast-comment">
           <CommentProfile comment={ comment } />
           <CommentText comment={ comment } />
-          <CommentControls comment={ comment } replyTo={ this.openTextArea.bind(this) }/>
+          <CommentControls comment={ comment } replyTo={ this.openTextArea.bind(this) } single={ single } />
           { this.state.replyingTo === comment._id ?
             <TextArea
               roast={ roast }
@@ -47,4 +47,5 @@ export class Comment extends Component {
 Comment.propTypes = {
   comment: React.PropTypes.object,
   roast: React.PropTypes.object,
+  single: React.PropTypes.bool,
 };

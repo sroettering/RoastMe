@@ -32,7 +32,7 @@ class RoastC extends Component {
             roastTitle={ roast.title }
             onClick={ this.handleClick.bind(this) } />
           { single ? <TextArea roast={ roast } /> : '' }
-          <CommentSection comments={ comments } roast={ roast } />
+          <CommentSection comments={ comments } roast={ roast } single={ single } />
         </div>
       );
     } else {

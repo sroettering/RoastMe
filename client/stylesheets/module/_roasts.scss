@@ -272,6 +272,10 @@
 			display: inline-block;
 			margin-left: 20px;
 		}
+
+		li:first-child {
+			margin-left: 0;
+		}
 	}
 
 	button.flat-button {
