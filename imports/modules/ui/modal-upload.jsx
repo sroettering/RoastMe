@@ -46,8 +46,8 @@ export class ModalUpload extends Component {
       });
     } else {
       Bert.alert({
-        title: "Sorry!",
-        message: "Heading is missing!",
+        title: "Not like that!",
+        message: "Title or image is missing!",
         type: "warning",
         icon: "fa fa-info",
       });
@@ -57,20 +57,21 @@ export class ModalUpload extends Component {
   render() {
     return (
       <div className="modal">
-        <span className="roast-title">Upload your image</span>
-        <hr />
+        <h2 className="modal-title">Get roasted</h2>
+        <label htmlFor="title-input">Enter a roast title</label>
         <input
+          id="title-input"
           type="text"
           className="roast-title"
-          placeholder="Roast Heading..."
+          placeholder="Roast me please..."
           ref={ input => this.title = input}/>
-        <label htmlFor="modal-input">Choose or drag image here</label>
+        <label htmlFor="image-input">Laugh at yourself first, before anyone else can</label>
         <div className="modal-upload">
           { this.state.loading ?
             <Spinner spinnerName="circle" className="dark" noFadeIn/> : <span className="drop-area mdi mdi-upload"></span>
           }
           <input
-            id="modal-input"
+            id="image-input"
             type="file"
             accept=".jpg,.jpeg,.png"
             name="name"
@@ -79,7 +80,7 @@ export class ModalUpload extends Component {
           <img src="" ref={ img => this.imgElement = img } />
         </div>
         <button
-          className="button mdi mdi-check"
+          className="button"
           onClick={ this.uploadImg.bind(this) }
           disabled={ !this.state.uploadEnabled }>Roast me!</button>
       </div>

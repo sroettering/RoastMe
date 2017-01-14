@@ -17,8 +17,10 @@
 
 	.modal {
 		background: $background-modal;
+		border-radius: 2px;
 		margin: 0 auto;
-		max-width: 400px;
+		width: 90%;
+		max-width: 430px;
 		padding: 30px;
 		position: relative;
 		top: 50%;
@@ -34,10 +36,9 @@
 		hr {
 			background: $background-secondary;
 			border: none;
-			color: #d9d7bd;
 			height: 1px;
 			left: -30px;
-			margin: 0 0 30px;
+			margin: 0 0 20px;
 			position: relative;
 			width: calc(100% + 60px);
 		}
@@ -47,12 +48,14 @@
 			display: block;
 			font-size: 24px;
 			line-height: 32px;
-			margin: 0 0 30px;
+			margin: 0 0 20px;
+			font-weight: bold;
 		}
 
 		label {
 			display: block;
 			margin: 0 0 5px;
+			font-weight: bold;
 		}
 
 		.modal-upload {
@@ -78,7 +81,7 @@
 			width: 100%;
 		}
 
-		input#modal-input {
+		input#image-input {
 			cursor: pointer;
 			height: 100%;
 			left: 0;
@@ -100,13 +103,17 @@
 
 		img {
 			position: relative;
+			margin: 0 auto;
 			display: block;
 			width: auto;
 			max-width: 100%;
+			max-height: 300px;
 		}
 
 		.button {
 			float: right;
+			width: auto;
+			padding: 0 15px 0 15px;
 		}
 
 		.spinner {
