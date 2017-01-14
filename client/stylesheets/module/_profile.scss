@@ -41,6 +41,7 @@
 
     .roast-score {
         position: relative;
+        top: 0;
     }
 
     span.membership {
@@ -75,8 +76,11 @@
       }
 
       .image {
-        border-right: 1px solid $background-tertiary;
         background: transparent;
+
+        @media (min-width: $break-small) {
+          border-right: 1px solid $background-tertiary;
+        }
       }
 
       .roast-comment-text {

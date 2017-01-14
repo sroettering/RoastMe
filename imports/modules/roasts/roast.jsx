@@ -11,7 +11,7 @@ import { downvote } from './voting';
 import { ToggleButton } from '/imports/modules/ui/toggle-button';
 import { TextArea } from '/imports/modules/ui/textarea';
 import { Headline } from '/imports/modules/roasts/components/headline';
-import { Caption } from '/imports/modules/roasts/components/caption';
+import { Score } from '/imports/modules/roasts/components/score';
 import { Image } from '/imports/modules/roasts/components/image';
 import { CommentSection } from '/imports/modules/roasts/components/comment-section';
 
@@ -21,13 +21,16 @@ class RoastC extends Component {
     if(roast && comments) {
       return (
         <div className="roast">
-          <Headline roastUrl={ `/roast/${this.props.roast._id}` } roastTitle={ roast.title }/>
-          { single ? '' : <Caption username={ roast.userName } totalComments={ totalComments } totalPoints={ totalPoints }/> }
+          <Headline
+            roastUrl={ `/roast/${this.props.roast._id}` }
+            roastTitle={ roast.title }
+            userId={ roast.userId }
+            username={ roast.userName } />
+          <Score comments={ totalComments } points={ totalPoints } />
           <Image
             imageUrl={ roast.imageUrl }
             roastTitle={ roast.title }
             onClick={ this.handleClick.bind(this) } />
-          { single ? <Caption totalComments={ totalComments } totalPoints={ totalPoints }/> : '' }
           { single ? <TextArea roast={ roast } /> : '' }
           <CommentSection comments={ comments } roast={ roast } />
         </div>

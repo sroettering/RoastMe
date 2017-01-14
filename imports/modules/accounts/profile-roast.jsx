@@ -16,7 +16,11 @@ class RoastC extends Component {
     if(roast && comment) {
       return (
         <div className="roast">
-          <Headline roastUrl={ `/roast/${roast._id}` } roastTitle={ roast.title }/>
+          <Headline
+            roastUrl={ `/roast/${roast._id}` }
+            roastTitle={ roast.title }
+            userId={ roast.userId }
+            username={ roast.userName } />
           <div className="profile-roast-section">
             <Image
               imageUrl={ roast.imageUrl }

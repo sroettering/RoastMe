@@ -23,7 +23,10 @@
 
 	h2 {
 		font-weight: bold;
-		margin-bottom: 20px;
+
+		@media (min-width: $break-large) {
+			max-width: calc(100% - 140px);
+		}
 	}
 }
 
@@ -53,9 +56,13 @@
 }
 
 .roast-score {
-	position: absolute;
-	right: 0px;
-	top: 0px;
+	position: relative;
+
+	@media (min-width: $break-large) {
+		position: absolute;
+		top: -55px;
+		right: 0;
+	}
 
 	p {
 		margin: 0;
