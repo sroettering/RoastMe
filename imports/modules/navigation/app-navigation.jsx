@@ -22,20 +22,18 @@ export class AppNavigation extends React.Component {
   render() {
     return (
       <header className="header" role="banner">
-        <div className="wrapper">
-          <a href="#" className="logo"></a>
-          <IndexLink to="/" className="logo" />
+        <a href="#" className="logo"></a>
+        <IndexLink to="/" className="logo" />
 
-          <nav className="navigation-left" role="navigation">
-            <ul>
-              <li><IndexLink to="/" activeClassName="current">Hot</IndexLink></li>
-              <li><Link to="/trending/" activeClassName="current">Trending</Link></li>
-              <li><Link to="/new/" activeClassName="current">New</Link></li>
-            </ul>
-          </nav>
+        <nav className="navigation-left" role="navigation">
+          <ul>
+            <li><IndexLink to="/" activeClassName="current">Hot</IndexLink></li>
+            <li><Link to="/trending/" activeClassName="current">Trending</Link></li>
+            <li><Link to="/new/" activeClassName="current">New</Link></li>
+          </ul>
+        </nav>
 
-          {this.renderNavigation(this.props.hasUser)}
-        </div>
+        {this.renderNavigation(this.props.hasUser)}
       </header>
     );
   }
