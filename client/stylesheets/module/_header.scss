@@ -59,7 +59,7 @@
 		width: 33%;
 
 		@media (min-width: $break-large) {
-			margin: 0 15px 0 0;
+			margin: 0 16px 0 0;
 			width: auto;
 
 			&:last-child {
@@ -71,7 +71,7 @@
 	a {
 		color: rgba(white, 0.7);
 		display: block;
-		font-size: 20px;
+		font-size: 16px;
 		line-height: 44px;
 		position: relative;
 		text-align: center;
@@ -80,7 +80,7 @@
 		        transition: color 0.3s ease 0s;
 
 		@media (min-width: $break-large) {
-			padding: 0 15px;
+			padding: 0 16px;
 		}
 
 		&:hover {
