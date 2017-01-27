@@ -27,6 +27,13 @@
 		-webkit-transform: translateY(-50%);
 		        transform: translateY(-50%);
 
+		.modal-close-btn {
+			position: absolute;
+			top: 5px;
+			right: 5px;
+			font-size: 30px;
+		}
+
 		&::after {
 			clear: both;
 			content: "";

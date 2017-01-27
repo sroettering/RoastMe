@@ -58,6 +58,9 @@ export class ModalUpload extends Component {
     return (
       <div className="modal">
         <h2 className="modal-title">Get roasted</h2>
+        <button className="flat-button modal-close-btn" onClick={ this.props.closeModal }>
+          &times;
+        </button>
         <label htmlFor="title-input">Enter a roast title</label>
         <input
           id="title-input"
