@@ -56,7 +56,7 @@ export class TextArea extends Component {
     } else {
       return (
         <div className="roast-write-comment">
-          <p className="login-hint"><Link to={ "/login" }>Login</Link> to write a roast!</p>
+          <p className="login-hint">Please login to write a roast!</p>
         </div>
       );
     }

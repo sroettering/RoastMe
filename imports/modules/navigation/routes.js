@@ -12,7 +12,6 @@ import { Hot } from '/imports/modules/ui/hot';
 import { Trending } from '/imports/modules/ui/trending';
 import { New } from '/imports/modules/ui/new';
 import { RoastPage } from '/imports/modules/ui/roast-page';
-import { Login } from '/imports/modules/ui/login';
 import { IntroPage } from '/imports/modules/accounts/intro-page';
 import { Rules } from '/imports/modules/accounts/rules';
 import { TermsOfService } from '/imports/modules/ui/terms-of-service';
@@ -25,7 +24,7 @@ import { NotFound } from '/imports/modules/ui/not-found.jsx';
 const requireAuth = (nextState, replace) => {
   if (!Meteor.loggingIn() && !Meteor.userId()) {
     replace({
-      pathname: '/login',
+      pathname: '/',
       state: { nextPathname: nextState.location.pathname },
     });
   }
@@ -43,7 +42,6 @@ Meteor.startup(() => {
         <Route name="trending" path="/trending" component={ Trending } />
         <Route name="new" path="/new" component={ New } />
         <Route name="roast" path="/roast/:id" component={ RoastPage } />
-        <Route name="login" path="/login" component={ Login } />
         <Route name="postSignup" path="/postSignup" component={ IntroPage } onEnter={requireAuth} />
         <Route name="rules" path="/rules" component={ Rules } onEnter={requireAuth} />
         <Route name="termsOfService" path="/tos" component={ TermsOfService } />
