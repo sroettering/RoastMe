@@ -43,6 +43,15 @@ export const UsersSchema = new SimpleSchema({
       }
     },
   },
+  status: {
+    type: String,
+    allowedValues: ['active', 'cautioned', 'banned'],
+    autoValue() {
+      if(this.isInsert) {
+        return 'active';
+      }
+    },
+  },
   heartbeat: {
     type: Date,
     optional: true,
