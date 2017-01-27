@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
+import { Roles } from 'meteor/alanning:roles';
 
 Meteor.publish('loggedinUser', function() {
   return Meteor.users.find({ _id: this.userId }, {
@@ -25,4 +26,20 @@ Meteor.publish('user.profile', function(userId) {
       createdAt: 1,
     },
   });
+});
+
+Meteor.publish('user.all', function() {
+  const user = Meteor.users.find({ _id: this.userId });
+  if(Roles.userIsInRole(user, 'admin')) {
+    return Meteor.users.find({}, { fields: {
+        profile: 1,
+        'services.facebook.picture': 1,
+        'services.google.picture': 1,
+        createdAt: 1,
+        roles: 1,
+      }
+    });
+  } else {
+    return [];
+  }
 });

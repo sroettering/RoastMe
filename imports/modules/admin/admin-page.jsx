@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
+import { Roles } from 'meteor/alanning:roles';
 
 import { NotFound } from '/imports/modules/ui/not-found';
 
