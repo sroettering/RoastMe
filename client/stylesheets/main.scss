@@ -24,12 +24,13 @@ $break-extralarge: 1024px;
 
 body {
 	background: $background-primary;
+	overflow-x: hidden;
 }
 
 .wrapper {
 	height: 100%;
 	margin: 0 auto;
-	max-width: 1200px;
+	max-width: 960px;
 	padding: 0 30px;
 	position: relative;
 
@@ -171,3 +172,4 @@ body {
 @import "module/modal";
 @import "module/admin";
 @import "module/rules";
+@import "module/tab";

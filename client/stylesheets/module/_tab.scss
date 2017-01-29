@@ -1,0 +1,50 @@
+.tab-wrapper {
+  position: relative;
+  left: -60px;
+  width: calc(100% + 120px);
+
+  .tab-nav {
+    list-style: none;
+
+    .tab-item {
+      display: inline-block;
+      padding: 10px 30px;
+      color: white;
+      cursor: pointer;
+
+      &.active {
+        background-color: $background-tertiary;
+      }
+    }
+
+  }
+
+  .tab-content {
+    background-color: $background-tertiary;
+    position: relative;
+    padding: 40px 30px;
+
+    &:before {
+      position: absolute;
+      content: "";
+      display: block;
+      width: 2000px;
+      height: 100%;
+      right: 100%;
+      top: 0;
+      background: $background-tertiary;
+    }
+
+    &:after {
+      position: absolute;
+      content: "";
+      display: block;
+      width: 2000px;
+      height: 100%;
+      left: 100%;
+      top: 0;
+      background: $background-tertiary;
+    }
+  }
+
+}

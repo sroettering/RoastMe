@@ -13,7 +13,7 @@ export class AppC extends Component {
       return React.cloneElement(child, { currentUser });
     });
     const path = location.pathname;
-    const sidebarVisible = path !== '/postSignup';
+    const sidebarVisible = false;//path !== '/postSignup';
     return (
       <div>
         <AppNavigation hasUser={ !!Meteor.userId() }/>

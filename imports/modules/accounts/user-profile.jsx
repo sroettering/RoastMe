@@ -9,6 +9,7 @@ import { Roasts } from '/imports/modules/roasts/roasts-collection';
 import { Comments } from '/imports/modules/roasts/comments-collection';
 import { Score } from '/imports/modules/roasts/components/score';
 import { ProfileRoast } from './profile-roast';
+import { TabComponent } from '/imports/modules/ui/tab-component';
 
 class UserProfileC extends Component {
 
@@ -43,27 +44,27 @@ class UserProfileC extends Component {
       return (
         <div className="profile">
           <div className="profile-section">
-            <div className="wrapper">
-              <div className="profile-picture">
-                <img src={ avatar } alt={ name } />
+            <div className="profile-picture">
+              <img src={ avatar } alt={ name } />
+            </div>
+            <div className="profile-information">
+              <h1>{ name }</h1>
+              <div className="profile-score">
+                <Score comments={ comments.length } points={ this.getTotalPoints() } />
               </div>
-              <div className="profile-information">
-                <h1>{ name }</h1>
-                <div className="profile-score">
-                  <Score comments={ comments.length } points={ this.getTotalPoints() } />
-                </div>
-                <span className="membership">Member since { since }</span>
-                { ownProfile ? <button className="flat-button" onClick={ this.logout.bind(this) }>Logout</button> : '' }
-              </div>
+              <span className="membership">Member since { since }</span>
+              { ownProfile ? <button className="flat-button" onClick={ this.logout.bind(this) }>Logout</button> : '' }
             </div>
           </div>
           <div className="profile-section">
-            <div className="wrapper">
+            <TabComponent tabHeadings={ ['Best Roasts', 'Test'] } >
               <div className="profile-roasts">
-                <h1>Best Roasts</h1>
                 { comments.map((comment, index) => <ProfileRoast key={ index } comment={ comment } />) }
               </div>
-            </div>
+              <div>
+                Test
+              </div>
+            </TabComponent>
           </div>
         </div>
       );
