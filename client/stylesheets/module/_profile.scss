@@ -60,7 +60,13 @@
 
   .roast {
     border: none;
-    clear: left;
+    margin-bottom: 30px;
+
+    &:after {
+      display: block;
+      content: "";
+      clear: both;
+    }
 
     .profile-roast-section {
       width: 100%;
@@ -79,10 +85,6 @@
 
       .image {
         background: transparent;
-
-        @media (min-width: $break-small) {
-          border-right: 1px solid $background-tertiary;
-        }
       }
 
       .roast-comment-text {
@@ -100,7 +102,6 @@
         }
 
         p {
-          border-top: 1px solid $background-primary;
           padding-top: 5px;
           word-wrap: break-word;
         }
