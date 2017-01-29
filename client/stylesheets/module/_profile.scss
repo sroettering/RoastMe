@@ -12,12 +12,14 @@
 .profile-picture {
     margin: 0 0 30px;
     position: relative;
+    width: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    height: 200px;
     img {
-        border-radius: 50%;
         display: block;
         height: auto;
         margin: 0 auto;
-        overflow: hidden;
         position: relative;
         width: 200px;
         @media (min-width: $break-small) {
