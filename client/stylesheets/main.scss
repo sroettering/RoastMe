@@ -112,6 +112,7 @@ body {
 
 	&:disabled {
 		opacity: 0.5;
+		cursor: no-drop;
 	}
 }
 
@@ -119,6 +120,25 @@ body {
 	@extend .button;
 	background: transparent;
 	color: #D83118;
+}
+
+.flame-button {
+	background-color: $red;
+	position: relative;
+	border-radius: 5px 0 5px 5px;
+	margin-top: 10px;
+
+	&:after {
+		display: block;
+		content: "";
+		position: absolute;
+		right: 0;
+		top: -18px;
+		width: 20px;
+		height: 20px;
+		background-color: blue;
+		background: url("./icons/topofbox-red.svg") no-repeat center;
+	}
 }
 
 /*

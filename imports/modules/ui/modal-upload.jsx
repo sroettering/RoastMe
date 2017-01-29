@@ -83,7 +83,7 @@ export class ModalUpload extends Component {
           <img src="" ref={ img => this.imgElement = img } />
         </div>
         <button
-          className="button"
+          className="button flame-button"
           onClick={ this.uploadImg.bind(this) }
           disabled={ !this.state.uploadEnabled }>Roast me!</button>
       </div>

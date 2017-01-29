@@ -50,7 +50,7 @@ export class TextArea extends Component {
             ref={(element) => {this.textarea = element;}}>
           </textarea>
           <p className="roast-write-counter">{ this.state.charsLeft }</p>
-          <a href="#" className="button mdi mdi-send" onClick={ this.submit.bind(this) }><span>Submit</span></a>
+          <a href="#" className="button flame-button" onClick={ this.submit.bind(this) }><span>Submit</span></a>
         </div>
       );
     } else {
