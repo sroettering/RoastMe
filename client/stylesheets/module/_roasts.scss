@@ -35,7 +35,6 @@
 	position: relative;
 
 	&.image {
-		background-color: $background-tertiary;
 		margin: 0 0 15px;
 	}
 
@@ -149,7 +148,7 @@
 }
 
 .roast-comment {
-	margin: 0 0 60px;
+	margin: 0 0 30px;
 }
 
 .roast-comment-answers {
@@ -164,7 +163,7 @@
 		}
 
 		@media (min-width: $break-large) {
-			padding: 0 0 0 60px;
+			padding: 0 0 0 90px;
 		}
 	}
 }
@@ -261,14 +260,15 @@
 
 		.button {
 			border-radius: 2px;
-			line-height: 44px;
-			height: 44px;
-			width: 44px;
+			line-height: 32px;
+			height: 32px;
+			width: 32px;
 
 			&.mdi::before {
-				font-size: 24px;
+				font-size: 18px;
 				position: relative;
-				top: 3px;
+				top: 0px;
+				left: -3px;
 			}
 
 			span {

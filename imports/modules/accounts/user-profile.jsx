@@ -31,7 +31,7 @@ class UserProfileC extends Component {
 
   render() {
     if(this.props.user && this.props.user.services) {
-      const { user, comments, ownProfile } = this.props;
+      const { user, comments, uploads, ownProfile } = this.props;
       const name = user.profile.username || user.profile.name;
       const since = moment(user.createdAt).format('DD.MM.YYYY');
 
@@ -57,12 +57,12 @@ class UserProfileC extends Component {
             </div>
           </div>
           <div className="profile-section">
-            <TabComponent tabHeadings={ ['Best Roasts', 'Test'] } >
+            <TabComponent tabHeadings={ ['Best Roasts', 'Own Roasts'] } >
               <div className="profile-roasts">
                 { comments.map((comment, index) => <ProfileRoast key={ index } comment={ comment } />) }
               </div>
-              <div>
-                Test
+              <div className="profile-uploads">
+                Uploads
               </div>
             </TabComponent>
           </div>
@@ -80,6 +80,7 @@ class UserProfileC extends Component {
 UserProfileC.propTypes = {
   user: React.PropTypes.object,
   comments: React.PropTypes.array,
+  uploads: React.PropTypes.array,
   ownProfile: React.PropTypes.bool,
 }
 
@@ -89,11 +90,14 @@ export const UserProfile = createContainer(({ params }) => {
   const user = Meteor.users.findOne(userId);
   const ownProfile = Meteor.userId() === userId;
   const commentsHandle = Meteor.subscribe('all-comments-for-user', userId);
+  const uploadsHandle = Meteor.subscribe('all-roasts-for-user', userId);
   let comments = Comments.find({ userId }, { sort: { points: -1 } }).fetch();
   comments = _.uniq(comments, (item) => item.roastId );
+  const uploads = Roasts.find({ userId }, { sort: { createdAt: -1 } }).fetch();
   return {
     user,
     comments,
+    uploads,
     ownProfile,
   }
 }, UserProfileC);

@@ -26,8 +26,9 @@ Meteor.publish('single-roast', function(roastId) {
   return Roasts.find({ _id: roastId, status: 'accepted' });
 });
 
-Meteor.publish('all-roasts-for-user', function(){
-  return Roasts.find({ userId: this.userId, status: 'accepted' });
+Meteor.publish('all-roasts-for-user', function(userId){
+  check(userId, String);
+  return Roasts.find({ userId: userId, status: 'accepted' });
 });
 
 Meteor.publish('queued-roasts', function() {
