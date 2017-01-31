@@ -9,7 +9,6 @@ import { Comments } from './comments-collection';
 import { upvote } from './voting';
 import { downvote } from './voting';
 import { ToggleButton } from '/imports/modules/ui/toggle-button';
-import { TextArea } from '/imports/modules/ui/textarea';
 import { Headline } from '/imports/modules/roasts/components/headline';
 import { Score } from '/imports/modules/roasts/components/score';
 import { Image } from '/imports/modules/roasts/components/image';
@@ -31,7 +30,6 @@ class RoastC extends Component {
             imageUrl={ roast.imageUrl }
             roastTitle={ roast.title }
             onClick={ this.handleClick.bind(this) } />
-          { single ? <TextArea roast={ roast } /> : '' }
           <CommentSection comments={ comments } roast={ roast } single={ single } />
         </div>
       );

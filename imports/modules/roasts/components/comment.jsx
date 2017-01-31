@@ -58,7 +58,7 @@ export const Comment = createContainer(({ comment }) => {
   const hoursPassed = moment(Session.get('now')).diff(comment.createdAt, 'hours');
   let timeString = moment(comment.createdAt).fromNow();
   if(hoursPassed >= 24) {
-    timeString = moment(comment.createdAt).format('MM.DD.YY - HH:mm');
+    timeString = moment(comment.createdAt).format('DD.MM.YY - HH:mm');
   }
   return {
     time: timeString,

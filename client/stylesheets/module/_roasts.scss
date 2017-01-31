@@ -10,6 +10,7 @@
 
 	&:last-child {
 		border-bottom: none;
+		margin-bottom: 0;
 	}
 
 	a {
@@ -243,6 +244,7 @@
 		ul {
 			list-style: none;
 			float: left;
+			padding-top: 6px;
 		}
 
 		li {

@@ -2,6 +2,7 @@
   position: relative;
   left: -60px;
   width: calc(100% + 120px);
+  margin-top: 60px;
 
   .tab-nav {
     list-style: none;
@@ -13,14 +14,15 @@
       cursor: pointer;
 
       &.active {
-        background-color: $background-tertiary;
+        background-color: $background-secondary;
+        color: $red;
       }
     }
 
   }
 
   .tab-content {
-    background-color: $background-tertiary;
+    background-color: $background-secondary;
     position: relative;
     padding: 40px 30px;
 
@@ -32,7 +34,7 @@
       height: 100%;
       right: 100%;
       top: 0;
-      background: $background-tertiary;
+      background: $background-secondary;
     }
 
     &:after {
@@ -43,7 +45,7 @@
       height: 100%;
       left: 100%;
       top: 0;
-      background: $background-tertiary;
+      background: $background-secondary;
     }
   }
 
