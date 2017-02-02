@@ -50,9 +50,9 @@ export class CommentSection extends Component {
               { bestComments.map((comment, index) => <Comment key={ index } single={ single } comment={ comment } roast={ roast } /> ) }
               { !this.state.showAllBest && hasMore ?
                 <button
-                  className="flat-button"
+                  className="more-roasts-button"
                   onClick={ this.showAllBestComments.bind(this) }>
-                  show more...
+                  I want more roasts!
                 </button> : ''
               }
             </div>
@@ -61,9 +61,9 @@ export class CommentSection extends Component {
               { newestComments.map((comment, index) => <Comment key={ index } single={ single } comment={ comment } roast={ roast } /> ) }
               { !this.state.showAllNewest && hasMore ?
                 <button
-                  className="flat-button"
+                  className="more-roasts-button"
                   onClick={ this.showAllNewestComments.bind(this) }>
-                  show more...
+                  I want more roasts!
                 </button> : ''
               }
             </div>

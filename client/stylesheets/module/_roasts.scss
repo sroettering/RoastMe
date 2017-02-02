@@ -82,7 +82,7 @@
 .roast-write-comment {
 	background: $background-tertiary;
 	border-radius: 5px;
-	height: 234px;
+	height: 220px;
 	margin: 10px 0 60px;
 	overflow: hidden;
 	position: relative;
@@ -128,23 +128,19 @@
 	}
 
 	.roast-write-counter {
-		bottom: 20px;
+		bottom: 10px;
 		line-height: 44px;
 		margin: 0;
 		position: absolute;
-		right: 89px;
+		right: 120px;
 		text-align: center;
 		width: 44px;
-
-		@media (min-width: $break-small) {
-			right: 162px;
-		}
 	}
 
 	.button {
-		bottom: 20px;
+		bottom: 10px;
 		position: absolute;
-		right: 30px;
+		right: 15px;
 	}
 }
 
@@ -212,11 +208,11 @@
 }
 
 .roast-comment-text {
-	margin: 0 0 30px;
+	margin: 0 0 15px;
 	position: relative;
 
 	@media (min-width: $break-small) {
-		margin: -60px 0 30px;
+		margin: -60px 0 15px;
 		padding: 0 0 0 90px;
 	}
 
@@ -263,6 +259,7 @@
 		.button {
 			border-radius: 2px;
 			line-height: 32px;
+			padding: 0 15px 0 10px;
 			height: 32px;
 			width: 32px;
 
@@ -294,7 +291,7 @@
 	}
 
 	button.flat-button {
-		font-size: 20px;
+		font-size: 16px;
 		width: auto;
 		padding-right: 5px;
 		padding-left: 5px;

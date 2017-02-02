@@ -74,7 +74,7 @@ body {
 	border-radius: 5px;
 	color: white;
 	display: block;
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: bold;
 	height: 44px;
 	line-height: 44px;
@@ -120,12 +120,34 @@ body {
 .flat-button {
 	@extend .button;
 	background: transparent;
-	color: #D83118;
+	color: white;
+}
+
+.more-roasts-button {
+	@extend .button;
+	width: auto;
+	padding: 0 10px 0 10px;
+	background: $background-tertiary;
+	margin: 60px auto;
+}
+
+.more-replies-button {
+	@extend .button;
+	width: auto;
+	padding: 0 10px 0 10px;
+	background: $background-tertiary;
+	margin-bottom: 30px;
+
+	@media (min-width: $break-small) {
+		margin-left: 90px;
+	}
 }
 
 .flame-button {
 	background-color: $red;
 	position: relative;
+	width: auto;
+	padding: 0 10px 0 10px;
 	border-radius: 5px 0 5px 5px;
 	margin-top: 10px;
 
