@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
 
 Meteor.methods({
   acceptRulesAndTos() {
@@ -12,4 +13,15 @@ Meteor.methods({
       }
     );
   },
+  changeUsername(username) {
+    check(username, String);
+    if(!this.userId) return;
+    Meteor.users.update({ _id: this.userId },
+      {
+        $set: {
+          "profile.name": username,
+        }
+      }
+    );
+  }
 });

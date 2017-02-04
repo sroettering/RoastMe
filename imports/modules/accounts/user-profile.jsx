@@ -16,6 +16,10 @@ class UserProfileC extends Component {
   constructor(props) {
     super(props);
     this.getTotalPoints = this.getTotalPoints.bind(this);
+    this.resetUsername = this.resetUsername.bind(this);
+    this.state = {
+      username: '',
+    };
   }
 
   getTotalPoints() {
@@ -29,10 +33,40 @@ class UserProfileC extends Component {
     browserHistory.push('/');
   }
 
+  usernameChanged(event) {
+    this.setState({ username: this.usernameField.value });
+  }
+
+  submitUsername(event) {
+    if(event.key === "Enter") {
+      const username = this.usernameField.value;
+      if(!username) {
+        this.resetUsername();
+        Bert.alert('Really?' ,'warning');
+      } else if(username !== this.props.user.profile.name) {
+        Meteor.call('changeUsername', username, (error, result) => {
+          if(error) {
+            Bert.alert(error.reason, 'danger');
+          } else {
+            Bert.alert('Done!', 'success');
+          }
+        });
+      }
+    }
+  }
+
+  resetUsername() {
+    this.usernameField.value = this.props.user.profile.name;
+  }
+
+  focusUsernameField() {
+    this.usernameField.focus();
+  }
+
   render() {
     if(this.props.user && this.props.user.services) {
       const { user, comments, uploads, ownProfile } = this.props;
-      const name = user.profile.username || user.profile.name;
+      const name = this.state.username || user.profile.name;
       const since = moment(user.createdAt).format('DD.MM.YYYY');
 
       let avatar;
@@ -48,7 +82,20 @@ class UserProfileC extends Component {
               <img src={ avatar } alt={ name } />
             </div>
             <div className="profile-information">
-              <h1>{ name }</h1>
+              <div className="username">
+                <input
+                  className="username-input"
+                  type="text"
+                  value={ name }
+                  onChange={ this.usernameChanged.bind(this) }
+                  onKeyPress={ this.submitUsername.bind(this) }
+                  onBlur={ this.resetUsername }
+                  ref={ input => this.usernameField = input }
+                  disabled={ !ownProfile } />
+                { ownProfile ?
+                  <span className="mdi mdi-pencil" onClick={ this.focusUsernameField.bind(this) }></span>
+                   : '' }
+              </div>
               <div className="profile-score">
                 <Score comments={ comments.length } points={ this.getTotalPoints() } />
               </div>

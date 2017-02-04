@@ -16,12 +16,15 @@
     border-radius: 50%;
     overflow: hidden;
     height: 200px;
+
     img {
         display: block;
         height: auto;
+        min-width: 200px;
+        max-height: 200px;
         margin: 0 auto;
         position: relative;
-        width: 200px;
+
         @media (min-width: $break-small) {
             margin: 0;
         }
@@ -39,6 +42,34 @@
 
     @media (min-width: $break-large) {
         width: 300px;
+    }
+
+    .username {
+
+      .username-input {
+        margin-bottom: 30px;
+        margin-right: 10px;
+        position: relative;
+        width: calc(100% - 34px);
+        background: transparent;
+        color: white;
+        border: none;
+        border-bottom: 2px solid transparent;
+        outline: none;
+        font-size: 28px;
+        line-height: 34px;
+
+        &:focus {
+          border-bottom: 2px solid white;
+        }
+      }
+
+      span {
+        color: white;
+        display: inline-block;
+        font-size: 24px;
+        cursor: pointer;
+      }
     }
 
     .roast-score {
