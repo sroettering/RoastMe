@@ -23,8 +23,8 @@ export class ModalLogin extends Component {
           &times;
         </button>
         <p>
-          This site's purpose is to verbally roast uploaded images from you and other users.
-          By registering you have to be fully aware of this fact!
+          itsroastme's purpose is to roast you and other users.
+          In order to create an account you have to 18+
         </p>
         <p className="center">Login in with</p>
         <button className="btn btn-facebook" data-social-login="loginWithFacebook" onClick={this.login}>
