@@ -187,6 +187,11 @@
 		left: 90px;
 		position: absolute;
 		top: 3px;
+
+		a {
+			white-space: nowrap;
+			font-size: 20px;
+		}
 	}
 
 	p {
@@ -245,7 +250,11 @@
 
 		li {
 			display: inline-block;
-			margin-right: 20px;
+			margin-right: 10px;
+
+			.SocialMediaShareButton {
+				cursor: pointer;
+			}
 
 			.mdi-facebook {
 				background-color: $facebook-color;

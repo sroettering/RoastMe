@@ -6,13 +6,17 @@ import { downvote } from '../voting';
 import { ToggleButton } from '/imports/modules/ui/toggle-button';
 import { SocialButtons } from './social-buttons';
 
-export const CommentControls = ({ comment, replyTo, single }) => {
+export const CommentControls = ({ roast, comment, replyTo, single }) => {
   const upToggled = !!_.findWhere(comment.upvotes, { userId: Meteor.userId() });
   const downToggled = !!_.findWhere(comment.downvotes, { userId: Meteor.userId() });
   if(single) {
     return (
       <div className="roast-comment-reply">
-        <SocialButtons />
+        <SocialButtons
+          url={ `roastme.iq-dev.com/roast/${roast._id}` }
+          title={ roast.title }
+          description={ comment.content }
+          img={ roast.imageUrl } />
         <ul className="comment-buttons">
           <li>
             <ToggleButton
@@ -39,7 +43,11 @@ export const CommentControls = ({ comment, replyTo, single }) => {
   } else {
     return (
       <div className="roast-comment-reply">
-        <SocialButtons />
+        <SocialButtons
+          url={ `roastme.iq-dev.com/roast/${roast._id}` }
+          title={ roast.title }
+          description={ comment.content } 
+          img={ roast.imageUrl } />
       </div>
     );
   }

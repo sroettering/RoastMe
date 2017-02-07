@@ -40,7 +40,6 @@ export class Replies extends Component {
             </button>
           </div> : ''
         }
-
       </div>
     );
   }

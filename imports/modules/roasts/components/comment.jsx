@@ -33,7 +33,7 @@ class CommentC extends Component {
         <div className="roast-comment">
           <CommentProfile comment={ comment } />
           <CommentText comment={ comment } time={ time } />
-          <CommentControls comment={ comment } replyTo={ this.openTextArea.bind(this) } single={ single } />
+          <CommentControls roast={ roast } comment={ comment } replyTo={ this.openTextArea.bind(this) } single={ single } />
           { this.state.replyingTo === comment._id ?
             <TextArea
               roast={ roast }
