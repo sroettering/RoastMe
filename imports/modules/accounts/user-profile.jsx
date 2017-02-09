@@ -7,8 +7,10 @@ import { moment } from 'meteor/momentjs:moment';
 
 import { Roasts } from '/imports/modules/roasts/roasts-collection';
 import { Comments } from '/imports/modules/roasts/comments-collection';
-import { Score } from '/imports/modules/roasts/components/score';
 import { ProfileRoast } from './profile-roast';
+import { Headline } from '/imports/modules/roasts/components/headline';
+import { Score } from '/imports/modules/roasts/components/score';
+import { Image } from '/imports/modules/roasts/components/image';
 import { TabComponent } from '/imports/modules/ui/tab-component';
 
 class UserProfileC extends Component {
@@ -109,7 +111,19 @@ class UserProfileC extends Component {
                 { comments.map((comment, index) => <ProfileRoast key={ index } comment={ comment } />) }
               </div>
               <div className="profile-uploads">
-                Uploads
+                { uploads.map((roast, index) =>
+                  <div className="roast" key={ roast._id }>
+                    <Headline
+                      roastUrl={ `/roast/${roast._id}` }
+                      roastTitle={ roast.title }
+                      userId={ roast.userId }
+                      username={ roast.userName } />
+                    <Score comments={ roast.totalComments } points={ roast.totalUpvotes } />
+                    <Image
+                      imageUrl={ roast.imageUrl }
+                      roastTitle={ roast.title }
+                      onClick={ this.handleClick.bind(this, roast._id) } />
+                  </div>) }
               </div>
             </TabComponent>
           </div>
@@ -120,6 +134,10 @@ class UserProfileC extends Component {
         <h3>Loading...</h3>
       );
     }
+  }
+
+  handleClick(roastId) {
+    console.log(roastId);
   }
 
 }
