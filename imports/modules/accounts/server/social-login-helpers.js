@@ -25,7 +25,7 @@ Meteor.methods({
       const params = {
         redirect: false,
         type: 'small',
-        height: 100,
+        height: 400,
       };
       HTTP.get(url, { params }, (err, result) => {
         if (err) {
