@@ -70,7 +70,7 @@ class UserProfileC extends Component {
       const { user, comments, uploads, ownProfile } = this.props;
       const name = this.state.username || user.profile.name;
       const since = moment(user.createdAt).format('DD.MM.YYYY');
-
+      const tabHeadings = ['Best Roasts', ownProfile ? 'My Uploads' : 'Uploads'];
       let avatar;
       if(user.services.facebook) {
         avatar = user.services.facebook.picture;
@@ -106,7 +106,7 @@ class UserProfileC extends Component {
             </div>
           </div>
           <div className="profile-section">
-            <TabComponent tabHeadings={ ['Best Roasts', 'Own Roasts'] } >
+            <TabComponent tabHeadings={ tabHeadings } >
               <div className="profile-roasts">
                 { comments.map((comment, index) => <ProfileRoast key={ index } comment={ comment } />) }
               </div>
@@ -123,6 +123,7 @@ class UserProfileC extends Component {
                       imageUrl={ roast.imageUrl }
                       roastTitle={ roast.title }
                       onClick={ this.handleClick.bind(this, roast._id) } />
+                    { ownProfile ? <button className="flat-button right mdi mdi-delete"></button> : '' }
                   </div>) }
               </div>
             </TabComponent>
