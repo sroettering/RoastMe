@@ -93,6 +93,7 @@ class UserProfileC extends Component {
 
   deleteRoast() {
     console.log('delete roast: ', this.state.roastToDelete);
+    Meteor.call('deleteRoast', this.state.roastToDelete);
     this.closeModal();
   }
 

@@ -38,6 +38,13 @@ Meteor.methods({
 
     return Roasts.insert(roast);
   },
+  deleteRoast(roastId) {
+    check(roastId, String);
+
+    if(!this.userId) return;
+    // TODO add remove hook to comments
+    Roasts.delete({ _id: roastId, userId: this.userId });
+  },
   createComment(roastId, commentId, text) {
     check(roastId, String);
     check(commentId, Match.OneOf(String, null));
