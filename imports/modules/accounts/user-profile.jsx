@@ -12,6 +12,8 @@ import { Headline } from '/imports/modules/roasts/components/headline';
 import { Score } from '/imports/modules/roasts/components/score';
 import { Image } from '/imports/modules/roasts/components/image';
 import { TabComponent } from '/imports/modules/ui/tab-component';
+import { ModalDialog } from '/imports/modules/ui/modal-dialog';
+import { ModalConfirm } from '/imports/modules/ui/modal-confirm';
 
 class UserProfileC extends Component {
 
@@ -21,6 +23,8 @@ class UserProfileC extends Component {
     this.resetUsername = this.resetUsername.bind(this);
     this.state = {
       username: '',
+      isModalOpen: false,
+      roastToDelete: undefined,
     };
   }
 
@@ -65,6 +69,33 @@ class UserProfileC extends Component {
     this.usernameField.focus();
   }
 
+  confirmDelete(roastId) {
+    console.log(roastId);
+    this.setState({
+      isModalOpen: true,
+      roastToDelete: roastId,
+    });
+  }
+
+  closeModal() {
+    this.setState({ isModalOpen: false });
+  }
+
+  modalCloseHandler(event) {
+    const target = event.target;
+    if(target && target.className === 'modal-overlay active') {
+      this.closeModal();
+    }
+    if(event.keyCode === 27) {
+      this.closeModal();
+    }
+  }
+
+  deleteRoast() {
+    console.log('delete roast: ', this.state.roastToDelete);
+    this.closeModal();
+  }
+
   render() {
     if(this.props.user && this.props.user.services) {
       const { user, comments, uploads, ownProfile } = this.props;
@@ -79,6 +110,13 @@ class UserProfileC extends Component {
       }
       return (
         <div className="profile">
+          <ModalDialog isOpen={ this.state.isModalOpen } closeHandler={ this.modalCloseHandler.bind(this) }>
+            <ModalConfirm
+              onSubmit={ this.deleteRoast.bind(this) }
+              onCancel={ this.closeModal.bind(this) }
+              title={ 'Delete Image?' }
+              confirmText={ 'Your image and all associated roasts will be deleted. Continue?' }/>
+          </ModalDialog>
           <div className="profile-section">
             <div className="profile-picture">
               <img src={ avatar } alt={ name } />
@@ -123,7 +161,10 @@ class UserProfileC extends Component {
                       imageUrl={ roast.imageUrl }
                       roastTitle={ roast.title }
                       onClick={ this.handleClick.bind(this, roast._id) } />
-                    { ownProfile ? <button className="flat-button right mdi mdi-delete"></button> : '' }
+                    { ownProfile ? <button
+                        className="flat-button right mdi mdi-delete"
+                        onClick={ this.confirmDelete.bind(this, roast._id) }>
+                      </button> : '' }
                   </div>) }
               </div>
             </TabComponent>

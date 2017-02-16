@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { browserHistory } from 'react-router';
-import EventListener from 'react-event-listener';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import { ReactiveVar } from 'meteor/reactive-var';
@@ -46,14 +45,15 @@ class AuthenticatedNavigationC extends Component {
   }
 
   handleKeyUp(event) {
-    if(event.keyCode === 27) {
-      this.closeModal();
-    }
+
   }
 
   modalCloseHandler(event) {
     const target = event.target;
-    if(target.className === 'modal-overlay active') {
+    if(target && target.className === 'modal-overlay active') {
+      this.closeModal();
+    }
+    if(event.keyCode === 27) {
       this.closeModal();
     }
   }
@@ -70,12 +70,9 @@ class AuthenticatedNavigationC extends Component {
             </Link>
           </li>
         </ul>
-        { this.state.isModalOpen ?
         <ModalDialog isOpen={ this.state.isModalOpen } closeHandler={ this.modalCloseHandler.bind(this) }>
-          <EventListener target="window" onKeyUp={ this.handleKeyUp.bind(this) } />
           <ModalUpload closeModal={ this.closeModal.bind(this) }/>
         </ModalDialog>
-        : '' }
       </nav>
     );
   }

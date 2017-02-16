@@ -13,6 +13,7 @@
 	&.active {
 		opacity: 1;
 		visibility: visible;
+		z-index: 200;
 	}
 
 	.modal {
@@ -121,6 +122,11 @@
 			float: right;
 			width: auto;
 			padding: 0 15px 0 15px;
+			margin-left: 15px;
+		}
+
+		.flat-button {
+			color: black;
 		}
 
 		.spinner {
@@ -139,6 +145,13 @@
 					background: $background-modal;
 				}
 			}
+		}
+	}
+
+	.modal-confirm {
+		p {
+			color: black;
+			margin-bottom: 30px;
 		}
 	}
 

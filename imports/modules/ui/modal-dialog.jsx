@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import EventListener from 'react-event-listener';
 
 export const ModalDialog = ({ isOpen, closeHandler, children }) => {
   const classes = classNames({
@@ -8,6 +9,7 @@ export const ModalDialog = ({ isOpen, closeHandler, children }) => {
   });
   return (
     <div className={ classes }  onClick={ closeHandler }>
+      <EventListener target="window" onKeyUp={ closeHandler } />
       { children }
     </div>
   );
