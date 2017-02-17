@@ -38,9 +38,9 @@ Meteor.startup(() => {
   render(
     <Router history={ browserHistory }>
       <Route path="/" component={ App }>
-        <IndexRoute name="hot" component={ Hot } />
-        <Route name="trending" path="/trending" component={ Trending } />
-        <Route name="new" path="/new" component={ New } />
+        <IndexRoute name="new" component={ New } />
+        <Route name="trending" path="/trending" component={ New } />
+        <Route name="hot" path="/hot" component={ New } />
         <Route name="roast" path="/roast/:id" component={ RoastPage } />
         <Route name="postSignup" path="/postSignup" component={ IntroPage } onEnter={requireAuth} />
         <Route name="rules" path="/rules" component={ Rules } onEnter={requireAuth} />

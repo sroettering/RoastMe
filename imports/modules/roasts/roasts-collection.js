@@ -27,6 +27,15 @@ const RoastsSchema = new SimpleSchema({
       }
     },
   },
+  category: {
+    type: String,
+    allowedValues: ['new', 'trending', 'hot'],
+    autoValue() {
+      if(this.isInsert) {
+        return 'new';
+      }
+    },
+  },
   totalUpvotes: {
     type: Number,
     autoValue() {

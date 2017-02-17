@@ -8,17 +8,17 @@ import { Comments } from '../comments-collection';
 
 Meteor.publish('hot-roasts', function(limit) {
   check(limit, Number);
-  return Roasts.find({ status: 'accepted' }, { sort: { totalUpvotes: 1 }, limit: limit });
+  return Roasts.find({ status: 'accepted', category: 'hot' }, { sort: { createdAt: -1 }, limit: limit });
 });
 
 Meteor.publish('trending-roasts', function(limit) {
   check(limit, Number);
-  return Roasts.find({ status: 'accepted' }, { sort: { totalComments: 1 }, limit: limit });
+  return Roasts.find({ status: 'accepted', category: 'trending' }, { sort: { createdAt: -1 }, limit: limit });
 });
 
 Meteor.publish('new-roasts', function(limit) {
   check(limit, Number);
-  return Roasts.find({ status: 'accepted' }, { sort: { createdAt: -1 }, limit: limit });
+  return Roasts.find({ status: 'accepted', category: 'new' }, { sort: { createdAt: -1 }, limit: limit });
 });
 
 Meteor.publish('single-roast', function(roastId) {
