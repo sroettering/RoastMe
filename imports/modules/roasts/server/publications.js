@@ -41,6 +41,7 @@ if (Meteor.isServer) {
   Roasts._ensureIndex({ status: 1, createdAt: 1 });
   Roasts._ensureIndex({ _id: 1, status: 1 });
   Roasts._ensureIndex({ userId: 1, status: 1 });
+  Roasts._ensureIndex({ _id: 1, userId: 1 });
 }
 
 

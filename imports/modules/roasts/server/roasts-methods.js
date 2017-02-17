@@ -40,10 +40,8 @@ Meteor.methods({
   },
   deleteRoast(roastId) {
     check(roastId, String);
-
     if(!this.userId) return;
-    // TODO add remove hook to comments
-    Roasts.delete({ _id: roastId, userId: this.userId });
+    Roasts.update({ _id: roastId, userId: this.userId }, { $set: { status: 'deleted' } });
   },
   createComment(roastId, commentId, text) {
     check(roastId, String);

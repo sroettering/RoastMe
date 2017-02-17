@@ -103,6 +103,7 @@ class UserProfileC extends Component {
       const name = this.state.username || user.profile.name;
       const since = moment(user.createdAt).format('DD.MM.YYYY');
       const tabHeadings = ['Best Roasts', ownProfile ? 'My Uploads' : 'Uploads'];
+      console.log(uploads);
       let avatar;
       if(user.services.facebook) {
         avatar = user.services.facebook.picture;
