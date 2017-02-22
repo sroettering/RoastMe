@@ -66,6 +66,8 @@ const createReplies = () => {
 Meteor.startup(function(){
   /*Roasts.remove({});
   Comments.remove({});*/
+  //Roasts.update({}, { $set: { category: 'new' } }, { multi: true }); // use to migrate schema
+
   if(Roasts.find().count() < 1 && Comments.find().count() < 1) {
     createRoasts();
     createComments();

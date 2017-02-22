@@ -13,6 +13,7 @@ import { Headline } from '/imports/modules/roasts/components/headline';
 import { Score } from '/imports/modules/roasts/components/score';
 import { Image } from '/imports/modules/roasts/components/image';
 import { CommentSection } from '/imports/modules/roasts/components/comment-section';
+import { RoastNavigation } from '/imports/modules/roasts/components/roast-navigation';
 
 class RoastC extends Component {
   render() {
@@ -20,6 +21,7 @@ class RoastC extends Component {
     if(roast && comments) {
       return (
         <div className="roast">
+          { single ? <RoastNavigation prev={ null } next={ null } /> : '' }
           <Headline
             roastUrl={ `/roast/${this.props.roast._id}` }
             roastTitle={ roast.title }
