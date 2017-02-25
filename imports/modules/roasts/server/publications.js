@@ -8,17 +8,17 @@ import { Comments } from '../comments-collection';
 
 Meteor.publish('hot-roasts', function(limit) {
   check(limit, Number);
-  return Roasts.find({ status: 'accepted', category: 'hot' }, { sort: { createdAt: -1 }, limit: limit });
+  return Roasts.find({ status: 'accepted', "category.name": 'hot' }, { sort: { createdAt: -1 }, limit: limit });
 });
 
 Meteor.publish('trending-roasts', function(limit) {
   check(limit, Number);
-  return Roasts.find({ status: 'accepted', category: 'trending' }, { sort: { createdAt: -1 }, limit: limit });
+  return Roasts.find({ status: 'accepted', "category.name": 'trending' }, { sort: { createdAt: -1 }, limit: limit });
 });
 
 Meteor.publish('new-roasts', function(limit) {
   check(limit, Number);
-  return Roasts.find({ status: 'accepted', category: 'new' }, { sort: { createdAt: -1 }, limit: limit });
+  return Roasts.find({ status: 'accepted', "category.name": 'new' }, { sort: { createdAt: -1 }, limit: limit });
 });
 
 Meteor.publish('single-roast', function(roastId) {
@@ -51,9 +51,34 @@ Meteor.publish('all-comments', function() {
   return Comments.find();
 });
 
-Meteor.publish('all-comments-for-roast', function(roastId) {
+Meteor.publish('all-comments-and-neighbours-for-roast', function(roastId) {
   check(roastId, String);
-  return Comments.find({roastId: roastId});
+  const comments = Comments.find({ roastId: roastId });
+  const roast = Roasts.findOne({ _id: roastId });
+  const pub = [comments];
+  if(roast) {
+    this.added('roasts', roast._id, roast);
+    roastNext = Roasts.findOne({
+      _id: { $ne: roast._id },
+      "category.name": roast.category.name,
+      "category.enteredAt": { $gt: roast.category.enteredAt }
+    }, {
+      sort: { "category.enteredAt": 1 },
+      fields: { _id: 1, "category.enteredAt": 1 },
+    });
+    if(roastNext) this.added('roasts', roastNext._id, roastNext);
+    roastPrev = Roasts.findOne({
+      _id: { $ne: roast._id },
+      "category.name": roast.category.name,
+      "category.enteredAt": { $lt: roast.category.enteredAt }
+    }, {
+      sort: { "category.enteredAt": -1 },
+      fields: { _id: 1, "category.enteredAt": 1 },
+    });
+    if(roastPrev) this.added('roasts', roastPrev._id, roastPrev);
+  }
+  this.ready();
+  return pub;
 });
 
 Meteor.publish('top-comments-for-roast', function(roastId) {

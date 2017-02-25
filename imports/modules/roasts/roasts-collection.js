@@ -28,11 +28,22 @@ const RoastsSchema = new SimpleSchema({
     },
   },
   category: {
+    type: Object,
+  },
+  "category.name": {
     type: String,
     allowedValues: ['new', 'trending', 'hot'],
     autoValue() {
       if(this.isInsert) {
         return 'new';
+      }
+    },
+  },
+  "category.enteredAt": {
+    type: Date,
+    autoValue() {
+      if(this.isInsert) {
+        return new Date();
       }
     },
   },

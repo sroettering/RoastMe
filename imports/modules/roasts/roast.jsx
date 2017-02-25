@@ -13,15 +13,15 @@ import { Headline } from '/imports/modules/roasts/components/headline';
 import { Score } from '/imports/modules/roasts/components/score';
 import { Image } from '/imports/modules/roasts/components/image';
 import { CommentSection } from '/imports/modules/roasts/components/comment-section';
-import { RoastNavigation } from '/imports/modules/roasts/components/roast-navigation';
+import RoastNavigation from '/imports/modules/roasts/components/roast-navigation';
 
 class RoastC extends Component {
   render() {
-    const { roast, comments, totalComments, totalPoints, single } = this.props;
+    const { roast, comments, totalComments, totalPoints, single, prev, next } = this.props;
     if(roast && comments) {
       return (
         <div className="roast">
-          { single ? <RoastNavigation prev={ null } next={ null } /> : '' }
+          { single ? <RoastNavigation prev={ prev } next={ next } /> : '' }
           <Headline
             roastUrl={ `/roast/${this.props.roast._id}` }
             roastTitle={ roast.title }
@@ -49,17 +49,37 @@ class RoastC extends Component {
 
 RoastC.propTypes = {
   roast: React.PropTypes.object,
+  single: React.PropTypes.bool,
   comments: React.PropTypes.array, // these are not the raw db comments
   totalComments: React.PropTypes.number,
   totalPoints: React.PropTypes.number,
+  prev: React.PropTypes.object,
+  next: React.PropTypes.object,
 };
 
 export const Roast = createContainer(({roast, single}) => {
   if(!roast) return {};
   if(single) {
-    Meteor.subscribe('all-comments-for-roast', roast._id);
+    Meteor.subscribe('all-comments-and-neighbours-for-roast', roast._id);
   } else {
     Meteor.subscribe('top-comments-for-roast', roast._id);
+  }
+
+  let prev;
+  let next;
+  if(single) {
+    prev = Roasts.findOne({
+        _id: { $ne: roast._id },
+        "category.enteredAt": { $lt: roast.category.enteredAt }
+      }, {
+        sort: { "category.enteredAt": -1 },
+      });
+    next = Roasts.findOne({
+        _id: { $ne: roast._id },
+        "category.enteredAt": { $gt: roast.category.enteredAt }
+      }, {
+        sort: { "category.enteredAt": 1 },
+      });
   }
 
   const allComments = Comments.find({ roastId: roast._id }, { sort: { points: -1, createdAt: 1 } }).fetch();
@@ -77,5 +97,7 @@ export const Roast = createContainer(({roast, single}) => {
     comments,
     totalComments,
     totalPoints,
+    prev,
+    next,
   }
 }, RoastC);
