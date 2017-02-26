@@ -14,11 +14,12 @@ import { Score } from '/imports/modules/roasts/components/score';
 import { Image } from '/imports/modules/roasts/components/image';
 import { CommentSection } from '/imports/modules/roasts/components/comment-section';
 import RoastNavigation from '/imports/modules/roasts/components/roast-navigation';
+import Loading from '/imports/modules/ui/loading';
 
 class RoastC extends Component {
   render() {
     const { roast, comments, totalComments, totalPoints, single, prev, next } = this.props;
-    if(roast && comments) {
+    if(comments) {
       return (
         <div className="roast">
           { single ? <RoastNavigation prev={ prev } next={ next } /> : '' }
@@ -37,7 +38,7 @@ class RoastC extends Component {
       );
     } else {
       return (
-        <h3>Loading...</h3>
+        <Loading />
       );
     }
   }
@@ -59,6 +60,7 @@ RoastC.propTypes = {
 
 export const Roast = createContainer(({roast, single}) => {
   if(!roast) return {};
+
   if(single) {
     Meteor.subscribe('comments.all.roastneighbours', roast._id);
   } else {

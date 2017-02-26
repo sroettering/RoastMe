@@ -8,6 +8,7 @@ import { moment } from 'meteor/momentjs:moment';
 import { Roasts } from '/imports/modules/roasts/roasts-collection';
 import { Headline } from '/imports/modules/roasts/components/headline';
 import { Image } from '/imports/modules/roasts/components/image';
+import Loading from '/imports/modules/ui/loading';
 
 class RoastC extends Component {
   render() {
@@ -38,7 +39,7 @@ class RoastC extends Component {
       );
     } else {
       return (
-        <h3>Loading...</h3>
+        <Loading />
       );
     }
   }

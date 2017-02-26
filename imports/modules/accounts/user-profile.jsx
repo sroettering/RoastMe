@@ -14,6 +14,7 @@ import { Image } from '/imports/modules/roasts/components/image';
 import { TabComponent } from '/imports/modules/ui/tab-component';
 import { ModalDialog } from '/imports/modules/ui/modal-dialog';
 import { ModalConfirm } from '/imports/modules/ui/modal-confirm';
+import Loading from '/imports/modules/ui/loading';
 
 class UserProfileC extends Component {
 
@@ -96,7 +97,8 @@ class UserProfileC extends Component {
   }
 
   render() {
-    if(this.props.user && this.props.user.services) {
+    const { userReady, commentsReady, uploadsReady } = this.props;
+    if(userReady) {
       const { user, comments, uploads, ownProfile } = this.props;
       const name = this.state.username || user.profile.name;
       const since = moment(user.createdAt).format('DD.MM.YYYY');
@@ -144,35 +146,39 @@ class UserProfileC extends Component {
           </div>
           <div className="profile-section">
             <TabComponent tabHeadings={ tabHeadings } >
-              <div className="profile-roasts">
-                { comments.map((comment, index) => <ProfileRoast key={ index } comment={ comment } />) }
-              </div>
-              <div className="profile-uploads">
-                { uploads.map((roast, index) =>
-                  <div className="roast" key={ roast._id }>
-                    <Headline
-                      roastUrl={ `/roast/${roast._id}` }
-                      roastTitle={ roast.title }
-                      userId={ roast.userId }
-                      username={ roast.userName } />
-                    <Score comments={ roast.totalComments } points={ roast.totalUpvotes } />
-                    <Image
-                      imageUrl={ roast.imageUrl }
-                      roastTitle={ roast.title }
-                      onClick={ () => browserHistory.push(`/roast/${roast._id}`) } />
-                    { ownProfile ? <button
-                        className="flat-button right mdi mdi-delete"
-                        onClick={ this.confirmDelete.bind(this, roast._id) }>
-                      </button> : '' }
-                  </div>) }
-              </div>
+              { commentsReady ?
+                <div className="profile-roasts">
+                  { comments.map((comment, index) => <ProfileRoast key={ index } comment={ comment } />) }
+                </div> : <Loading />
+              }
+              { uploadsReady ?
+                <div className="profile-uploads">
+                  { uploads.map((roast, index) =>
+                    <div className="roast" key={ roast._id }>
+                      <Headline
+                        roastUrl={ `/roast/${roast._id}` }
+                        roastTitle={ roast.title }
+                        userId={ roast.userId }
+                        username={ roast.userName } />
+                      <Score comments={ roast.totalComments } points={ roast.totalUpvotes } />
+                      <Image
+                        imageUrl={ roast.imageUrl }
+                        roastTitle={ roast.title }
+                        onClick={ () => browserHistory.push(`/roast/${roast._id}`) } />
+                      { ownProfile ? <button
+                          className="flat-button right mdi mdi-delete"
+                          onClick={ this.confirmDelete.bind(this, roast._id) }>
+                        </button> : '' }
+                    </div>) }
+                </div> : <Loading />
+               }
             </TabComponent>
           </div>
         </div>
       );
     } else {
       return (
-        <h3>Loading...</h3>
+        <Loading />
       );
     }
   }
@@ -180,6 +186,9 @@ class UserProfileC extends Component {
 }
 
 UserProfileC.propTypes = {
+  userReady: React.PropTypes.bool,
+  commentsReady: React.PropTypes.bool,
+  uploadsReady: React.PropTypes.bool,
   user: React.PropTypes.object,
   comments: React.PropTypes.array,
   uploads: React.PropTypes.array,
@@ -197,6 +206,9 @@ export const UserProfile = createContainer(({ params }) => {
   comments = _.uniq(comments, (item) => item.roastId );
   const uploads = Roasts.find({ userId }, { sort: { createdAt: -1 } }).fetch();
   return {
+    userReady: userHandle.ready(),
+    commentsReady: commentsHandle.ready(),
+    uploadsReady: uploadsHandle.ready(),
     user,
     comments,
     uploads,

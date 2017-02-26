@@ -1,10 +1,14 @@
-.loading {
-  -webkit-animation-name: rotate;
-  -webkit-animation-duration: 0.5s;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-timing-function: linear;
-  animation-name: rotate;
-  animation-duration: 0.5s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
+.loading-indicator {
+  position: relative;
+  margin: 120px auto;
+
+  .loading-spinner {
+
+
+    &.light {
+      .circle:before {
+        background: $background-modal;
+      }
+    }
+  }
 }

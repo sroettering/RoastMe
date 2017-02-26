@@ -4,6 +4,7 @@ import Spinner from 'react-spinkit';
 
 import { ScrollHandler } from '/imports/modules/utility/scroll-handler';
 import { Roast } from '/imports/modules/roasts/roast';
+import Loading from '/imports/modules/ui/loading';
 
 export const roastLimit = new ReactiveVar(30);
 
@@ -25,24 +26,26 @@ export class RoastsListView extends Component {
   }
 
   render() {
-    if(this.props.roasts) {
+    const { ready, roasts, hasMore } = this.props;
+    if(ready) {
       return (
         <div className="roast-list-view">
-          { this.props.roasts.map((roast) => {
+          { roasts.map((roast) => {
             return <Roast key={roast._id} roast={roast} single={false}/>
           })}
-          { this.props.hasMore ? <Spinner spinnerName="circle" className="light" noFadeIn/> : '' }
+          { hasMore ? <Spinner spinnerName="circle" className="light" noFadeIn/> : '' }
         </div>
       );
     } else {
       return (
-        <Spinner spinnerName="circle"/>
+        <Loading />
       );
     }
   }
 }
 
 RoastsListView.propTypes = {
+  ready: React.PropTypes.bool,
   roasts: React.PropTypes.array,
   hasMore: React.PropTypes.bool,
 }

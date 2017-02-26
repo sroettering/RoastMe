@@ -3,29 +3,32 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import { Roasts } from '/imports/modules/roasts/roasts-collection';
 import { Roast } from '/imports/modules/roasts/roast';
+import Loading from '/imports/modules/ui/loading';
 
 export class RoastPageC extends Component {
   render() {
-    if(this.props.roast) {
-      return <Roast roast={ this.props.roast } single={ true }/>;
+    const { ready, roast } = this.props;
+    if(ready) {
+      return <Roast roast={ roast } single={ true }/>;
     } else {
       return (
-        <div>Loading...</div>
+        <Loading />
       );
     }
   }
 }
 
 RoastPageC.propTypes = {
+  ready: React.PropTypes.bool,
   roast: React.PropTypes.object,
 };
 
 export const RoastPage = createContainer(({ params }) => {
   const roastId = params.id;
-  Meteor.subscribe('roasts.single', roastId);
+  const subHandle = Meteor.subscribe('roasts.single', roastId);
   const roast = Roasts.findOne(roastId);
-
   return {
+    ready: subHandle.ready(),
     roast,
   }
 }, RoastPageC);

@@ -7,7 +7,6 @@ import { moment } from 'meteor/momentjs:moment';
 
 import { App } from '/imports/modules/ui/app';
 import { UserProfile } from '/imports/modules/accounts/user-profile';
-import { Index } from '/imports/modules/ui/index.jsx';
 import { Hot } from '/imports/modules/ui/hot';
 import { Trending } from '/imports/modules/ui/trending';
 import { New } from '/imports/modules/ui/new';
