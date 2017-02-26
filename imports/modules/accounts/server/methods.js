@@ -1,6 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
+import { Roasts } from '/imports/modules/roasts/roasts-collection';
+import { Comments } from '/imports/modules/roasts/comments-collection';
+
 Meteor.methods({
   acceptRulesAndTos() {
     if(!this.userId) return;
@@ -23,5 +26,17 @@ Meteor.methods({
         }
       }
     );
+    Roasts.update({ userId: this.userId },
+      {
+        $set: {
+          userName: username,
+        }
+      }, { multi: true });
+    Comments.update({ userId: this.userId },
+      {
+        $set: {
+          userName: username,
+        }
+      }, { multi: true });
   }
 });
