@@ -9,11 +9,12 @@ export class ModalUpload extends Component {
     this.state = {
       loading: false,
       uploadEnabled: false,
+      uploading: false,
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ loading: false, uploadEnabled: false });
+    this.setState({ loading: false, uploadEnabled: false, uploading: false });
     this.imgElement.src = "";
     this.image = undefined;
     this.title.value = '';
@@ -32,6 +33,7 @@ export class ModalUpload extends Component {
 
   uploadImg(event) {
     if(this.image && this.title.value) {
+      this.setState({ uploading: true })
       ImageUpload(this.image, this.imgElement, this.title.value, (roastId) => {
         if(roastId) {
           const notification = () => Bert.alert({
@@ -42,6 +44,7 @@ export class ModalUpload extends Component {
           });
           _.delay(notification, 500);
         }
+        this.setState({ uploading: false });
         _.delay(this.props.closeModal, 600);
       });
     } else {
@@ -71,7 +74,7 @@ export class ModalUpload extends Component {
         <label htmlFor="image-input">Laugh at yourself first, before anyone else can</label>
         <div className="modal-upload">
           { this.state.loading ?
-            <Spinner spinnerName="circle" className="dark" noFadeIn/> : <span className="drop-area mdi mdi-upload"></span>
+            <Spinner spinnerName="circle" className="preview-spinner dark" noFadeIn/> : <span className="drop-area mdi mdi-upload"></span>
           }
           <input
             id="image-input"
@@ -86,6 +89,9 @@ export class ModalUpload extends Component {
           className="button flame-button"
           onClick={ this.uploadImg.bind(this) }
           disabled={ !this.state.uploadEnabled }>Roast me!</button>
+        { this.state.uploading ?
+          <Spinner spinnerName="circle" className="upload-spinner dark" noFadeIn/> : ''
+        }
       </div>
     );
   }
