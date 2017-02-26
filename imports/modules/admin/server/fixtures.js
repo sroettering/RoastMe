@@ -10,6 +10,7 @@ const adminEmails = [
   'facebook@tim-tilch.de',
 ];
 
+/*
 const makeAdmins = () => {
   adminEmails.forEach((email) => {
     let user = Meteor.users.findOne({
@@ -24,7 +25,17 @@ const makeAdmins = () => {
     }
   });
 }
+*/
+
+const giveRoles = (userId, doc) => {
+  const email = doc.services.facebook ? doc.services.facebook.email : doc.services.google ? doc.services.google.email : '';
+  if(adminEmails.includes(email)) {
+    Roles.addUsersToRoles(doc, 'admin');
+  } else {
+    Roles.addUsersToRoles(doc, 'user');
+  }
+}
 
 Meteor.users.after.insert(function(userId, doc) {
-  makeAdmins();
+  giveRoles(userId, doc);
 });

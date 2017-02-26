@@ -38,7 +38,7 @@ AppC.propTypes = {
 };
 
 export const App = createContainer(() => {
-  Meteor.subscribe('loggedinUser');
+  Meteor.subscribe('user.current');
   const currentUser = Meteor.user();
   return {
     currentUser,

@@ -24,7 +24,7 @@ AdminPageC.propTypes = {
 };
 
 export const AdminPage = createContainer(() => {
-  Meteor.subscribe('loggedinUser');
+  Meteor.subscribe('user.current');
   const user = Meteor.user();
   return {
     user,

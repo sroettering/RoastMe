@@ -22,7 +22,7 @@ RoastPageC.propTypes = {
 
 export const RoastPage = createContainer(({ params }) => {
   const roastId = params.id;
-  Meteor.subscribe('single-roast', roastId);
+  Meteor.subscribe('roasts.single', roastId);
   const roast = Roasts.findOne(roastId);
 
   return {

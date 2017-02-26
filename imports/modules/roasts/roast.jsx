@@ -60,9 +60,9 @@ RoastC.propTypes = {
 export const Roast = createContainer(({roast, single}) => {
   if(!roast) return {};
   if(single) {
-    Meteor.subscribe('all-comments-and-neighbours-for-roast', roast._id);
+    Meteor.subscribe('comments.all.roastneighbours', roast._id);
   } else {
-    Meteor.subscribe('top-comments-for-roast', roast._id);
+    Meteor.subscribe('comments.roast.top', roast._id);
   }
 
   let prev;

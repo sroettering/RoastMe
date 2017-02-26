@@ -56,7 +56,7 @@ RoastC.propTypes = {
 
 export const ProfileRoast = createContainer(({ comment }) => {
   if(!comment) return {};
-  Meteor.subscribe('single-roast', comment.roastId);
+  Meteor.subscribe('roasts.single', comment.roastId);
   const roast = Roasts.findOne({ _id: comment.roastId });
   const totalComments = roast ? roast.totalComments : 0;
 

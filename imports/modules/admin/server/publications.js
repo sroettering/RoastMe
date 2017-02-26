@@ -10,7 +10,7 @@ function getDayDifference(date1, date2) {
   const diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
   return diffDays;
 }
-
+/*
 Meteor.publish('usersPerDay', function (historyLength) {
   check(historyLength, Number);
   const self = this;
@@ -53,3 +53,4 @@ Meteor.publish('usersPerDay', function (historyLength) {
     userHandle.stop();
   });
 });
+*/

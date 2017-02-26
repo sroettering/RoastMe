@@ -70,7 +70,6 @@ class UserProfileC extends Component {
   }
 
   confirmDelete(roastId) {
-    console.log(roastId);
     this.setState({
       isModalOpen: true,
       roastToDelete: roastId,
@@ -92,7 +91,6 @@ class UserProfileC extends Component {
   }
 
   deleteRoast() {
-    console.log('delete roast: ', this.state.roastToDelete);
     Meteor.call('deleteRoast', this.state.roastToDelete);
     this.closeModal();
   }
@@ -103,7 +101,6 @@ class UserProfileC extends Component {
       const name = this.state.username || user.profile.name;
       const since = moment(user.createdAt).format('DD.MM.YYYY');
       const tabHeadings = ['Best Roasts', ownProfile ? 'My Uploads' : 'Uploads'];
-      console.log(uploads);
       let avatar;
       if(user.services.facebook) {
         avatar = user.services.facebook.picture;
@@ -162,7 +159,7 @@ class UserProfileC extends Component {
                     <Image
                       imageUrl={ roast.imageUrl }
                       roastTitle={ roast.title }
-                      onClick={ this.handleClick.bind(this, roast._id) } />
+                      onClick={ () => browserHistory.push(`/roast/${roast._id}`) } />
                     { ownProfile ? <button
                         className="flat-button right mdi mdi-delete"
                         onClick={ this.confirmDelete.bind(this, roast._id) }>
@@ -180,10 +177,6 @@ class UserProfileC extends Component {
     }
   }
 
-  handleClick(roastId) {
-    console.log(roastId);
-  }
-
 }
 
 UserProfileC.propTypes = {
@@ -198,8 +191,8 @@ export const UserProfile = createContainer(({ params }) => {
   const userHandle = Meteor.subscribe('user.profile', userId);
   const user = Meteor.users.findOne(userId);
   const ownProfile = Meteor.userId() === userId;
-  const commentsHandle = Meteor.subscribe('all-comments-for-user', userId);
-  const uploadsHandle = Meteor.subscribe('all-roasts-for-user', userId);
+  const commentsHandle = Meteor.subscribe('comments.all.user', userId);
+  const uploadsHandle = Meteor.subscribe('roasts.all.user', userId);
   let comments = Comments.find({ userId }, { sort: { points: -1 } }).fetch();
   comments = _.uniq(comments, (item) => item.roastId );
   const uploads = Roasts.find({ userId }, { sort: { createdAt: -1 } }).fetch();

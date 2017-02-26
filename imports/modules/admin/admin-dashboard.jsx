@@ -26,7 +26,7 @@ DashboardC.propTypes = {
 export const Dashboard = createContainer(() => {
   const currentUser = Meteor.user();
   const users = Meteor.subscribe('user.all');
-  const roastHandle = Meteor.subscribe('queued-roasts');
+  const roastHandle = Meteor.subscribe('roasts.admin.queued');
   const roast = Roasts.findOne();
   const numQueued = Roasts.find().count();
   return {

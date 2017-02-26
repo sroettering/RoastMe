@@ -6,32 +6,83 @@ import { Comments } from '../comments-collection';
 
 // ----------------- Roasts -----------------
 
-Meteor.publish('hot-roasts', function(limit) {
+Meteor.publish('roasts.hot', function(limit) {
   check(limit, Number);
-  return Roasts.find({ status: 'accepted', "category.name": 'hot' }, { sort: { createdAt: -1 }, limit: limit });
+  return Roasts.find({
+    status: 'accepted',
+    "category.name": 'hot'
+  }, {
+    sort: { createdAt: -1 },
+    limit: limit,
+    fields: {
+      status: 0,
+      createdAt: 0,
+      updatedAt: 0,
+    },
+  });
 });
 
-Meteor.publish('trending-roasts', function(limit) {
+Meteor.publish('roasts.trending', function(limit) {
   check(limit, Number);
-  return Roasts.find({ status: 'accepted', "category.name": 'trending' }, { sort: { createdAt: -1 }, limit: limit });
+  return Roasts.find({
+    status: 'accepted',
+    "category.name": 'trending'
+  }, {
+    sort: { createdAt: -1 },
+    limit: limit,
+    fields: {
+      status: 0,
+      createdAt: 0,
+      updatedAt: 0,
+    },
+  });
 });
 
-Meteor.publish('new-roasts', function(limit) {
+Meteor.publish('roasts.new', function(limit) {
   check(limit, Number);
-  return Roasts.find({ status: 'accepted', "category.name": 'new' }, { sort: { createdAt: -1 }, limit: limit });
+  return Roasts.find({
+    status: 'accepted',
+    "category.name": 'new'
+  }, {
+    sort: { createdAt: -1 },
+    limit: limit,
+    fields: {
+      status: 0,
+      createdAt: 0,
+      updatedAt: 0,
+    },
+  });
 });
 
-Meteor.publish('single-roast', function(roastId) {
+Meteor.publish('roasts.single', function(roastId) {
   check(roastId, String);
-  return Roasts.find({ _id: roastId, status: 'accepted' });
+  return Roasts.find({
+    _id: roastId,
+    status: 'accepted'
+  }, {
+    fields: {
+      status: 0,
+      createdAt: 0,
+      updatedAt: 0,
+    },
+  });
 });
 
-Meteor.publish('all-roasts-for-user', function(userId){
+Meteor.publish('roasts.all.user', function(userId){
   check(userId, String);
-  return Roasts.find({ userId: userId, status: 'accepted' });
+  return Roasts.find({
+    userId: userId,
+    status: 'accepted'
+  }, {
+    fields: {
+      status: 0,
+      createdAt: 0,
+      updatedAt: 0,
+    },
+  });
 });
 
-Meteor.publish('queued-roasts', function() {
+Meteor.publish('roasts.admin.queued', function() {
   return Roasts.find({ status: 'queued' }, { sort: { createdAt: 1 } });
 });
 
@@ -42,19 +93,23 @@ if (Meteor.isServer) {
   Roasts._ensureIndex({ _id: 1, status: 1 });
   Roasts._ensureIndex({ userId: 1, status: 1 });
   Roasts._ensureIndex({ _id: 1, userId: 1 });
+  Roasts._ensureIndex({ status: 1, "category.name": 1, "category.enteredAt": 1 });
 }
 
 
 // ----------------- Comments -----------------
 
-Meteor.publish('all-comments', function() {
-  return Comments.find();
-});
-
-Meteor.publish('all-comments-and-neighbours-for-roast', function(roastId) {
+Meteor.publish('comments.all.roastneighbours', function(roastId) {
   check(roastId, String);
-  const comments = Comments.find({ roastId: roastId });
-  const roast = Roasts.findOne({ _id: roastId });
+  const comments = Comments.find({
+    roastId: roastId
+  }, {
+    fields: {
+      createdAt: 0,
+      updatedAt: 0,
+    }
+  });
+  const roast = Roasts.findOne({ _id: roastId }, { fields: { status: 0, createdAt: 0, updatedAt: 0 } });
   const pub = [comments];
   if(roast) {
     this.added('roasts', roast._id, roast);
@@ -81,14 +136,35 @@ Meteor.publish('all-comments-and-neighbours-for-roast', function(roastId) {
   return pub;
 });
 
-Meteor.publish('top-comments-for-roast', function(roastId) {
+Meteor.publish('comments.roast.top', function(roastId) {
   check(roastId, String);
-  return Comments.find({roastId: roastId, replyTo: null}, { sort: { points: -1 }, limit: 1 });
+  return Comments.find({
+    roastId: roastId,
+    replyTo: null
+  }, {
+    sort: { points: -1 },
+    limit: 1,
+    fields: {
+      upvotes: 0,
+      downvotes: 0,
+      createdAt: 0,
+      updatedAt: 0,
+    }
+  });
 });
 
-Meteor.publish('all-comments-for-user', function(userId){
+Meteor.publish('comments.all.user', function(userId){
   check(userId, String);
-  return Comments.find({ userId: userId, replyTo: null }, { sort: { points: -1 } });
+  return Comments.find({
+    userId: userId,
+    replyTo: null
+  }, {
+    sort: { points: -1 },
+    fields: {
+      createdAt: 0,
+      updatedAt: 0,
+    }
+  });
 });
 
 if (Meteor.isServer) {

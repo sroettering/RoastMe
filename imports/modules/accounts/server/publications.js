@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Roles } from 'meteor/alanning:roles';
 
-Meteor.publish('loggedinUser', function() {
+Meteor.publish('user.current', function() {
   return Meteor.users.find({ _id: this.userId }, {
     fields: {
       profile: 1,

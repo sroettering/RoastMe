@@ -66,9 +66,12 @@ const createReplies = () => {
 Meteor.startup(function(){
   /*Roasts.remove({});
   Comments.remove({});*/
-  
+
   // use to migrate schema
-  //Roasts.update({}, { $set: { category: { name: 'new', enteredAt: new Date() } } }, { multi: true });
+  // Roasts.find().fetch().forEach(roast => {
+  //   if(typeof roast.category !== 'object')
+  //     Roasts.update({ _id: roast._id }, { $set: { category: { name: 'new', enteredAt: roast.createdAt } } });
+  // })
 
   if(Roasts.find().count() < 1 && Comments.find().count() < 1) {
     createRoasts();
