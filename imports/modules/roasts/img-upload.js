@@ -1,5 +1,7 @@
 import { Slingshot } from 'meteor/edgee:slingshot';
-import { Resizer } from 'meteor/thinksoftware:image-resize-client';
+import Compress from 'compress.js';
+
+const compress = new Compress();
 
 export default ImageUpload = (file, imgElement, title, onFinished) => {
   const width = imgElement.naturalWidth;
@@ -11,13 +13,18 @@ export default ImageUpload = (file, imgElement, title, onFinished) => {
     cropSquare: false,
   };
 
-  Resizer.resize(file, resizeOptions, (error, resizedFile) => {
+  compress.compress([file], {
+    size: 1,
+    quality: 1,
+    maxWidth: 800,
+    maxHeight: 800,
+    resize: true,
+  }).then(data => {
+    const base64 = data[0];
+    const file = Compress.convertBase64ToFile(base64.data, base64.ext);
+
     const uploader = new Slingshot.Upload("uploadRoastImgS3");
-    let fileToUpload = resizedFile;
-    if(error) {
-      fileToUpload = file;
-    }
-    uploader.send(fileToUpload, (error, url) => {
+    uploader.send(file, (error, url) => {
       if(error) {
         Bert.alert({
           title: "Upload failed",

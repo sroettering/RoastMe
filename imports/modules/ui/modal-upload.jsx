@@ -23,6 +23,15 @@ export class ModalUpload extends Component {
   changeListener(event) {
     this.setState({ loading: true });
     this.image = event.target.files[0];
+    if(this.image.type !== 'image/png' && this.image.type !== 'image/jpeg') {
+      Bert.alert({
+        title: "Wrong image format",
+        message: `image type ${this.image.type} is not supported`,
+        type: "warning",
+        icon: "fa fa-info",
+      });
+      return;
+    }
     const reader = new FileReader();
     reader.readAsDataURL(this.image);
     reader.onloadend = (event) => {
