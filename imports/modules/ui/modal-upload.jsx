@@ -51,9 +51,9 @@ export class ModalUpload extends Component {
             type: "success",
             icon: "fa fa-check",
           });
-          _.delay(notification, 500);
-          _.delay(this.props.closeModal, 600);
+          _.delay(notification, 250);
         }
+        _.delay(this.props.closeModal, 600);
         this.setState({ uploading: false });
       });
     } else {

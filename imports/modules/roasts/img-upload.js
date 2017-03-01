@@ -12,10 +12,11 @@ export default ImageUpload = (file, imgElement, title, onFinished) => {
     resize: true,
   }).then(data => {
     const base64 = data[0];
-    const file = Compress.convertBase64ToFile(base64.data, base64.ext);
-
+    const blob = Compress.convertBase64ToFile(base64.data, base64.ext);
+    const resizedFile = new File([blob], file.name, { type: base64.ext });
     const uploader = new Slingshot.Upload("uploadRoastImgS3");
-    uploader.send(file, (error, url) => {
+
+    uploader.send(resizedFile, (error, url) => {
       if(error) {
         Bert.alert({
           title: "Upload failed",
@@ -34,7 +35,7 @@ export default ImageUpload = (file, imgElement, title, onFinished) => {
             });
             onFinished(error, null);
           } else {
-            onFinished(result, null);
+            onFinished(null, result);
           }
         });
       }
