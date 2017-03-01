@@ -4,19 +4,10 @@ import Compress from 'compress.js';
 const compress = new Compress();
 
 export default ImageUpload = (file, imgElement, title, onFinished) => {
-  const width = imgElement.naturalWidth;
-  const height = imgElement.naturalHeight;
-  const aspectRatio = width / height;
-  const resizeOptions = {
-    width: Math.min(800, 800 * aspectRatio),
-    height: Math.min(800, 800 / aspectRatio),
-    cropSquare: false,
-  };
-
   compress.compress([file], {
-    size: 1,
-    quality: 1,
-    maxWidth: 800,
+    size: 1, // mb
+    quality: 1, // max 1
+    maxWidth: 800, // aspect ratio is unchanged
     maxHeight: 800,
     resize: true,
   }).then(data => {
@@ -41,8 +32,9 @@ export default ImageUpload = (file, imgElement, title, onFinished) => {
               type: "danger",
               icon: "fa fa-exclamation-triangle",
             });
+            onFinished(error, null);
           } else {
-            onFinished(result);
+            onFinished(result, null);
           }
         });
       }

@@ -11,7 +11,7 @@ Slingshot.createDirective("uploadRoastImgS3", Slingshot.S3Storage, {
     return Meteor.userId();
   },
   key(file) {
-    const imageUrl = `${Meteor.userId()}/${process.env.NODE_ENV}/roasts/${file.name}`;
+    const imageUrl = `${process.env.NODE_ENV}/${Meteor.userId()}/roasts/${file.name}`;
     const roast = Roasts.findOne({ imageUrl });
     if(roast) throw new Meteor.Error("duplicate-roast", "This file already exists!");
     return imageUrl;

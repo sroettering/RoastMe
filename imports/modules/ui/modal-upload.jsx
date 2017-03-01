@@ -43,7 +43,7 @@ export class ModalUpload extends Component {
   uploadImg(event) {
     if(this.image && this.title.value) {
       this.setState({ uploading: true })
-      ImageUpload(this.image, this.imgElement, this.title.value, (roastId) => {
+      ImageUpload(this.image, this.imgElement, this.title.value, (error, roastId) => {
         if(roastId) {
           const notification = () => Bert.alert({
             title: "Upload complete",
@@ -52,9 +52,9 @@ export class ModalUpload extends Component {
             icon: "fa fa-check",
           });
           _.delay(notification, 500);
+          _.delay(this.props.closeModal, 600);
         }
         this.setState({ uploading: false });
-        _.delay(this.props.closeModal, 600);
       });
     } else {
       Bert.alert({
