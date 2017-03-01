@@ -40,7 +40,9 @@ export class TextArea extends Component {
   }
 
   render() {
-    if(Meteor.userId()) {
+    if(Meteor.userId() && Meteor.userId() === this.props.roast.userId) {
+      return null;
+    } else if(Meteor.userId()) {
       return (
         <div className="roast-write-comment">
           <textarea
