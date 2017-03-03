@@ -40,6 +40,6 @@ Meteor.publish('user.all', function() {
       }
     });
   } else {
-    return [];
+    this.ready();
   }
 });

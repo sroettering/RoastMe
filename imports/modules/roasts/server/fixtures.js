@@ -16,6 +16,10 @@ const createRoasts = () => {
         userId: faker.random.uuid(),
         userName: faker.internet.userName(),
         userImage: faker.internet.avatar(),
+        category: {
+          name: 'new',
+          enteredAt: faker.date.recent(),
+        },
         imageUrl: faker.image.imageUrl(),
       }
     },

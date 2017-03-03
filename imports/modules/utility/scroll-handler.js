@@ -6,6 +6,7 @@ export const ScrollHandler = {
     this.scrollPosition = curScrollPos;
   },
   resetScrollPosition() {
+    console.log('reset scroll position');
     this.scrollPosition = 0;
     document.body.scrollTop = 0;
   },

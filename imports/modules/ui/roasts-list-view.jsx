@@ -6,9 +6,16 @@ import { ScrollHandler } from '/imports/modules/utility/scroll-handler';
 import { Roast } from '/imports/modules/roasts/roast';
 import Loading from '/imports/modules/ui/loading';
 
-export const roastLimit = new ReactiveVar(30);
+export const roastLimit = new ReactiveVar(10);
 
 export class RoastsListView extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      initialized: false,
+    };
+  }
 
   componentDidMount() {
     ScrollHandler.resetScrollPosition();
@@ -19,6 +26,7 @@ export class RoastsListView extends Component {
         }
       }, 500)
     );
+    this.setState({ initialized: true });
   }
 
   componentWillUnmount() {
@@ -27,7 +35,7 @@ export class RoastsListView extends Component {
 
   render() {
     const { ready, roasts, hasMore } = this.props;
-    if(ready) {
+    if(ready || this.state.initialized) {
       return (
         <div className="roast-list-view">
           { roasts.map((roast) => {

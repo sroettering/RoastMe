@@ -34,6 +34,7 @@ Meteor.startup(() => {
   Meteor.setInterval(() => {
     Session.set('now', moment().toObject());
   }, 20000);
+
   render(
     <Router history={ browserHistory }>
       <Route path="/" component={ App }>
