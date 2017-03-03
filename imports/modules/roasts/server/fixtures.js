@@ -77,7 +77,7 @@ Meteor.startup(function(){
   //     Roasts.update({ _id: roast._id }, { $set: { category: { name: 'new', enteredAt: roast.createdAt } } });
   // })
 
-  if(Roasts.find().count() < 1 && Comments.find().count() < 1) {
+  if(Roasts.find().count() < 1 && Comments.find().count() < 1 && process.env.NODE_ENV === 'development') {
     createRoasts();
     createComments();
     createReplies();

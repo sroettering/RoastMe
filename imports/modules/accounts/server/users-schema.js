@@ -2,6 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 import { SchemaCommons } from '/imports/modules/utility/schema-commons.js';
+import { Roasts } from '/imports/modules/roasts/roasts-collection';
+import { Comments } from '/imports/modules/roasts/comments-collection';
 
 const UserProfile = new SimpleSchema({
   name: {
@@ -59,3 +61,9 @@ export const UsersSchema = new SimpleSchema({
 });
 
 Meteor.users.attachSchema(UsersSchema);
+
+Meteor.users.after.update(function(userId, doc) {
+  const userImage = doc.services.facebook ? doc.services.facebook.picture : doc.services.google ? doc.services.google.picture : '';
+  Roasts.update({ userId }, { $set: { userImage } }, { multi: true });
+  Comments.update({ userId }, { $set: { userImage } }, { multi: true });
+});
