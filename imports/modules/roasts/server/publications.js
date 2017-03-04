@@ -105,7 +105,6 @@ Meteor.publish('comments.all.roastneighbours', function(roastId) {
     roastId: roastId
   }, {
     fields: {
-      createdAt: 0,
       updatedAt: 0,
     }
   });
@@ -147,7 +146,6 @@ Meteor.publish('comments.roast.top', function(roastId) {
     fields: {
       upvotes: 0,
       downvotes: 0,
-      createdAt: 0,
       updatedAt: 0,
     }
   });
@@ -161,7 +159,6 @@ Meteor.publish('comments.all.user', function(userId){
   }, {
     sort: { points: -1 },
     fields: {
-      createdAt: 0,
       updatedAt: 0,
     }
   });
