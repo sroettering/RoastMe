@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { moment } from 'meteor/momentjs:moment';
+import { Session } from 'meteor/session';
 
 import { App } from '/imports/modules/ui/app';
 import { UserProfile } from '/imports/modules/accounts/user-profile';
