@@ -13,7 +13,8 @@ export default ImageUpload = (file, imgElement, title, onFinished) => {
   }).then(data => {
     const base64 = data[0];
     const blob = Compress.convertBase64ToFile(base64.data, base64.ext);
-    const resizedFile = new File([blob], file.name, { type: base64.ext });
+    const filename = file.name.replace(/ /g, '_');
+    const resizedFile = new File([blob], filename, { type: base64.ext });
     const uploader = new Slingshot.Upload("uploadRoastImgS3");
 
     uploader.send(resizedFile, (error, url) => {

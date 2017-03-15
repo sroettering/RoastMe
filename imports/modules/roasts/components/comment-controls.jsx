@@ -9,12 +9,12 @@ import { SocialButtons } from './social-buttons';
 export const CommentControls = ({ roast, comment, replyTo, single }) => {
   const upToggled = !!_.findWhere(comment.upvotes, { userId: Meteor.userId() });
   const downToggled = !!_.findWhere(comment.downvotes, { userId: Meteor.userId() });
-  const description = comment.userName + "roasted: " + comment.content
+  const description = comment.userName + " roasted: " + comment.content
   if(single) {
     return (
       <div className="roast-comment-reply">
         <SocialButtons
-          url={ `roastme.iq-dev.com/roast/${roast._id}` }
+          url={ `https://itsroast.me/roast/${roast._id}` }
           title={ roast.title }
           description={ description }
           img={ roast.imageUrl } />
@@ -45,7 +45,7 @@ export const CommentControls = ({ roast, comment, replyTo, single }) => {
     return (
       <div className="roast-comment-reply">
         <SocialButtons
-          url={ `roastme.iq-dev.com/roast/${roast._id}` }
+          url={ `https://itsroast.me/roast/${roast._id}` }
           title={ roast.title }
           description={ comment.content }
           img={ roast.imageUrl } />
