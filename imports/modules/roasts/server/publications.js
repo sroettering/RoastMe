@@ -115,7 +115,8 @@ Meteor.publish('comments.all.roastneighbours', function(roastId) {
     roastNext = Roasts.findOne({
       _id: { $ne: roast._id },
       "category.name": roast.category.name,
-      "category.enteredAt": { $gt: roast.category.enteredAt }
+      "category.enteredAt": { $gt: roast.category.enteredAt },
+      status: 'accepted',
     }, {
       sort: { "category.enteredAt": 1 },
       fields: { _id: 1, "category.enteredAt": 1 },
@@ -124,7 +125,8 @@ Meteor.publish('comments.all.roastneighbours', function(roastId) {
     roastPrev = Roasts.findOne({
       _id: { $ne: roast._id },
       "category.name": roast.category.name,
-      "category.enteredAt": { $lt: roast.category.enteredAt }
+      "category.enteredAt": { $lt: roast.category.enteredAt },
+      status: 'accepted',
     }, {
       sort: { "category.enteredAt": -1 },
       fields: { _id: 1, "category.enteredAt": 1 },
