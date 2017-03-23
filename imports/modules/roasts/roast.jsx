@@ -71,13 +71,15 @@ export const Roast = createContainer(({roast, single}) => {
   let next;
   if(single) {
     prev = Roasts.findOne({
-        _id: { $ne: roast._id },
+        _id: { $ne: roast._id},
+        status: {$ne: 'deleted'},
         "category.enteredAt": { $lt: roast.category.enteredAt }
       }, {
         sort: { "category.enteredAt": -1 },
       });
     next = Roasts.findOne({
         _id: { $ne: roast._id },
+        status: {$ne: 'deleted'},
         "category.enteredAt": { $gt: roast.category.enteredAt }
       }, {
         sort: { "category.enteredAt": 1 },
