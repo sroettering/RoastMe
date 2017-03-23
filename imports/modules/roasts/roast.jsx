@@ -72,15 +72,15 @@ export const Roast = createContainer(({roast, single}) => {
   if(single) {
     prev = Roasts.findOne({
         _id: { $ne: roast._id },
-        "category.enteredAt": { $lt: roast.category.enteredAt }
-      }, {
-        sort: { "category.enteredAt": -1 },
-      });
-    next = Roasts.findOne({
-        _id: { $ne: roast._id },
         "category.enteredAt": { $gt: roast.category.enteredAt }
       }, {
         sort: { "category.enteredAt": 1 },
+      });
+    next = Roasts.findOne({
+        _id: { $ne: roast._id },
+        "category.enteredAt": { $lt: roast.category.enteredAt }
+      }, {
+        sort: { "category.enteredAt": -1 },
       });
   }
 
