@@ -14,10 +14,11 @@ export default ImageUpload = (file, imgElement, title, onFinished) => {
     const base64 = data[0];
     const blob = Compress.convertBase64ToFile(base64.data, base64.ext);
     const filename = file.name.replace(/ /g, '_');
-    const resizedFile = new File([blob], filename, { type: base64.ext });
+    blob.name = filename;
+    
     const uploader = new Slingshot.Upload("uploadRoastImgS3");
 
-    uploader.send(resizedFile, (error, url) => {
+    uploader.send(blob, (error, url) => {
       if(error) {
         Bert.alert({
           title: "Upload failed",
@@ -25,6 +26,7 @@ export default ImageUpload = (file, imgElement, title, onFinished) => {
           type: "danger",
           icon: "fa fa-exclamation-triangle",
         });
+        onFinished(error, null);
       } else {
         Meteor.call("createRoast", url, title, (error, result) => {
           if(error) {
