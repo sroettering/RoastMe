@@ -86,7 +86,7 @@ export const Roast = createContainer(({roast, single}) => {
 
   const allComments = Comments.find({ roastId: roast._id }, { sort: { points: -1, createdAt: 1 } }).fetch();
   const totalComments = roast.totalComments;
-  const totalPoints = _.reduce(allComments, (mem, c) => mem + c.points, 0);
+  const totalPoints = roast.totalUpvotes;
   let comments;
   if(allComments) {
     comments = _.filter(allComments, (c) => !c.replyTo);
