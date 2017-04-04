@@ -9,7 +9,7 @@ export const Imprint = () => {
         Klostergang 2<br />
         30159 Hannover<br />
         mail: <a href="mailto:info@iq-dev.com">info@iq-dev.com</a><br />
-        web: <a href="www.iq-dev.com" target="_BLANK">www.iq-dev.com</a><br /><br /><br />
+        web: <a href="http://www.iq-dev.com" target="_BLANK">www.iq-dev.com</a><br /><br /><br />
       </p>
       <h3>Disclaimer</h3>
 
