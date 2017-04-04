@@ -73,6 +73,7 @@ export class ModalUpload extends Component {
         <button className="flat-button modal-close-btn" onClick={ this.props.closeModal }>
           &times;
         </button>
+        <p class="roast-warning"><span class="exclamation-mark">!</span>We can only accept your picture if you hold up a paper saying "#Roast Me"!</p>
         <label htmlFor="title-input">Enter a roast title</label>
         <input
           id="title-input"
