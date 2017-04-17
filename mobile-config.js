@@ -19,11 +19,11 @@ App.icons({
   'ios_settings_3x': 'mobile/icons/ios/Icon-App-29x29@3x.png',
   'ios_spotlight': 'mobile/icons/ios/Icon-App-40x40@1x.png',
   'ios_spotlight_2x': 'mobile/icons/ios/Icon-App-40x40@2x.png',
-  'android_mdpi': 'mobile/icons/android/mipmap-mdpi/ic-launcher.png',
-  'android_hdpi': 'mobile/icons/android/mipmap-hdpi/ic-launcher.png',
-  'android_xhdpi': 'mobile/icons/android/mipmap-xhdpi/ic-launcher.png',
-  'android_xxhdpi': 'mobile/icons/android/mipmap-xxhdpi/ic-launcher.png',
-  'android_xxxhdpi': 'mobile/icons/android/mipmap-xxxhdpi/ic-launcher.png',
+  'android_mdpi': 'mobile/icons/android/mipmap-mdpi/ic_launcher.png',
+  'android_hdpi': 'mobile/icons/android/mipmap-hdpi/ic_launcher.png',
+  'android_xhdpi': 'mobile/icons/android/mipmap-xhdpi/ic_launcher.png',
+  'android_xxhdpi': 'mobile/icons/android/mipmap-xxhdpi/ic_launcher.png',
+  'android_xxxhdpi': 'mobile/icons/android/mipmap-xxxhdpi/ic_launcher.png',
 });
 
 App.launchScreens({

@@ -7,11 +7,11 @@ import { RoastVerificationPanel } from '/imports/modules/admin/roast-verificatio
 
 class DashboardC extends Component {
   render() {
-    const { roast, numQueued } = this.props;
+    const { roast, numQueued, email } = this.props;
     return (
       <main className="main admin-main">
         <h2>Roastme Dashboard</h2>
-        <RoastVerificationPanel roast={ roast } numQueued={ numQueued } />
+        <RoastVerificationPanel roast={ roast } email={ email } numQueued={ numQueued } />
       </main>
     );
   }
@@ -29,9 +29,12 @@ export const Dashboard = createContainer(() => {
   const roastHandle = Meteor.subscribe('roasts.admin.queued');
   const roast = Roasts.findOne();
   const numQueued = Roasts.find().count();
+  const roastOwner = roast ? Meteor.users.findOne({ _id: roast.userId }) : null;
+  const email = (roastOwner && roastOwner.services.facebook) ? roastOwner.services.facebook.email : 'None';
   return {
     currentUser,
     roast,
+    email,
     numQueued,
   };
 }, DashboardC);

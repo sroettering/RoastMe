@@ -7,6 +7,7 @@ Meteor.publish('user.current', function() {
     fields: {
       profile: 1,
       'services.facebook.picture': 1,
+      'services.facebook.email': 1,
       'services.google.picture': 1,
       roles: 1,
       createdAt: 1,
@@ -29,11 +30,12 @@ Meteor.publish('user.profile', function(userId) {
 });
 
 Meteor.publish('user.all', function() {
-  const user = Meteor.users.find({ _id: this.userId });
+  const user = Meteor.users.findOne({ _id: this.userId });
   if(Roles.userIsInRole(user, 'admin')) {
     return Meteor.users.find({}, { fields: {
         profile: 1,
         'services.facebook.picture': 1,
+        'services.facebook.email': 1,
         'services.google.picture': 1,
         createdAt: 1,
         roles: 1,
