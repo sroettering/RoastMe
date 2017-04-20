@@ -4,6 +4,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import { Roasts } from '/imports/modules/roasts/roasts-collection';
 import { RoastVerificationPanel } from '/imports/modules/admin/roast-verification-panel';
+import SPE from '/imports/modules/accounts/social-property-extractor';
 
 class DashboardC extends Component {
   render() {
@@ -30,7 +31,7 @@ export const Dashboard = createContainer(() => {
   const roast = Roasts.findOne();
   const numQueued = Roasts.find().count();
   const roastOwner = roast ? Meteor.users.findOne({ _id: roast.userId }) : null;
-  const email = (roastOwner && roastOwner.services.facebook) ? roastOwner.services.facebook.email : 'None';
+  const email = SPE.getEmail(roastOwner);//(roastOwner && roastOwner.services.facebook) ? roastOwner.services.facebook.email : 'None';
   return {
     currentUser,
     roast,

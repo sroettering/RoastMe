@@ -9,6 +9,7 @@ Meteor.publish('user.current', function() {
       'services.facebook.picture': 1,
       'services.facebook.email': 1,
       'services.google.picture': 1,
+      'services.google.email': 1,
       roles: 1,
       createdAt: 1,
       rulesAccepted: 1,
@@ -37,6 +38,7 @@ Meteor.publish('user.all', function() {
         'services.facebook.picture': 1,
         'services.facebook.email': 1,
         'services.google.picture': 1,
+        'services.google.email': 1,
         createdAt: 1,
         roles: 1,
       }

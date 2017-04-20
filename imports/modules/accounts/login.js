@@ -14,6 +14,7 @@ export const handleLogin = (service) => {
 
   if (service === 'loginWithGoogle') {
     options.requestPermissions.push('https://www.googleapis.com/auth/plus.login');
+    options.requestPermissions.push('https://www.googleapis.com/auth/userinfo.email');
   }
 
   if (service === 'loginWithTwitter') {
