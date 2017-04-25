@@ -1,6 +1,5 @@
 node_modules/
 .DS_Store
 settings.json
-settings-development.json
-settings-production.json
 mup.js
+.mobile-build
