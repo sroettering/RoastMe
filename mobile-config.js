@@ -1,12 +1,14 @@
 App.info({
-  id: 'com.iq-dev.itsroastme',
-  version: '1.0.0',
-  name: 'Roast Me',
+  id: 'com.iqdev.itsroastme',
+  version: '0.8.0',
+  name: 'RoastMe',
   description: 'Enjoy funny roasts of other people',
   author: 'IQ Development',
   email: 'Info@iq-dev.com',
   website: 'www.iq-dev.com',
 });
+
+App.setPreference('Orientation', 'portrait');
 
 App.icons({
   'iphone_2x': 'mobile/icons/ios/Icon-App-60x60@2x.png',
@@ -44,4 +46,22 @@ App.launchScreens({
   // 'android_xhdpi_landscape': , //(960x720)
   // 'android_xxhdpi_portrait': , //(1080x1440)
   // 'android_xxhdpi_landscape': , //(1440x1080)
+});
+
+App.accessRule('http://www.roastme.iq-dev.com');
+App.accessRule('https://www.itsroast.me');
+App.accessRule('https://itsroastme.s3-eu-central-1.amazonaws.com');
+App.accessRule('https://www.google-analytics.com');
+App.accessRule('https://scontent.xx.fbcdn.net');
+App.accessRule('https://enginex.kadira.io/simplentp/sync');
+App.accessRule('data:https://cdn.materialdesignicons.com/1.7.22/css/materialdesignicons.min.css');
+App.accessRule('data:https://fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+
+App.configurePlugin('cordova-plugin-googleplus', {
+  REVERSED_CLIENT_ID: 'com.googleusercontent.apps.476899950105-b5s883fnbesj4bsri8vgj1pl6iroigji'
+});
+
+App.configurePlugin('com.phonegap.plugins.facebookconnect', {
+  APP_ID: '239459316485267',
+  API_KEY: '7bdd29d4127f7f92dfa5cfbf9584a245'
 });

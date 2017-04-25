@@ -2,4 +2,4 @@ node_modules/
 .DS_Store
 settings.json
 mup.js
-.mobile-build
+.mobile-build/
