@@ -4,15 +4,17 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import { Roasts } from '/imports/modules/roasts/roasts-collection';
 import { RoastVerificationPanel } from '/imports/modules/admin/roast-verification-panel';
+import { StatsPanel } from '/imports/modules/admin/stats-panel';
 import SPE from '/imports/modules/accounts/social-property-extractor';
 
 class DashboardC extends Component {
   render() {
-    const { roast, numQueued, email } = this.props;
+    const { roast, numQueued, email, stats, statsReady } = this.props;
     return (
       <main className="main admin-main">
-        <h2>Roastme Dashboard</h2>
+        <h2>Dashboard</h2>
         <RoastVerificationPanel roast={ roast } email={ email } numQueued={ numQueued } />
+        <StatsPanel />
       </main>
     );
   }
@@ -21,6 +23,7 @@ class DashboardC extends Component {
 DashboardC.propTypes = {
   currentUser: React.PropTypes.object,
   roast: React.PropTypes.object,
+  email: React.PropTypes.string,
   numQueued: React.PropTypes.number,
 };
 

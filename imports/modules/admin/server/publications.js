@@ -3,6 +3,9 @@ import { Random } from 'meteor/random';
 import { check } from 'meteor/check';
 import { moment } from 'meteor/momentjs:moment';
 
+import { Roasts } from '/imports/modules/roasts/roasts-collection';
+import { Comments } from '/imports/modules/roasts/comments-collection';
+
 function getDayDifference(date1, date2) {
   date1.setHours(12, 0, 0, 0);
   date2.setHours(12, 0, 0, 0);
@@ -10,47 +13,63 @@ function getDayDifference(date1, date2) {
   const diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
   return diffDays;
 }
-/*
-Meteor.publish('usersPerDay', function (historyLength) {
-  check(historyLength, Number);
+
+Meteor.publish('admin.stats', function () {
   const self = this;
   const tempId = Random.id();
-  const dateLimit = new Date();
-  dateLimit.setHours(12, 0, 0, 0);
-  dateLimit.setDate(dateLimit.getDate() - (historyLength - 1));
-  const curDate = moment(dateLimit);
+  const dateLimit = new Date(2017, 0, 1, 0, 0, 0, 0);
+
   const stats = {
-    userDeltas: [],
-    labels: [],
-    updatedAt: new Date(),
+    totalUsers: 0,
+    totalRoasts: 0,
+    totalComments: 0,
   };
 
-  for (let i = 0; i < historyLength; i++) {
-    stats.userDeltas.push(0);
-    stats.labels.push(curDate.format('DD.MM.YY'));
-    curDate.add(1, 'd');
-  }
+  self.added('stats', tempId, stats);
 
-  self.added('userStats', tempId, stats);
-
-  const userHandle = Meteor.users.find({ createdAt: { $gte: dateLimit } }, { sort: { createdAt: 1 } }).observeChanges({
+  const userHandle = Meteor.users.find({ roles: { $nin: ['admin'] } }).observeChanges({
     added(id, doc) {
-      const day = getDayDifference(dateLimit, doc.createdAt);
-      stats.userDeltas[day]++;
-      stats.updatedAt = new Date();
-      self.changed('userStats', tempId, stats);
+      stats.totalUsers++;
+      self.changed('stats', tempId, stats);
     },
     removed() {
-      const day = historyLength - 1;
-      stats.userDeltas[day]--;
-      stats.updatedAt = new Date();
-      self.changed('userStats', tempId, stats);
+      stats.totalUsers--;
+      self.changed('stats', tempId, stats);
+    },
+  });
+
+  const roastHandle = Roasts.find({ status: 'accepted' }).observeChanges( {
+    added(id, doc) {
+      stats.totalRoasts++;
+      self.changed('stats', tempId, stats);
+    },
+    changed(id, fields) { // TODO this does not capture roasts that go from accepted to sth else
+      if(fields.status && fields.status == 'accepted') {
+        stats.totalRoasts++;
+        self.changed('stats', tempId, stats);
+      }
+    },
+    removed() {
+      stats.totalRoasts--;
+      self.changed('stats', tempId, stats);
+    },
+  });
+
+  const commentHandle = Comments.find().observeChanges( {
+    added(id, doc) {
+      stats.totalComments++;
+      self.changed('stats', tempId, stats);
+    },
+    removed() {
+      stats.totalComments--;
+      self.changed('stats', tempId, stats);
     },
   });
 
   this.ready();
   self.onStop(() => {
     userHandle.stop();
+    roastHandle.stop();
+    commentHandle.stop();
   });
 });
-*/
