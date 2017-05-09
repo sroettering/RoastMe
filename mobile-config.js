@@ -53,9 +53,11 @@ App.accessRule('https://www.itsroast.me');
 App.accessRule('https://itsroastme.s3-eu-central-1.amazonaws.com');
 App.accessRule('https://www.google-analytics.com');
 App.accessRule('https://scontent.xx.fbcdn.net');
+App.accessRule('https://lh6.googleusercontent.com');
 App.accessRule('https://enginex.kadira.io/simplentp/sync');
-App.accessRule('data:https://cdn.materialdesignicons.com/1.7.22/css/materialdesignicons.min.css');
-App.accessRule('data:https://fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+App.accessRule('https://cdn.materialdesignicons.com');
+App.accessRule('https://fonts.googleapis.com');
+App.accessRule('*://fonts.gstatic.com/*');
 
 App.configurePlugin('cordova-plugin-googleplus', {
   REVERSED_CLIENT_ID: 'com.googleusercontent.apps.476899950105-b5s883fnbesj4bsri8vgj1pl6iroigji'

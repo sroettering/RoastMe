@@ -31,7 +31,7 @@ export const Dashboard = createContainer(() => {
   const roast = Roasts.findOne();
   const numQueued = Roasts.find().count();
   const roastOwner = roast ? Meteor.users.findOne({ _id: roast.userId }) : null;
-  const email = SPE.getEmail(roastOwner);//(roastOwner && roastOwner.services.facebook) ? roastOwner.services.facebook.email : 'None';
+  const email = SPE.getEmail(roastOwner);
   return {
     currentUser,
     roast,
