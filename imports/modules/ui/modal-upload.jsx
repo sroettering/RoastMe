@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Spinner from 'react-spinkit';
+import loadImage from 'blueimp-load-image';
 
 import ImageUpload from '/imports/modules/roasts/img-upload';
 
@@ -11,12 +12,17 @@ export class ModalUpload extends Component {
       uploadEnabled: false,
       uploading: false,
     }
+    this.rotateRight = this.rotateRight.bind(this);
+    this.rotateLeft = this.rotateLeft.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({ loading: false, uploadEnabled: false, uploading: false });
     this.imgElement.src = "";
     this.image = undefined;
+    this.ctx = undefined;
+    this.imgWidth = 0;
+    this.imgHeight = 0;
     this.title.value = '';
   }
 
@@ -32,12 +38,53 @@ export class ModalUpload extends Component {
       });
       return;
     }
-    const reader = new FileReader();
-    reader.readAsDataURL(this.image);
-    reader.onloadend = (event) => {
-      this.imgElement.src = event.target.result;
-      this.setState({ loading: false, uploadEnabled: true });
-    }
+    loadImage.parseMetaData(this.image, (data) => {
+      const orientation = data.exif && data.exif.get('Orientation') || true;
+      loadImage(this.image, (canvas, meta) => {
+        if(canvas.type === 'error') {
+          Bert.alert({
+            title: "Whoops",
+            message: `Something went wrong while loading your image`,
+            type: "warning",
+            icon: "fa fa-info",
+          });
+        } else {
+          // this.ctx = canvas.getContext('2d');
+          // this.imgWidth = canvas.width;
+          // this.imgHeight = canvas.height;
+          this.imgElement.src = canvas.toDataURL();
+          this.setState({ loading: false, uploadEnabled: true });
+        }
+      }, {
+        maxWidth: 800,
+        maxHeight: 800,
+        orientation: orientation
+      });
+    }, {});
+  }
+
+  rotateRight() {
+    this.ctx.canvas.width = this.imgHeight;
+    this.ctx.canvas.height = this.imgWidth;
+    this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+    this.ctx.translate(this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
+    this.ctx.rotate(Math.PI / 2);
+    this.ctx.drawImage(this.imgElement, -this.imgWidth/2, -this.imgHeight/2);
+    this.imgElement.src = this.ctx.canvas.toDataURL();
+    this.imgWidth = this.ctx.canvas.width;
+    this.imgHeight = this.ctx.canvas.height;
+  }
+
+  rotateLeft() {
+    this.ctx.canvas.width = this.imgHeight;
+    this.ctx.canvas.height = this.imgWidth;
+    this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+    this.ctx.translate(this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
+    this.ctx.rotate(-Math.PI / 2);
+    this.ctx.drawImage(this.imgElement, -this.imgWidth/2, -this.imgHeight/2);
+    this.imgElement.src = this.ctx.canvas.toDataURL();
+    this.imgWidth = this.ctx.canvas.width;
+    this.imgHeight = this.ctx.canvas.height;
   }
 
   uploadImg(event) {

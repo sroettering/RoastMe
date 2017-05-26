@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
-import { LineChart, XAxis, YAxis, Line, Legend } from 'recharts';
 import Loading from '/imports/modules/ui/loading';
 
 import { Stats } from '/imports/modules/admin/admin-collections';
-
-const data = [
-  { period: 'KW 4', value: 100 },
-  { period: 'KW 5', value: 105 },
-  { period: 'KW 6', value: 112 },
-];
 
 class StatsPanelC extends Component {
 
