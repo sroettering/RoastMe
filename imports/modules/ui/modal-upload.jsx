@@ -12,35 +12,36 @@ export class ModalUpload extends Component {
       uploadEnabled: false,
       uploading: false,
     }
-    this.rotateRight = this.rotateRight.bind(this);
-    this.rotateLeft = this.rotateLeft.bind(this);
+    // this.rotateRight = this.rotateRight.bind(this);
+    // this.rotateLeft = this.rotateLeft.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({ loading: false, uploadEnabled: false, uploading: false });
     this.imgElement.src = "";
+    this.imageFile = undefined;
     this.image = undefined;
-    this.ctx = undefined;
-    this.imgWidth = 0;
-    this.imgHeight = 0;
+    // this.ctx = undefined;
+    // this.imgWidth = 0;
+    // this.imgHeight = 0;
     this.title.value = '';
   }
 
   changeListener(event) {
     this.setState({ loading: true });
-    this.image = event.target.files[0];
-    if(this.image.type !== 'image/png' && this.image.type !== 'image/jpeg') {
+    this.imageFile = event.target.files[0];
+    if(this.imageFile.type !== 'image/png' && this.imageFile.type !== 'image/jpeg') {
       Bert.alert({
         title: "Wrong image format",
-        message: `image type ${this.image.type} is not supported`,
+        message: `image type ${this.imageFile.type} is not supported`,
         type: "warning",
         icon: "fa fa-info",
       });
       return;
     }
-    loadImage.parseMetaData(this.image, (data) => {
+    loadImage.parseMetaData(this.imageFile, (data) => {
       const orientation = data.exif && data.exif.get('Orientation') || true;
-      loadImage(this.image, (canvas, meta) => {
+      loadImage(this.imageFile, (canvas, meta) => {
         if(canvas.type === 'error') {
           Bert.alert({
             title: "Whoops",
@@ -49,10 +50,15 @@ export class ModalUpload extends Component {
             icon: "fa fa-info",
           });
         } else {
+          // incase rotation buttons are added
           // this.ctx = canvas.getContext('2d');
           // this.imgWidth = canvas.width;
           // this.imgHeight = canvas.height;
           this.imgElement.src = canvas.toDataURL();
+          canvas.toBlob((blob) => {
+            blob.name = this.imageFile.name.replace(/ /g, '_');
+            this.image = blob;
+          });
           this.setState({ loading: false, uploadEnabled: true });
         }
       }, {
@@ -63,34 +69,34 @@ export class ModalUpload extends Component {
     }, {});
   }
 
-  rotateRight() {
-    this.ctx.canvas.width = this.imgHeight;
-    this.ctx.canvas.height = this.imgWidth;
-    this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-    this.ctx.translate(this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
-    this.ctx.rotate(Math.PI / 2);
-    this.ctx.drawImage(this.imgElement, -this.imgWidth/2, -this.imgHeight/2);
-    this.imgElement.src = this.ctx.canvas.toDataURL();
-    this.imgWidth = this.ctx.canvas.width;
-    this.imgHeight = this.ctx.canvas.height;
-  }
-
-  rotateLeft() {
-    this.ctx.canvas.width = this.imgHeight;
-    this.ctx.canvas.height = this.imgWidth;
-    this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-    this.ctx.translate(this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
-    this.ctx.rotate(-Math.PI / 2);
-    this.ctx.drawImage(this.imgElement, -this.imgWidth/2, -this.imgHeight/2);
-    this.imgElement.src = this.ctx.canvas.toDataURL();
-    this.imgWidth = this.ctx.canvas.width;
-    this.imgHeight = this.ctx.canvas.height;
-  }
+  // rotateRight() {
+  //   this.ctx.canvas.width = this.imgHeight;
+  //   this.ctx.canvas.height = this.imgWidth;
+  //   this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+  //   this.ctx.translate(this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
+  //   this.ctx.rotate(Math.PI / 2);
+  //   this.ctx.drawImage(this.imgElement, -this.imgWidth/2, -this.imgHeight/2);
+  //   this.imgElement.src = this.ctx.canvas.toDataURL();
+  //   this.imgWidth = this.ctx.canvas.width;
+  //   this.imgHeight = this.ctx.canvas.height;
+  // }
+  //
+  // rotateLeft() {
+  //   this.ctx.canvas.width = this.imgHeight;
+  //   this.ctx.canvas.height = this.imgWidth;
+  //   this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+  //   this.ctx.translate(this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
+  //   this.ctx.rotate(-Math.PI / 2);
+  //   this.ctx.drawImage(this.imgElement, -this.imgWidth/2, -this.imgHeight/2);
+  //   this.imgElement.src = this.ctx.canvas.toDataURL();
+  //   this.imgWidth = this.ctx.canvas.width;
+  //   this.imgHeight = this.ctx.canvas.height;
+  // }
 
   uploadImg(event) {
-    if(this.image && this.title.value) {
+    if(this.imageFile && this.title.value) {
       this.setState({ uploading: true })
-      ImageUpload(this.image, this.imgElement, this.title.value, (error, roastId) => {
+      ImageUpload(this.image, this.title.value, (error, roastId) => {
         if(roastId) {
           const notification = () => Bert.alert({
             title: "Upload complete",
