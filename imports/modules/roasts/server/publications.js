@@ -12,7 +12,7 @@ Meteor.publish('roasts.hot', function(limit) {
     status: 'accepted',
     "category.name": 'hot'
   }, {
-    sort: { createdAt: -1 },
+    sort: { "category.enteredAt": -1 },
     limit: limit,
     fields: {
       status: 0,
@@ -28,7 +28,7 @@ Meteor.publish('roasts.trending', function(limit) {
     status: 'accepted',
     "category.name": 'trending'
   }, {
-    sort: { createdAt: -1 },
+    sort: { "category.enteredAt": -1 },
     limit: limit,
     fields: {
       status: 0,
@@ -44,7 +44,7 @@ Meteor.publish('roasts.new', function(limit) {
     status: 'accepted',
     "category.name": 'new'
   }, {
-    sort: { createdAt: -1 },
+    sort: { "category.enteredAt": -1 },
     limit: limit,
     fields: {
       status: 0,

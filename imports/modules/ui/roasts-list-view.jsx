@@ -36,6 +36,7 @@ export class RoastsListView extends Component {
   render() {
     const { ready, roasts, hasMore } = this.props;
     if(ready || this.state.initialized) {
+      roasts.sort((a, b) => b.category.enteredAt - a.category.enteredAt);
       return (
         <div className="roast-list-view">
           { roasts.map((roast) => {

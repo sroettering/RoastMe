@@ -183,9 +183,16 @@ Meteor.methods({
     if(!roast) return;
 
     Roasts.update({ _id: roastId }, { $set: { status: 'accepted' } });
+
+    const title = 'Image accepted';
+    const message = 'Your image can now be roasted by others!'
+    const type = 'success';
+    const icon = 'fa fa-check';
+    Meteor.call('createNotification', title, message, type, icon, roast.userId, roast.userName);
   },
-  declineRoast(roastId) {
+  declineRoast(roastId, reason) {
     check(roastId, String);
+    check(reason, String);
 
     if(!this.userId) return;
     if(!Roles.userIsInRole(this.userId, 'admin')) return;
@@ -194,5 +201,12 @@ Meteor.methods({
     if(!roast) return;
 
     Roasts.update({ _id: roastId }, { $set: { status: 'declined' } });
+
+    const title = 'Image rejected';
+    const type = 'warning';
+    const icon = 'fa fa-info';
+    if(reason) {
+      Meteor.call('createNotification', title, reason, type, icon, roast.userId, roast.userName);
+    }
   },
 });

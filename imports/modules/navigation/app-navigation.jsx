@@ -28,8 +28,8 @@ export class AppNavigation extends React.Component {
         <nav className="navigation-left" role="navigation">
           <ul>
             <li><IndexLink to="/" activeClassName="current">New</IndexLink></li>
-            {/*
             <li><Link to="/trending/" activeClassName="current">Trending</Link></li>
+            {/*
             <li><Link to="/hot/" activeClassName="current">Hot</Link></li>
             */}
           </ul>

@@ -14,3 +14,5 @@ import '/imports/modules/roasts/server/configure-slingshot';
 
 import '/imports/modules/admin/server/fixtures';
 import '/imports/modules/admin/server/publications';
+
+import '/imports/modules/notifications/server/notifications-methods';

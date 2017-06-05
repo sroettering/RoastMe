@@ -13,7 +13,7 @@ export class RoastVerificationPanel extends Component {
     const { roast } = this.props;
     if(!roast) return;
     // TODO send this.reason.value to server and send an email to the user
-    Meteor.call('declineRoast', roast._id);
+    Meteor.call('declineRoast', roast._id, this.reason.value);
   }
 
   render() {
@@ -35,7 +35,7 @@ export class RoastVerificationPanel extends Component {
           <img className="roast-image" src={ roast.imageUrl } alt=""/>
           <button className="button mdi mdi-thumb-up" onClick={ this.acceptRoast.bind(this) }>Accept</button>
           <button className="button mdi mdi-thumb-down" onClick={ this.declineRoast.bind(this) }>Decline</button>
-          <span>Reason (sent per mail):</span>
+          <span>Reason (sent as notification):</span>
           <textarea ref={ e => this.reason = e }></textarea>
         </div>
       );

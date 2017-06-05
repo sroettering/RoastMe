@@ -82,3 +82,17 @@ Roasts.deny({
 });
 
 Roasts.attachSchema(RoastsSchema);
+
+Roasts.before.update(function(userId, doc, fieldNames, modifier, options) {
+  if(modifier.$set && modifier.$set.totalUpvotes >= 0) {
+    const upvotes = modifier.$set.totalUpvotes;
+    // POINT LIMITS
+    const categoryName = upvotes >= 160 ? 'hot' : upvotes >= 30 ? 'trending' : 'new';
+    if(doc.category.name != categoryName) {
+      modifier.$set.category = {
+        name: categoryName,
+        enteredAt: new Date()
+      };
+    }
+  }
+});
