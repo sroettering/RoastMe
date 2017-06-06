@@ -122,7 +122,7 @@
         color: white;
         padding: 10px;
         margin: 0;
-        overflow: scroll;
+        overflow: auto;
 
         @media (min-width: $break-small) {
           height: 300px;

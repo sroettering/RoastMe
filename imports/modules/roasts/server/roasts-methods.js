@@ -203,8 +203,8 @@ Meteor.methods({
     Roasts.update({ _id: roastId }, { $set: { status: 'declined' } });
 
     const title = 'Image rejected';
-    const type = 'warning';
-    const icon = 'fa fa-info';
+    const type = 'danger';
+    const icon = 'fa fa-remove';
     if(reason) {
       Meteor.call('createNotification', title, reason, type, icon, roast.userId, roast.userName);
     }
