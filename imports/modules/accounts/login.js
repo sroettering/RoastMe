@@ -2,6 +2,16 @@ import { browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 
+const triggerFbPixel = () => {
+  if(fbq) {
+    console.log('fb pixel test');
+    fbq('track', 'CompleteRegistration', {
+      value: 0,
+      currency: 'EUR'
+    });
+  }
+};
+
 export const handleLogin = (service) => {
   const options = {
     requestPermissions: [],
@@ -34,6 +44,7 @@ export const handleLogin = (service) => {
 
     if (!error) {
       if (!Meteor.user().rulesAccepted || !Meteor.user().tosAccepted) {
+        triggerFbPixel();
         browserHistory.push('/postSignup');
       } else {
         browserHistory.push('/');
