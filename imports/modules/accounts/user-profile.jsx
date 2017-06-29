@@ -15,6 +15,7 @@ import { TabComponent } from '/imports/modules/ui/tab-component';
 import { ModalDialog } from '/imports/modules/ui/modal-dialog';
 import { ModalConfirm } from '/imports/modules/ui/modal-confirm';
 import Loading from '/imports/modules/ui/loading';
+import SEO from '/imports/modules/utility/seo';
 
 class UserProfileC extends Component {
 
@@ -111,6 +112,12 @@ class UserProfileC extends Component {
       }
       return (
         <div className="profile">
+          <SEO
+            schema='Profile'
+            title={ user.profile.name }
+            path={ '/user/' + user._id }
+            contentType='profile'
+          />
           <ModalDialog isOpen={ this.state.isModalOpen } closeHandler={ this.modalCloseHandler.bind(this) }>
             <ModalConfirm
               onSubmit={ this.deleteRoast.bind(this) }

@@ -1,8 +1,15 @@
 import React from 'react';
+import SEO from '/imports/modules/utility/seo';
 
 export const Imprint = () => {
   return (
     <div>
+      <SEO
+        schema='Imprint'
+        title='Imprint'
+        path='/imprint'
+        contentType='article'
+      />
       <h3>Imprint</h3>
       <p>
         IQ Development<br />

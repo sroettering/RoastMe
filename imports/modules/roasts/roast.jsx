@@ -15,6 +15,7 @@ import { Image } from '/imports/modules/roasts/components/image';
 import { CommentSection } from '/imports/modules/roasts/components/comment-section';
 import RoastNavigation from '/imports/modules/roasts/components/roast-navigation';
 import Loading from '/imports/modules/ui/loading';
+import SEO from '/imports/modules/utility/seo';
 
 class RoastC extends Component {
   render() {
@@ -23,6 +24,15 @@ class RoastC extends Component {
       return (
         <div className="roast">
           { single ? <RoastNavigation prev={ prev } next={ next } /> : '' }
+          { single ?
+            <SEO
+              schema='Article'
+              title={ roast.title }
+              description={ comments[0] ? comments[0].content.substring(0, Math.min(comments[0].content.length, 157)) + '...' : 'Nothing here yet, be the first to write a roast!' }
+              roastImg={ roast.imageUrl }
+              path={ '/roast/' + roast._id }
+              contentType='article'
+            /> : '' }
           <Headline
             roastUrl={ `/roast/${this.props.roast._id}` }
             roastTitle={ roast.title }

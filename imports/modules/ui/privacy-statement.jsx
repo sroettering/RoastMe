@@ -1,8 +1,14 @@
 import React from 'react';
+import SEO from '/imports/modules/utility/seo';
 
 export const PrivacyStatement = () => {
   return (
     <div>
+      <SEO
+        title='Privacy Statement'
+        path='/privacy'
+        contentType='article'
+      />
       <h1>itsroast.me Privacy Statement</h1>
       <p>
         Last modified: December 10, 2016

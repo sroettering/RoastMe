@@ -1,6 +1,13 @@
 import React from 'react';
+import SEO from '/imports/modules/utility/seo';
 
-export const TermsOfService = () => <div className="static-block">
+export const TermsOfService = () =>
+<div className="static-block">
+	<SEO
+		title='Terms of Service'
+		path='/tos'
+		contentType='article'
+	/>
 	<h2>Terms of services</h2>
 	<ul className="qa-list">
 

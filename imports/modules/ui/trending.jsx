@@ -13,5 +13,6 @@ export const Trending = createContainer(() => {
     ready: subHandle.ready(),
     roasts,
     hasMore,
+    category: 'Trending',
   }
 }, RoastsListView);

@@ -1,8 +1,14 @@
 import React from 'react';
+import SEO from '/imports/modules/utility/seo';
 
 const sentence = "Jean shorts mustache lyft cray, chambray lo-fi portland tilde bespoke mumblecore. Coloring book cronut shoreditch pork belly +1 hot chicken post-ironic godard.";
 
 export const Rules = () => <div className="rules">
+  <SEO
+    title='Rules'
+    path='/rules'
+    contentType='article'
+  />
   <h1>Rules</h1>
   <p>This is a comedy website where people try to make the internet laugh with offending comments.</p>
   <h3>Roastees:</h3>

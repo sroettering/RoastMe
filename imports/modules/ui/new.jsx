@@ -13,5 +13,6 @@ export const New = createContainer(() => {
     ready: subHandle.ready(),
     roasts,
     hasMore,
+    category: 'New',
   }
 }, RoastsListView);
