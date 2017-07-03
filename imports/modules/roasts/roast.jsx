@@ -19,11 +19,11 @@ import SEO from '/imports/modules/utility/seo';
 
 const getDescription = (comment) => {
   if(comment) {
-    if(comment.content.length > 160) {
-      return comment.content.substring(0, Math.min(comment.content.length, 157)) + '...';
-    } else {
-      return comment.content;
+    const text = 'Best roast: ' + comment.content;
+    if(text.length > 160) {
+      return text.substring(0, Math.min(text.length, 157)) + '...';
     }
+    return text;
   } else {
     return 'Nothing here yet, be the first to write a roast!';
   }
