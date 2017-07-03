@@ -17,6 +17,18 @@ import RoastNavigation from '/imports/modules/roasts/components/roast-navigation
 import Loading from '/imports/modules/ui/loading';
 import SEO from '/imports/modules/utility/seo';
 
+const getDescription = (comment) => {
+  if(comment) {
+    if(comment.content.length > 160) {
+      return comment.content.substring(0, Math.min(comment.content.length, 157)) + '...';
+    } else {
+      return comment.content;
+    }
+  } else {
+    return 'Nothing here yet, be the first to write a roast!';
+  }
+}
+
 class RoastC extends Component {
   render() {
     const { roast, comments, totalComments, totalPoints, single, prev, next } = this.props;
@@ -28,7 +40,7 @@ class RoastC extends Component {
             <SEO
               schema='Article'
               title={ roast.title }
-              description={ comments[0] ? comments[0].content.substring(0, Math.min(comments[0].content.length, 157)) + '...' : 'Nothing here yet, be the first to write a roast!' }
+              description={ getDescription(comments[0]) }
               roastImg={ roast.imageUrl }
               path={ '/roast/' + roast._id }
               contentType='article'

@@ -4,9 +4,17 @@ import { Meteor } from 'meteor/meteor';
 
 const seoURL = path => Meteor.absoluteUrl(path);
 
+const getTitle = ({ title, roastImg }) => {
+  if(roastImg) {
+    return title;
+  } else {
+    return (title ? title + ' | ' : '') + 'Roast Me - The first official platform';
+  }
+}
+
 const getMetaTags = ({title, description, contentType, url, published, updated, category, tags, twitter, roastImg}) => {
   const metaTags = [
-    { itemprop: 'name', content: (title ? title + ' | ' : '') + 'Roast Me - The first official platform' },
+    { itemprop: 'name', content: title },
     { itemprop: 'description', content: description || 'On Roast Me roasters creatively insult other people based on their looks. Check out the best roasts!' },
     { itemprop: 'image', content: roastImg || 'RoastMe_Logo_Original.svg' },
     { name: 'description', content: description || 'On Roast Me roasters creatively insult other people based on their looks. Check out the best roasts!' },
@@ -34,12 +42,12 @@ const SEO = ({ schema, title, description, path, contentType, published, updated
       itemscope: undefined,
       itemtype: 'http://schema.org/' + schema,
     }}
-    title={ (title ? title + ' | ' : '') + 'Roast Me - The first official platform' }
+    title={ getTitle({ title, roastImg }) }
     link={[
       { rel: 'canonical', href: seoURL(path) },
     ]}
     meta={getMetaTags({
-      title,
+      title: getTitle({ title, roastImg }),
       description,
       contentType,
       url: seoURL(path),
