@@ -1,6 +1,6 @@
 div .admin-main {
 
-  color: white;
+  color: $font-color;
   margin: 0 30px;
 
   .dashboard-panel {
@@ -75,8 +75,8 @@ div .admin-main {
   textarea {
 		background: transparent;
 		border: none;
-		border: 2px solid white;
-		color: white;
+		border: 2px solid $font-color;
+		color: $font-color;
 		font-size: 16px;
 		font-weight: 400;
 		height: 150px;

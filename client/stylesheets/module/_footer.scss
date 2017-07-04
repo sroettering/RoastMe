@@ -25,7 +25,7 @@
         }
     }
     a {
-        color: rgba(white, 0.7);
+        color: rgba($font-color, 0.7);
         display: inline-block;
         font-size: 16px;
         line-height: 44px;
@@ -33,12 +33,12 @@
         -webkit-transition: color 0.3s ease 0s;
                 transition: color 0.3s ease 0s;
         &:hover {
-            color: white;
+            color: $font-color;
         }
     }
 }
 .copyright {
-    color: white;
+    color: $font-color;
     font-size: 16px;
     line-height: 44px;
 }

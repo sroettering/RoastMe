@@ -73,7 +73,7 @@
 	}
 
 	a {
-		color: rgba(white, 0.7);
+		color: rgba($font-color, 0.7);
 		display: block;
 		font-size: 16px;
 		line-height: 44px;
@@ -88,7 +88,7 @@
 		}
 
 		&:hover {
-			color: white;
+			color: $font-color;
 		}
 
 		&.current {
@@ -121,12 +121,12 @@
 
 	i {
 		font-size: 34px;
-		color: rgba(white, 0.7);
+		color: rgba($font-color, 0.7);
 		cursor: pointer;
 	}
 
 	a {
-		color: rgba(white, 0.7);
+		color: rgba($font-color, 0.7);
 		display: block;
 		font-size: 44px;
 		line-height: 44px;
@@ -137,12 +137,12 @@
 		        transition: all 0.3s ease 0s;
 
 		&.button {
-			color: white;
+			color: $font-color;
 			font-size: 16px;
 		}
 
 		&:hover {
-			color: white;
+			color: $font-color;
 		}
 	}
 }
