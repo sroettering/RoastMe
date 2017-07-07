@@ -1,0 +1,90 @@
+<template name="MeteorCandy_account_details">
+	{{> MeteorCandy_title content="Account Data"}} 
+
+	{{#if detail}}
+		
+		{{#each detail}}
+			{{> MeteorCandy_keyval}}
+		{{/each}}
+
+		{{#each action}}
+			<div class="MeteorCandy_task">
+				{{this}}
+			</div>
+		{{/each}}
+
+	{{else}}
+		{{> MeteorCandy_text content="When you select an account,<br> its details will appear here."}}
+	{{/if}}
+</template>
+
+<template name="MeteorCandy_title">
+	<div class="MeteorCandy_row">
+		<strong>{{content}}</strong>
+	</div>
+</template>
+
+<template name="MeteorCandy_text">
+	<div class="MeteorCandy_row MeteorCandy_row_basic">
+		{{{content}}}
+	</div>
+</template>
+
+<template name="MeteorCandy_keyval">
+	<div class="MeteorCandy_row {{type}} {{selected}}">
+		<div class="MeteorCandy_row_detail">
+			{{#if loading}} 
+				- 
+			{{else}}
+				{{value}}
+			{{/if}}
+		</div>
+		{{key}}
+	</div>
+</template>
+
+<template name="MeteorCandy_account">
+	<div class="MeteorCandy_row MeteorCandy_account MeteorCandy_clickable {{state}}">
+		<div class="MeteorCandy_row_avatar" style="background-image: url('{{_avatar}}')"></div>
+		<div class="MeteorCandy_truncate"><strong>{{_displayName}}</strong></div>
+		{{_id}}
+	</div>
+</template>
+
+<template name="MeteorCandy_widget">
+	{{#with data}}
+	<div id="MeteorCandy" class="MeteorCandy_impersonate">
+		<div class="MeteorCandy_row MeteorCandy_row_header">
+			<strong>Impersonating</strong>
+		</div>
+
+		<div class="MeteorCandy_row MeteorCandy_row_middle">
+			<strong>{{_displayName}}</strong>
+		</div>
+		<div class="MeteorCandy_row">
+			<strong>{{_id}}</strong>
+		</div>
+
+		<div class="MeteorCandy_row MeteorCandy_row_action">
+			End Session
+		</div>
+	</div>
+	{{/with}}
+</template>
+
+<template name="MeteorCandy_header_refreshButton">
+	<div class="MeteorCandy_loader_container {{loaderActive}}">
+		<div class="MeteorCandy_loader">
+			<div class="MeteorCandy_loader_circle"></div>
+			<div class="MeteorCandy_loader_arrow"></div>
+		</div>
+	</div>
+</template>
+
+<template name="MeteorCandy_header_closeButton">
+	<div class="MeteorCandy_close">
+		<div class="MeteorCandy_close_icon">
+			<div></div><div></div>
+		</div>
+	</div>
+</template>

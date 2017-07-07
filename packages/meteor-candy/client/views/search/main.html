@@ -1,0 +1,30 @@
+<template name="MeteorCandy_view_search">
+	<div class="MeteorCandy_splitView">
+	
+		<div class="MeteorCandy_splitView_left">
+			
+			<div class="MeteorCandy_row">
+				<div class="MeteorCandy_searchIcon">
+					<div></div><div></div>
+				</div>
+				<input type="text" id="MeteorCandy_search" placeholder="Search by username, email or id" value="{{query}}">
+			</div>
+
+			{{#if query}}
+				{{#each results}}
+					{{> MeteorCandy_account}}
+				{{else}}
+					{{> MeteorCandy_text content="No accounts found<br> with that keyword."}}
+				{{/each}}
+			{{else}}
+				{{> MeteorCandy_text content="To get started, enter a keyword<br> in the text field above."}}
+			{{/if}}
+
+		</div>
+		
+		<div class="MeteorCandy_splitView_right">
+			{{> MeteorCandy_account_details}}
+		</div>
+
+	</div>
+</template>

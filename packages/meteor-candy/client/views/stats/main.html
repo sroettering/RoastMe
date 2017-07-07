@@ -1,0 +1,29 @@
+<template name="MeteorCandy_view_stats">
+	<div class="MeteorCandy_splitView">
+		<div class="MeteorCandy_splitView_left">
+			{{> MeteorCandy_title content="Overview"}}
+
+			{{#each item}}
+				<div class="MeteorCandy_row MeteorCandy_clickable {{selected}}">
+					<div class="MeteorCandy_row_detail">
+						{{#if loading}} 
+							- 
+						{{else}}
+							{{value}}
+						{{/if}}
+					</div>
+					{{name}}
+				</div>
+			{{/each}}
+		</div>
+		
+		<div class="MeteorCandy_splitView_right">
+			{{> MeteorCandy_title content="Details"}}
+
+			{{#each detail}}
+				{{> MeteorCandy_keyval key=name value=value}}
+			{{/each}}
+		</div>
+
+	</div>
+</template>

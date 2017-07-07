@@ -1,0 +1,17 @@
+<template name="MeteorCandy_view_recents">
+	<div class="MeteorCandy_splitView">
+		<div class="MeteorCandy_splitView_left">
+			{{> MeteorCandy_title content="Recently Joined"}}
+			
+			{{#each results}}
+				{{> MeteorCandy_account}}
+			{{else}}
+				{{> MeteorCandy_text content="There are no accounts<br> in your database."}}
+			{{/each}}
+
+		</div>
+		<div class="MeteorCandy_splitView_right">
+			{{> MeteorCandy_account_details}}
+		</div>
+	</div>
+</template>

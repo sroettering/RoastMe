@@ -1,0 +1,28 @@
+<template name="MeteorCandy">
+	{{#if impersonating}}
+		{{> MeteorCandy_widget}}
+	{{else}}
+		{{#if display}}
+			<div id="MeteorCandy" class="MeteorCandy_base_ui">
+				<div id="MeteorCandy_ui">
+					<div id="MeteorCandy_header">
+						
+						{{#each item}}
+							<div class="MeteorCandy_button {{selected}}">
+								{{name}}
+							</div>
+						{{/each}}
+
+						{{> MeteorCandy_header_closeButton}}
+						{{> MeteorCandy_header_refreshButton}}
+					</div>
+
+					<div id="MeteorCandy_body">
+						{{> Template.dynamic template=view}}
+					</div>
+
+				</div>
+			</div>
+		{{/if}}
+	{{/if}}
+</template>
