@@ -83,7 +83,8 @@ body {
 	text-align: center;
 	text-decoration: none;
 	transition: opacity 0.3s ease 0s;
-	width: 44px;
+	width: auto;
+	padding: 0 4px 0 4px;
 	cursor: pointer;
 
 	&:hover {
@@ -92,7 +93,6 @@ body {
 
 	@media (min-width: $break-small) {
 		padding: 0 15px 0 10px;
-		width: auto;
 	}
 
 	&.mdi::before {
