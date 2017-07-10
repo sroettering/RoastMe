@@ -35,9 +35,6 @@ edgee:slingshot
 mixmax:smart-disconnect
 ongoworks:spiderable
 session@1.1.7
-facebook-config-ui@1.0.0
-google-config-ui@1.0.0
-twitter-config-ui@1.0.0
-meteorhacks:aggregate
 dynamic-import
 meteor-candy
+dburles:mongo-collection-instances

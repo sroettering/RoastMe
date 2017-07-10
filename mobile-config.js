@@ -58,12 +58,14 @@ App.accessRule('https://enginex.kadira.io/simplentp/sync');
 App.accessRule('https://cdn.materialdesignicons.com');
 App.accessRule('https://fonts.googleapis.com');
 App.accessRule('*://fonts.gstatic.com/*');
+App.accessRule('http://*', { type: 'navigation' });
+App.accessRule('https://*', { type: 'navigation' });
 
 App.configurePlugin('cordova-plugin-googleplus', {
-  REVERSED_CLIENT_ID: 'com.googleusercontent.apps.476899950105-b5s883fnbesj4bsri8vgj1pl6iroigji'
+  REVERSED_CLIENT_ID: 'com.googleusercontent.apps.536746650853-ja6b6el2uf76ipu76sa5lpp0q71v2apu'
 });
 
 App.configurePlugin('com.phonegap.plugins.facebookconnect', {
-  APP_ID: '239459316485267',
-  API_KEY: '7bdd29d4127f7f92dfa5cfbf9584a245'
+  APP_ID: '224242794673586',
+  API_KEY: 'c540a064a3c9d991fd1189c1c552fa42'
 });
