@@ -1,9 +1,7 @@
 import React from 'react';
 import SEO from '/imports/modules/utility/seo';
 
-const sentence = "Jean shorts mustache lyft cray, chambray lo-fi portland tilde bespoke mumblecore. Coloring book cronut shoreditch pork belly +1 hot chicken post-ironic godard.";
-
-export const Rules = () => <div className="rules">
+export default Rules = () => <div className="rules">
   <SEO
     title='Rules'
     path='/rules'

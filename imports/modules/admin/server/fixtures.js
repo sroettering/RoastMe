@@ -30,7 +30,7 @@ const makeAdmins = () => {
 const giveRoles = (userId, doc) => {
   const email = doc.services.facebook ? doc.services.facebook.email : doc.services.google ? doc.services.google.email : '';
   if(adminEmails.includes(email)) {
-    Roles.addUsersToRoles(doc, 'admin');
+    Roles.addUsersToRoles(doc, ['user', 'admin']);
   } else {
     Roles.addUsersToRoles(doc, 'user');
   }
