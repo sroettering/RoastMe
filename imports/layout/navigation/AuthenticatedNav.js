@@ -1,29 +1,15 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
-import { browserHistory } from 'react-router';
+import { Link, withRouter } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import { ReactiveVar } from 'meteor/reactive-var';
 
+import withUser from '/imports/decorators/withUser';
 import { ModalDialog } from '/imports/modules/ui/modal-dialog';
 import { ModalUpload } from '/imports/modules/ui/modal-upload';
 
-const profileImage = () => {
-  const user = Meteor.user();
-  let imgSrc = '';
-  if(user && user.services && user.services.facebook) {
-    imgSrc = user.services.facebook.picture;
-  }
-  if(user && user.services && user.services.twitter) {
-    imgSrc = user.services.twitter.profile_image_url;
-  }
-  if(user && user.services && user.services.google) {
-    imgSrc = user.services.google.picture;
-  }
-  return imgSrc;
-}
-
-class AuthenticatedNavigationC extends Component {
+@withUser
+class AuthenticatedNav extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,9 +18,9 @@ class AuthenticatedNavigationC extends Component {
   }
 
   openModal() {
-    const { user } = this.props;
+    const { user, history } = this.props;
     if(user && (!user.rulesAccepted || !user.tosAccepted)) {
-      browserHistory.push('/postSignup');
+      history.push('/postSignup');
     } else {
       this.setState({ isModalOpen: true });
     }
@@ -59,11 +45,10 @@ class AuthenticatedNavigationC extends Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { user, userReady } = this.props;
     return (
       <nav className="navigation-right" role="navigation">
         <ul>
-          <li><i className="icon-upload big" onClick={ this.openModal.bind(this) }></i></li>
           <li>
             <Link to={ "/user/" + (user ? user._id : "") } rel='nofollow'>
               <img className="img-circle" src={ profileImage() } />
@@ -78,9 +63,4 @@ class AuthenticatedNavigationC extends Component {
   }
 }
 
-export const AuthenticatedNavigation = createContainer(() => {
-  const user = Meteor.user();
-  return {
-    user,
-  }
-}, AuthenticatedNavigationC);
+export default withRouter(AuthenticatedNav);

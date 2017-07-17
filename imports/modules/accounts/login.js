@@ -1,4 +1,3 @@
-import { browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 
@@ -45,9 +44,9 @@ export const handleLogin = (service) => {
     if (!error) {
       if (!Meteor.user().rulesAccepted || !Meteor.user().tosAccepted) {
         triggerFbPixel();
-        browserHistory.push('/postSignup');
+        //browserHistory.push('/postSignup');
       } else {
-        browserHistory.push('/');
+        //browserHistory.push('/');
       }
     }
   });

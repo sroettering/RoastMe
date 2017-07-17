@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
@@ -52,10 +53,10 @@ export class AppC extends Component {
 }
 
 AppC.propTypes = {
-  children: React.PropTypes.element.isRequired,
-  location: React.PropTypes.object,
-  currentUser: React.PropTypes.object,
-  notifications: React.PropTypes.array,
+  children: PropTypes.element.isRequired,
+  location: PropTypes.object,
+  currentUser: PropTypes.object,
+  notifications: PropTypes.array,
 };
 
 export const App = createContainer(() => {

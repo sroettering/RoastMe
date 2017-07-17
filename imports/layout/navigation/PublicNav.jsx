@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import EventListener from 'react-event-listener';
 
 import { ModalDialog } from '/imports/modules/ui/modal-dialog';
 import { ModalLogin } from '/imports/modules/ui/modal-login';
 
-export class PublicNavigation extends Component {
+export default class PublicNav extends Component {
 
   constructor(props) {
     super(props);
