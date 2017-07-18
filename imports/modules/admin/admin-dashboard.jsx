@@ -4,7 +4,6 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import { Roasts } from '/imports/modules/roasts/roasts-collection';
 import { RoastVerificationPanel } from '/imports/modules/admin/roast-verification-panel';
-import { StatsPanel } from '/imports/modules/admin/stats-panel';
 import SPE from '/imports/modules/accounts/social-property-extractor';
 
 class DashboardC extends Component {
@@ -14,7 +13,6 @@ class DashboardC extends Component {
       <main className="main admin-main">
         <h2>Dashboard</h2>
         <RoastVerificationPanel roast={ roast } email={ email } numQueued={ numQueued } />
-        <StatsPanel />
       </main>
     );
   }
