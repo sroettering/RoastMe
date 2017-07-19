@@ -69,3 +69,8 @@ App.configurePlugin('com.phonegap.plugins.facebookconnect', {
   APP_ID: '224242794673586',
   API_KEY: 'c540a064a3c9d991fd1189c1c552fa42'
 });
+
+App.configurePlugin('cordova-plugin-facebook4', {
+  APP_ID: '224242794673586',
+  APP_NAME: 'c540a064a3c9d991fd1189c1c552fa42'
+});

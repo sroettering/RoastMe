@@ -27,7 +27,7 @@ export class ModalLogin extends Component {
           In order to create an account you have to 18+
         </p>
         <p className="center">Login in with</p>
-        <button className="btn btn-facebook" data-social-login="loginWithFacebook" onClick={this.login}>
+        <button className="btn btn-facebook" data-social-login="loginWithNativeFacebook" onClick={this.login}>
           <i className="mdi mdi-facebook-box"></i> Facebook
         </button>
         <p className="center">or</p>

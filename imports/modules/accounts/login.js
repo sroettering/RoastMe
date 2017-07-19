@@ -17,8 +17,9 @@ export const handleLogin = (service) => {
     requestPermissions: [],
   };
 
-  if (service === 'loginWithFacebook') {
+  if (service === 'loginWithNativeFacebook') {
     options.requestPermissions.push('email');
+    //options.requestPermissions.push('public_profile');
     //options.requestPermissions.push('user_birthday');
   }
 
