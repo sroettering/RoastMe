@@ -1,0 +1,21 @@
+{
+  "public": {},
+  "private": {
+    "oAuth": {
+      "facebook": {
+        "appId": "287306675033864",
+        "secret": "132b1209944afff2d84ae07bcc5dc412"
+      },
+      "google": {
+        "clientId": "476899950105-v1420qjpvhk417o9r7g608maops0e6n7.apps.googleusercontent.com",
+        "secret": "_1UPh1HR1sNSryrHDUehOWuY"
+      }
+    }
+  },
+  "AWSAccessKeyId": "AKIAI6YJJZWMQ7WUIQZQ",
+  "AWSSecretAccessKey": "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",
+  "kadira": {
+    "appId": "uDWnSsYmcpm4i78yE",
+    "appSecret": "6402632d-cbf5-43c8-b0be-fbd826b8c90e"
+  }
+}
