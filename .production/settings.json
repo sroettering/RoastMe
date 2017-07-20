@@ -14,6 +14,10 @@
   },
   "AWSAccessKeyId": "AKIAI6YJJZWMQ7WUIQZQ",
   "AWSSecretAccessKey": "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",
+  "PrerenderIO": {
+    "serviceUrl": "http://service.prerender.io/",
+    "token": "5qX9IewE1cqVZjd8qoqS"
+  },
   "kadira": {
     "appId": "zBSmi6rygAZd7utex",
     "appSecret": "56d707a3-5083-44b7-ac38-4e19d18f5b5c"

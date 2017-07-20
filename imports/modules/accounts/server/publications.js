@@ -6,6 +6,7 @@ Meteor.publish('user.current', function() {
   return Meteor.users.find({ _id: this.userId }, {
     fields: {
       profile: 1,
+      // 'services.facebook': 1,
       'services.facebook.picture': 1,
       'services.facebook.email': 1,
       'services.google.picture': 1,
