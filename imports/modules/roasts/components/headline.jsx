@@ -5,7 +5,7 @@ export const Headline = ({ roastUrl, roastTitle, userId, username }) =>
   <div className="roast-section">
     <div>
       <h2><Link to={ roastUrl }>{ roastTitle }</Link></h2>
-      <Link to={ `/user/${userId}` }>{ username }</Link>
+      <Link to={ `/user/${userId}` } rel='nofollow'>{ username }</Link>
     </div>
   </div>
 

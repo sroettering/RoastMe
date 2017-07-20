@@ -37,4 +37,3 @@ session@1.1.7
 dynamic-import
 meteor-candy
 dburles:mongo-collection-instances
-dferber:prerender

@@ -16,3 +16,5 @@ import '/imports/modules/admin/server/fixtures';
 
 import '/imports/modules/notifications/server/notifications-methods';
 import '/imports/modules/notifications/server/publications';
+
+import '/imports/modules/utility/prerender';
