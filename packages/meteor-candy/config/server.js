@@ -85,6 +85,12 @@ MeteorCandy.server = {
 			}, {
 				name: "Rejected",
 				value: Mongo.Collection.get('roasts').find({ status: 'declined' }).count()
+			}, {
+				name: "Banned",
+				value: Mongo.Collection.get('roasts').find({ status: 'banned' }).count()
+			}, {
+				name: "Deleted",
+				value: Mongo.Collection.get('roasts').find({ status: 'deleted' }).count()
 			}];
 		}
 	},

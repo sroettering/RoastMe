@@ -24,8 +24,6 @@ var MAX_BUFFER = 10*1024*1024; // 5MB
 
 // Exported for tests.
 Spiderable._urlForPhantom = function (siteAbsoluteUrl, requestUrl) {
-  console.log(siteAbsoluteUrl);
-  console.log(requestUrl);
   // reassembling url without escaped fragment if exists
   var parsedUrl = urlParser.parse(requestUrl);
   var parsedQuery = querystring.parse(parsedUrl.query);
@@ -111,7 +109,7 @@ WebApp.connectHandlers.use(function (req, res, next) {
     child_process.execFile(
       '/bin/bash',
       ['-c',
-       ("exec phantomjs --load-images=no --ignore-ssl-errors=yes --ssl-protocol=any " + filename)],
+       ("exec phantomjs --load-images=no --ignore-ssl-errors=yes " + filename)],
       {timeout: REQUEST_TIMEOUT, maxBuffer: MAX_BUFFER},
       function (error, stdout, stderr) {
         fs.unlink(filename);
