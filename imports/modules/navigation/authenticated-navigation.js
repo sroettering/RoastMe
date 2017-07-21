@@ -65,7 +65,7 @@ class AuthenticatedNavigationC extends Component {
         <ul>
           <li><i className="icon-upload big" onClick={ this.openModal.bind(this) }></i></li>
           <li>
-            <Link to={ "/user/" + (user ? user._id : "") }>
+            <Link to={ "/user/" + (user ? user._id : "") } rel='nofollow'>
               <img className="img-circle" src={ profileImage() } />
             </Link>
           </li>

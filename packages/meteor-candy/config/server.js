@@ -23,20 +23,6 @@ MeteorCandy.server = {
 	// that way, you can display stats for today instead of past 24 hours
 
 	stats: [{
-		name: "Active Users",
-		value: function () {
-			const total = Mongo.Collection.get('users').find({ status: 'active' }).count();
-			return total;
-		},
-		content: function () {
-			const activeUsers = Mongo.Collection.get('users').find({ status: 'active' }).fetch()
-				.map(user => user.profile.name);
-			const entries = activeUsers.map(username => {
-				return { name: username, value: '' };
-			});
-			return entries;
-		}
-	}, {
 		name: "Total Accounts",
 		value: function () {
 			return MeteorCandy.accountStats.getCount();
@@ -91,6 +77,18 @@ MeteorCandy.server = {
 			}, {
 				name: "Deleted",
 				value: Mongo.Collection.get('roasts').find({ status: 'deleted' }).count()
+			}, {
+				name: "--- Categories ---",
+				value: ''
+			}, {
+				name: "Hot",
+				value: Mongo.Collection.get('roasts').find({ "category.name": 'hot' }).count()
+			}, {
+				name: "Trending",
+				value: Mongo.Collection.get('roasts').find({ "category.name": 'trending' }).count()
+			}, {
+				name: "New",
+				value: Mongo.Collection.get('roasts').find({ "category.name": 'new' }).count()
 			}];
 		}
 	},
@@ -107,6 +105,35 @@ MeteorCandy.server = {
 			}, {
 				name: "Replies",
 				value: Mongo.Collection.get('comments').find({ replyTo: { $exists: true } }).count()
+			}];
+		}
+	},
+	{
+		name: "Roasts Today",
+		value: function(dayStart) {
+			const total = Mongo.Collection.get('comments').find({ createdAt: { $gte: new Date(dayStart) } }).count();
+			return total;
+		},
+		content: function(dayStart) {
+			const commentsToday = Mongo.Collection.get('comments').find({ createdAt: { $gte: new Date(dayStart) } }).fetch();
+			return [{
+				name: "Hot",
+				value: commentsToday.reduce((sum, comment) => {
+							return sum + Mongo.Collection.get('roasts')
+								.find({ _id: comment.roastId, "category.name": 'hot' }).count();
+						}, 0) || 0
+			}, {
+				name: "Trending",
+				value: commentsToday.reduce((sum, comment) => {
+							return sum + Mongo.Collection.get('roasts')
+								.find({ _id: comment.roastId, "category.name": 'trending' }).count();
+						}, 0) || 0
+			}, {
+				name: "New",
+				value: commentsToday.reduce((sum, comment) => {
+							return sum + Mongo.Collection.get('roasts')
+								.find({ _id: comment.roastId, "category.name": 'new' }).count();
+						}, 0) || 0
 			}];
 		}
 	},
@@ -134,6 +161,32 @@ MeteorCandy.server = {
 				value: Mongo.Collection.get('roasts').find().fetch()
 					.map(roast => roast.totalUpvotes)
 					.reduce((sum, points) => sum += points, 0)
+			}];
+		}
+	},
+	{
+		name: "Points Today",
+		value: function(dayStart) {
+			const timeLimit = new Date(dayStart);
+			const total = Mongo.Collection.get('comments').find().fetch()
+				.map(comment => comment.upvotes.filter(upvote => upvote.createdAt >= timeLimit).length 
+					+ comment.downvotes.filter(downvote => downvote.createdAt >= timeLimit).length)
+				.reduce((sum, votes) => sum += votes, 0);
+			return total;
+		},
+		content: function(dayStart) {
+			const timeLimit = new Date(dayStart);
+			const comments = Mongo.Collection.get('comments').find().fetch();
+			return [{
+				name: "Upvotes",
+				value: comments
+					.map(comment => comment.upvotes.filter(upvote => upvote.createdAt >= timeLimit).length)
+					.reduce((sum, votes) => sum += votes, 0)
+			}, {
+				name: "Downvotes",
+				value: comments
+					.map(comment => comment.downvotes.filter(downvote => downvote.createdAt >= timeLimit).length)
+					.reduce((sum, votes) => sum += votes, 0)
 			}];
 		}
 	}
