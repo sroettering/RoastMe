@@ -1,5 +1,3 @@
-import '/imports/modules/roasts/slingshot-filerestrictions';
-
 import React from 'react';
 import { render } from 'react-dom';
 import { Meteor } from 'meteor/meteor';
@@ -22,6 +20,7 @@ import { Bert } from 'meteor/themeteorchef:bert';
 // import { AdminPage } from '/imports/modules/admin/admin-page';
 // import { Dashboard } from '/imports/modules/admin/admin-dashboard';
 // import { NotFound } from '/imports/modules/ui/not-found.jsx';
+import '/imports/modules/roasts/slingshot-filerestrictions';
 import MainLayout from '/imports/layout/MainLayout';
 
 Bert.defaults.style = 'growl-top-right';

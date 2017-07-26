@@ -45,11 +45,11 @@ export default class PublicNav extends Component {
           </li>
         </ul>
         { this.state.isModalOpen ?
-        <ModalDialog isOpen={ this.state.isModalOpen } closeHandler={ this.modalCloseHandler.bind(this) }>
-          <EventListener target="window" onKeyUp={ this.handleKeyUp.bind(this) } />
-          <ModalLogin closeModal={ this.closeModal.bind(this) }/>
-        </ModalDialog>
-        : '' }
+          <ModalDialog isOpen={ this.state.isModalOpen } closeHandler={ this.modalCloseHandler.bind(this) }>
+            <EventListener target="window" onKeyUp={ this.handleKeyUp.bind(this) } />
+            <ModalLogin closeModal={ this.closeModal.bind(this) }/>
+          </ModalDialog>
+        : '' } 
       </nav>
     );
   }
