@@ -18,3 +18,4 @@ import '/imports/modules/notifications/server/notifications-methods';
 import '/imports/modules/notifications/server/publications';
 
 import '/imports/modules/utility/prerender';
+import '/imports/methods/roast-methods';
