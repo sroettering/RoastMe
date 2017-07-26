@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import Spinner from 'react-spinkit';
-import loadImage from 'blueimp-load-image';
+// import Spinner from 'react-spinkit';
+
+if(Meteor.isClient) {
+  import loadImage from 'blueimp-load-image';
+}
 
 import ImageUpload from '/imports/modules/roasts/img-upload';
 
@@ -136,9 +139,9 @@ export class ModalUpload extends Component {
           ref={ input => this.title = input}/>
         <label htmlFor="image-input">Laugh at yourself first, before anyone else can</label>
         <div className="modal-upload">
-          { this.state.loading ?
+          {/* { this.state.loading ?
             <Spinner spinnerName="circle" className="preview-spinner dark" noFadeIn/> : <span className="drop-area mdi mdi-upload"></span>
-          }
+          } */}
           <input
             id="image-input"
             type="file"
@@ -152,9 +155,9 @@ export class ModalUpload extends Component {
           className="button flame-button"
           onClick={ this.uploadImg.bind(this) }
           disabled={ !this.state.uploadEnabled }>Roast me!</button>
-        { this.state.uploading ?
+        {/* { this.state.uploading ?
           <Spinner spinnerName="circle" className="upload-spinner dark" noFadeIn/> : ''
-        }
+        } */}
       </div>
     );
   }
