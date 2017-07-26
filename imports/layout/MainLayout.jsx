@@ -4,14 +4,14 @@ import { Switch, Route } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 
 import withNotifications from '/imports/decorators/withNotifications';
-import SecuredRoute from '/imports/logic/SecuredRoute';
+import SecuredRoute from '/imports/util/SecuredRoute';
 import Navigation from '/imports/layout/navigation/Navigation.jsx';
 import Footer from '/imports/layout/navigation/Footer';
 import IntroPage from '/imports/layout/pages/IntroPage';
 import Imprint from '/imports/layout/pages/Imprint';
 import TermsOfService from '/imports/layout/pages/TermsOfService';
 import PrivacyStatement from '/imports/layout/pages/PrivacyStatement';
-import Trending from '/imports/layout/pages/Trending';
+import RoastFeed from '/imports/layout/pages/RoastFeed';
 
 @withNotifications
 export default class MainLayout extends React.Component {
@@ -29,8 +29,8 @@ export default class MainLayout extends React.Component {
           <main className="main" role="main">
             <div className="wrapper">
               <div className="content">
-                 <Switch>
-                  <Route exact path='/' component={ Trending } />
+                <Switch>
+                  <Route exact path='/' render={ (props) => <RoastFeed category='new' {...props} /> } />
                   <SecuredRoute path='/postSignup' component={ IntroPage } />
                   <Route path='/rules' component={ Rules } />
                   <Route path='/privacy' component={ PrivacyStatement } />

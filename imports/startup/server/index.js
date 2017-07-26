@@ -17,3 +17,5 @@ import '/imports/modules/admin/server/publications';
 
 import '/imports/modules/notifications/server/notifications-methods';
 import '/imports/modules/notifications/server/publications';
+
+import '/imports/methods/roast-methods';
