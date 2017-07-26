@@ -82,13 +82,13 @@ MeteorCandy.server = {
 				value: ''
 			}, {
 				name: "Hot",
-				value: Mongo.Collection.get('roasts').find({ "category.name": 'hot' }).count()
+				value: Mongo.Collection.get('roasts').find({ "category.name": 'hot', status: 'accepted' }).count()
 			}, {
 				name: "Trending",
-				value: Mongo.Collection.get('roasts').find({ "category.name": 'trending' }).count()
+				value: Mongo.Collection.get('roasts').find({ "category.name": 'trending', status: 'accepted' }).count()
 			}, {
 				name: "New",
-				value: Mongo.Collection.get('roasts').find({ "category.name": 'new' }).count()
+				value: Mongo.Collection.get('roasts').find({ "category.name": 'new', status: 'accepted' }).count()
 			}];
 		}
 	},
