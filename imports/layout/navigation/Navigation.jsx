@@ -5,23 +5,20 @@ import { NavLink } from 'react-router-dom';
 import withUser from '/imports/decorators/withUser';
 import PublicNav from './PublicNav';
 import AuthenticatedNav from './AuthenticatedNav';
-
-import { ScrollHandler } from '/imports/modules/utility/scroll-handler';
+import ScrollListener from '/imports/util/ScrollListener';
 
 @withUser
 export default class Navigation extends React.Component {
-  componentDidMount() {
-    window.addEventListener('scroll', ScrollHandler.handleScrollEvent);
-  }
 
-  componentWillUnmount() {
-    window.removeEventListener('scroll', ScrollHandler.handleScrollEvent);
+  handleScroll(position, lastPosition) {
+    document.getElementsByClassName('header')[0].classList.toggle('fixed', position > lastPosition);
   }
 
   render() {
     const { user } = this.props;
     return (
       <header className="header" role="banner">
+        <ScrollListener listener={ this.handleScroll.bind(this) } />
         <NavLink to="/" className="logo" />
 
         <nav className="navigation-left" role="navigation">
