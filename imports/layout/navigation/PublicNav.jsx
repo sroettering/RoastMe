@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import EventListener from 'react-event-listener';
 
-import { ModalDialog } from '/imports/modules/ui/modal-dialog';
-import { ModalLogin } from '/imports/modules/ui/modal-login';
+import LoginModal from '/imports/layout/components/LoginModal';
 
 export default class PublicNav extends Component {
 
@@ -11,6 +9,8 @@ export default class PublicNav extends Component {
     this.state = {
       isModalOpen: false,
     }
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   openModal() {
@@ -21,35 +21,17 @@ export default class PublicNav extends Component {
     this.setState({ isModalOpen: false });
   }
 
-  handleKeyUp(event) {
-    if(event.keyCode === 27) {
-      this.closeModal();
-    }
-  }
-
-  modalCloseHandler(event) {
-    const target = event.target;
-    if(target.className === 'modal-overlay active') {
-      this.closeModal();
-    }
-  }
-
   render() {
     return (
       <nav className="navigation-right" role="navigation">
         <ul>
           <li>
-            <button className="button mdi-mdi-login" onClick={ this.openModal.bind(this) }>
+            <button className="button mdi-mdi-login" onClick={ this.openModal }>
               Login
             </button>
           </li>
         </ul>
-        { this.state.isModalOpen ?
-          <ModalDialog isOpen={ this.state.isModalOpen } closeHandler={ this.modalCloseHandler.bind(this) }>
-            <EventListener target="window" onKeyUp={ this.handleKeyUp.bind(this) } />
-            <ModalLogin closeModal={ this.closeModal.bind(this) }/>
-          </ModalDialog>
-        : '' } 
+        <LoginModal isOpen={ this.state.isModalOpen } onClose={ this.closeModal } />
       </nav>
     );
   }

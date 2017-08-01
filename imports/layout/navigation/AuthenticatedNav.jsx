@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { Meteor } from 'meteor/meteor';
-import { createContainer } from 'meteor/react-meteor-data';
-import { ReactiveVar } from 'meteor/reactive-var';
 
 import withUser from '/imports/decorators/withUser';
-import { ModalDialog } from '/imports/modules/ui/modal-dialog';
-import { ModalUpload } from '/imports/modules/ui/modal-upload';
 
 @withUser
 class AuthenticatedNav extends Component {
@@ -15,6 +10,8 @@ class AuthenticatedNav extends Component {
     this.state = {
       isModalOpen: false,
     }
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   openModal() {
@@ -30,16 +27,9 @@ class AuthenticatedNav extends Component {
     this.setState({ isModalOpen: false });
   }
 
-  handleKeyUp(event) {
-
-  }
-
   modalCloseHandler(event) {
     const target = event.target;
     if(target && target.className === 'modal-overlay active') {
-      this.closeModal();
-    }
-    if(event.keyCode === 27) {
       this.closeModal();
     }
   }
@@ -50,7 +40,7 @@ class AuthenticatedNav extends Component {
       <nav className="navigation-right" role="navigation">
         <ul>
           <li>
-            <i className="icon-upload big" onClick={ this.openModal.bind(this) }></i>
+            <i className="icon-upload big" onClick={ this.openModal }></i>
           </li>
           <li>
             { userReady ?
@@ -60,9 +50,9 @@ class AuthenticatedNav extends Component {
             }
           </li>
         </ul>
-        <ModalDialog isOpen={ this.state.isModalOpen } closeHandler={ this.modalCloseHandler.bind(this) }>
+        {/* <ModalDialog isOpen={ this.state.isModalOpen } closeHandler={ this.modalCloseHandler.bind(this) }>
           <ModalUpload closeModal={ this.closeModal.bind(this) }/>
-        </ModalDialog>
+        </ModalDialog> */}
       </nav>
     );
   }
