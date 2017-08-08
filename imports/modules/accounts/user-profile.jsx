@@ -115,7 +115,7 @@ class UserProfileC extends Component {
           <SEO
             schema='Profile'
             title={ user.profile.name }
-            path={ '/user/' + user._id }
+            path={ 'user/' + user._id }
             contentType='profile'
           />
           <ModalDialog isOpen={ this.state.isModalOpen } closeHandler={ this.modalCloseHandler.bind(this) }>

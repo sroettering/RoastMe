@@ -6,7 +6,7 @@ const sentence = "Jean shorts mustache lyft cray, chambray lo-fi portland tilde 
 export const Rules = () => <div className="rules">
   <SEO
     title='Rules'
-    path='/rules'
+    path='rules'
     contentType='article'
   />
   <h1>Rules</h1>

@@ -5,7 +5,7 @@ export const TermsOfService = () =>
 <div className="static-block">
 	<SEO
 		title='Terms of Service'
-		path='/tos'
+		path='tos'
 		contentType='article'
 	/>
 	<h2>Terms of services</h2>

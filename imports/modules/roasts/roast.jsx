@@ -42,7 +42,7 @@ class RoastC extends Component {
               title={ roast.title }
               description={ getDescription(comments[0]) }
               roastImg={ roast.imageUrl }
-              path={ '/roast/' + roast._id }
+              path={ 'roast/' + roast._id }
               contentType='article'
             /> : '' }
           <Headline

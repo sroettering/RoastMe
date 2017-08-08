@@ -7,7 +7,7 @@ export const Imprint = () => {
       <SEO
         schema='Imprint'
         title='Imprint'
-        path='/imprint'
+        path='imprint'
         contentType='article'
       />
       <h3>Imprint</h3>

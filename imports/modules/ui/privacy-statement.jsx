@@ -6,7 +6,7 @@ export const PrivacyStatement = () => {
     <div>
       <SEO
         title='Privacy Statement'
-        path='/privacy'
+        path='privacy'
         contentType='article'
       />
       <h1>itsroast.me Privacy Statement</h1>

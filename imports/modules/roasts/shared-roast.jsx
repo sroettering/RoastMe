@@ -31,7 +31,7 @@ export class SharedRoast extends Component {
           title={ roast.title }
           description={ getDescription(comment) }
           roastImg={ roast.imageUrl }
-          path={ '/c/' + comment._id }
+          path={ 'c/' + comment._id }
           contentType='article'
         />
         <Headline
