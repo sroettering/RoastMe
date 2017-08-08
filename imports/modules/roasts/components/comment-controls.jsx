@@ -14,7 +14,7 @@ export const CommentControls = ({ roast, comment, replyTo, single }) => {
     return (
       <div className="roast-comment-reply">
         <SocialButtons
-          url={ `https://itsroast.me/comment/${comment._id}` }
+          url={ `https://itsroast.me/c/${comment._id}` }
           title={ roast.title }
           description={ description }
           img={ roast.imageUrl } />
@@ -45,7 +45,7 @@ export const CommentControls = ({ roast, comment, replyTo, single }) => {
     return (
       <div className="roast-comment-reply">
         <SocialButtons
-          url={ `https://itsroast.me/comment/${comment._id}` }
+          url={ `https://itsroast.me/c/${comment._id}` }
           title={ roast.title }
           description={ comment.content }
           img={ roast.imageUrl } />

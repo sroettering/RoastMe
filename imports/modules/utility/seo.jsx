@@ -13,11 +13,16 @@ const getTitle = ({ title, roastImg }) => {
 }
 
 const getMetaTags = ({title, description, contentType, url, published, updated, category, tags, twitter, roastImg}) => {
+  const defaultDescription = 'On Roast Me roasters creatively insult other people based on their looks. Check out the best roasts!';
   const metaTags = [
     { itemprop: 'name', content: title },
-    { itemprop: 'description', content: description || 'On Roast Me roasters creatively insult other people based on their looks. Check out the best roasts!' },
+    { itemprop: 'description', content: description || defaultDescription },
     { itemprop: 'image', content: roastImg || 'RoastMe_Logo_Original.svg' },
-    { name: 'description', content: description || 'On Roast Me roasters creatively insult other people based on their looks. Check out the best roasts!' },
+    { name: 'description', content: description || defaultDescription },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:description', content: description || defaultDescription },
+    { name: 'twitter:title', content: title },
+    { name: 'twitter:image', content: roastImg || 'RoastMe_Logo_Original.svg' },
     // { name: 'og:type', content: contentType },
     // { name: 'og:title', content: (title ? title + ' | ' : '') + 'Roast Me - The first official platform' },
     // { name: 'og:url', content: url },

@@ -23,7 +23,7 @@ const getDescription = (comment) => {
 export class SharedRoast extends Component {
   render() {
     const { roast, comment } = this.props;
-    const { totalComments, totalPoints } = roast;
+    const { totalComments, totalUpvotes } = roast;
     return (
       <div className="roast">
         <SEO
@@ -39,7 +39,7 @@ export class SharedRoast extends Component {
           roastTitle={ roast.title }
           userId={ roast.userId }
           username={ roast.userName } />
-        <Score comments={ totalComments } points={ totalPoints } />
+        <Score comments={ totalComments } points={ totalUpvotes } />
         <Image
           imageUrl={ roast.imageUrl }
           roastTitle={ roast.title }
