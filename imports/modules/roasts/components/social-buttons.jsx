@@ -19,7 +19,7 @@ export const SocialButtons = ({ url, title, description, img }) =>
       <li>
         <ShareButtons.TwitterShareButton
           url={ url }
-          title={ title }
+          title={ 'Checkout this roast!' }
           hashtags={ ['roastme'] }>
           <TwitterIcon size={ 32 } />
         </ShareButtons.TwitterShareButton>
