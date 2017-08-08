@@ -166,6 +166,39 @@ Meteor.publish('comments.all.user', function(userId){
   });
 });
 
+Meteor.publish('comments.forRoast', function(commentId) {
+  check(commentId, String);
+
+  const comment = Comments.find({ 
+    _id: commentId 
+  }, {
+    fields: {
+      upvotes: 0,
+      downvotes: 0,
+      updatedAt: 0,
+    }
+  });
+  
+  const commentsArray = comment.fetch();
+  if(!commentsArray || !commentsArray.length) {
+    this.ready();
+    return;
+  }
+
+  const roast = Roasts.find({
+    _id: commentsArray[0].roastId,
+    status: 'accepted'
+  }, {
+    fields: {
+      status: 0,
+      createdAt: 0,
+      updatedAt: 0,
+    },
+  });
+
+  return [comment, roast];
+});
+
 if (Meteor.isServer) {
   Comments._ensureIndex({ replyTo: 1, points: 1, userId: 1, roastId: 1 });
   Comments._ensureIndex({ points: 1, userId: 1, roastId: 1, replyTo: 1 });

@@ -2,7 +2,7 @@ import React from 'react';
 import { ShareButtons, generateShareIcon } from 'react-share';
 
 const FacebookIcon = generateShareIcon('facebook');
-const PinterestIcon = generateShareIcon('pinterest');
+const TwitterIcon = generateShareIcon('twitter');
 
 export const SocialButtons = ({ url, title, description, img }) =>
   <div className="roast-social-media">
@@ -17,12 +17,12 @@ export const SocialButtons = ({ url, title, description, img }) =>
         </ShareButtons.FacebookShareButton>
       </li>
       <li>
-        <ShareButtons.PinterestShareButton
+        <ShareButtons.TwitterShareButton
           url={ url }
-          media={ img }
-          description={ description }>
-          <PinterestIcon size={ 32 } />
-        </ShareButtons.PinterestShareButton>
+          title={ 'Checkout this roast!' }
+          hashtags={ ['roastme'] }>
+          <TwitterIcon size={ 32 } />
+        </ShareButtons.TwitterShareButton>
       </li>
     </ul>
   </div>
