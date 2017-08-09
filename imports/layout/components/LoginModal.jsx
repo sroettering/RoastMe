@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 
+import withRouter from '/imports/decorators/withRouter';
 import ModalDialog from '/imports/layout/components/ModalDialog';
 
-class LoginModal extends Component {
+@withRouter
+export default class LoginModal extends Component {
   
   constructor(props) {
     super(props);
@@ -64,7 +65,7 @@ class LoginModal extends Component {
   }
 
   render() {
-    const { isOpen, onOpen, onClose } = this.props;
+    const { isOpen, onClose } = this.props;
     return (
       <ModalDialog isOpen={ isOpen } onClose={ onClose }>
         <div className="modal modal-login">
@@ -89,5 +90,3 @@ class LoginModal extends Component {
     );
   }
 }
-
-export default withRouter(LoginModal);

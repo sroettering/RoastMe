@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 import withUser from '/imports/decorators/withUser';
+import withRouter from '/imports/decorators/withRouter';
 import PublicNav from './PublicNav';
 import AuthenticatedNav from './AuthenticatedNav';
 import ScrollListener from '/imports/util/ScrollListener';
 
+@withRouter // important for highlighting current route!
 @withUser
 export default class Navigation extends React.Component {
 
@@ -26,7 +28,7 @@ export default class Navigation extends React.Component {
             {/*
             <li><Link to="/hot/" activeClassName="current">Hot</Link></li>
             */}
-            <li><NavLink to="/" activeClassName="current">Trending</NavLink></li>
+            <li><NavLink exact to="/" activeClassName="current">Trending</NavLink></li>
             <li><NavLink to="/new" activeClassName="current">New</NavLink></li>
           </ul>
         </nav>

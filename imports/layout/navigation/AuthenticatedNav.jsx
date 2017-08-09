@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import withUser from '/imports/decorators/withUser';
+import withRouter from '/imports/decorators/withRouter';
+import UploadModal from '/imports/layout/components/UploadModal';
 
+@withRouter
 @withUser
-class AuthenticatedNav extends Component {
+export default class AuthenticatedNav extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,13 +30,6 @@ class AuthenticatedNav extends Component {
     this.setState({ isModalOpen: false });
   }
 
-  modalCloseHandler(event) {
-    const target = event.target;
-    if(target && target.className === 'modal-overlay active') {
-      this.closeModal();
-    }
-  }
-
   render() {
     const { user, userReady } = this.props;
     return (
@@ -50,12 +46,8 @@ class AuthenticatedNav extends Component {
             }
           </li>
         </ul>
-        {/* <ModalDialog isOpen={ this.state.isModalOpen } closeHandler={ this.modalCloseHandler.bind(this) }>
-          <ModalUpload closeModal={ this.closeModal.bind(this) }/>
-        </ModalDialog> */}
+        <UploadModal isOpen={ this.state.isModalOpen } onClose={ this.closeModal }/>
       </nav>
     );
   }
 }
-
-export default withRouter(AuthenticatedNav);

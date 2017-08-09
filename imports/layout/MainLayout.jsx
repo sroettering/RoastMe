@@ -30,7 +30,8 @@ export default class MainLayout extends React.Component {
             <div className="wrapper">
               <div className="content">
                 <Switch>
-                  <Route exact path='/' render={ (props) => <RoastFeed category='new' {...props} /> } />
+                  <Route exact path='/' render={ (props) => <RoastFeed category='trending' {...props} /> } />
+                  <Route path='/new' render={ (props) => <RoastFeed category='new' {...props} /> } />
                   <SecuredRoute path='/postSignup' component={ IntroPage } />
                   <Route path='/rules' component={ Rules } />
                   <Route path='/privacy' component={ PrivacyStatement } />
