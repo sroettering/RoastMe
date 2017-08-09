@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 // import Spinner from 'react-spinkit';
-import loadImage from 'blueimp-load-image';
+
+if(Meteor.isClient) {
+  import loadImage from 'blueimp-load-image';
+}
 
 import ImageUpload from '/imports/modules/roasts/img-upload';
 
